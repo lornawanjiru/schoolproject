@@ -43,8 +43,8 @@
   while($row = $result->fetch_assoc()) {
     $upMail = $row["upMail"];
     $firstName = $row["firstName"];
-    $lastName = $row["lastName"];
     $middleName = $row["middleName"];
+    $lastName = $row["lastName"]; 
     $currentlocation = $row["currentlocation"];
     $gender = $row["gender"];
     $phonenumber = $row["phonenumber"];
@@ -120,14 +120,7 @@
                               </div>
                             <?php } ?>
 
-                            <?php if($lastName==NULL || $lastName==""){} else{ ?>
-                              <div class="row">
-                                <label class="col-10" for="lastName">Last Name:</label>
-                                <div class="col-90">
-                                  <input type="text"  class="form-control" value="<?php echo $lastName;?>" disabled>
-                                </div>
-                              </div>
-                            <?php } ?>
+                           
 
                             <?php if($firstName ==NULL || $firstName ==""){} else{ ?>
                             <div class="row">
@@ -146,7 +139,14 @@
                               </div>
                             </div>
                             <?php } ?>
-
+                            <?php if($lastName==NULL || $lastName==""){} else{ ?>
+                              <div class="row">
+                                <label class="col-10" for="lastName">Last Name:</label>
+                                <div class="col-90">
+                                  <input type="text"  class="form-control" value="<?php echo $lastName;?>" disabled>
+                                </div>
+                              </div>
+                            <?php } ?>
                             <?php if($currentlocation==NULL || $currentlocation==""){} else{ ?>
                             <div class="row">
                               <label class="col-10" for="currentlocation">Current Location:</label>
@@ -216,31 +216,31 @@
                               <div class="row">
                                 <label class="col-10" for="lastName">Last Name:</label>
                                 <div class="col-90">
-                                  <input type="text"  class="form-control" value="<?php echo $lastName;?>">
+                                  <input type="text" name="lastName" class="form-control" value="<?php echo $lastName;?>">
                                 </div>
                               </div>
                               <div class="row">
                               <label class="col-10" for="firstName">First Name:</label>
                               <div class="col-90">
-                                <input type="text"  class="form-control" value="<?php echo $firstName?>" >
+                                <input type="text" name="firstName" class="form-control" value="<?php echo $firstName?>" >
                               </div>
                             </div>
                             <div class="row">
                               <label class="col-10" for="middleName">Middle Name:</label>
                               <div class="col-90">
-                                <input type="text"  class="form-control" value="<?php echo $middleName?>">
+                                <input type="text" name="middleName" class="form-control" value="<?php echo $middleName?>">
                               </div>
                             </div>
                             <div class="row">
                               <label class="col-10" for="currentlocation">Current Location:</label>
                               <div class="col-90">
-                                <input type="text"  class="form-control" value="<?php echo $currentlocation?>" >
+                                <input type="text" name="currentlocation" class="form-control" value="<?php echo $currentlocation?>" >
                               </div>
                             </div>
                             <div class="form-group">
                               <label class="col-10" for="gender">Gender:</label>
                               <div class="col-sm-10">
-                                <input type="text" class="form-control" name="gender" value="<?php echo $gender?>">
+                                <input type="text" name="gender" class="form-control" name="gender" value="<?php echo $gender?>">
                               </div>
                             </div>
                             <div class="row">
@@ -292,7 +292,19 @@
    
 
     <!-- Scripts -->
-      
+    <script type="text/javascript">
+  		function viewcontent(){
+  			var selectone=document.getElementById("class").value;
+  			var schview=document.getElementById("application");
+  			if(selectone!="select"){
+  				document.getElementById("schid").innerHTML = selectone;
+  				schview.style.display = 'block';
+  			}
+  			else{
+  				schview.style.display = 'none';
+  			}
+  		}
+  	</script>  
       
       <script src="../js/script.js"></script>
 

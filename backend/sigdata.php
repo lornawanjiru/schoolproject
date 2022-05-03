@@ -24,16 +24,15 @@
         if ($conn->connect_error) {
           die("Connection failed: " . $conn->connect_error);
     	}
-
-
-
     	//inserting Record to the database
     	$firstName = $_POST['firstName'];
     	$lastName = $_POST['lastName'];
     	$middleName = $_POST['middleName'];
     	$position = $_POST['position'];
+      $phonenumber = $_POST['phonenumber'];
+      $organization = $_POST['organization'];
 
-    	$sql = "UPDATE signatory set firstName='$firstName', lastName='$lastName', middleName='$middleName', position='$position' where sigID = '$currentUserID'";
+    	$sql = "UPDATE signatory set firstName='$firstName', lastName='$lastName', middleName='$middleName', position='$position', phonenumber='$phonenumber', organization='$organization' where sigID = '$currentUserID'";
 
       if($conn->query($sql)){
       ?>

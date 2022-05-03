@@ -11,7 +11,7 @@
   }
 
   // Connect to database
-    $conn = new mysqli("localhost","root","","sms");
+    $conn = new mysqli("localhost","scholar","","sms");
   // Checks Connection
     if ($conn->connect_error) {
       die("Connection failed: " . $conn->connect_error);
@@ -40,7 +40,7 @@ foreach ($rows9 as $key => $value)
 	}
 }
 
-  $firstName = $lastName = $middleName = $position =  NULL;
+  $firstName = $lastName = $middleName = $position =  $organization = $phonenumber = NULL;
   //Get User Details
   $sql = "SELECT * FROM signatory WHERE sigID = '".$currentUserID."'";
   $result = $conn->query($sql);
@@ -49,8 +49,8 @@ foreach ($rows9 as $key => $value)
     $firstName = $row["firstName"];
     $lastName = $row["lastName"];
     $middleName = $row["middleName"];
-    $contact = $row['contact'];
-    $org = $row['organization/university'];
+    $phonenumber = $row["phonenumber"];
+    $organization = $row['organization'];
     $position = $row["position"];
   }
 ?>
@@ -67,116 +67,115 @@ foreach ($rows9 as $key => $value)
       <meta name="description" content="">
       <meta name="author" content="">
 
-      <link href="../css/bootstrap.min.css" rel="stylesheet">
-
       <link href="../css/main.css" rel="stylesheet">
-
+      <link href="../css/general.css" rel="stylesheet">
   </head>
 
-  <body class = "no-sidebar">
-    <div id = "page-wrapper">
+  <body class = "user">
+    
 
       <!-- Header -->
-        <header id = "header" >
-          <h1 id = "logo"><a href = "javascript:history.back()" class="button special">Back</a></h1>
-          <nav id = "nav">
-            <ul>
-               <li ><a href = "tempSigHome.php">Home</a></li>
-							 <li class="current"><a href = "#">User Profile</a></li>
-               <li class = "submenu">
-                <a href = "">Scholarships</a>
-                <ul>
-                  <li><a href = "tempSigScholarship.php">My Scholarships</a></li>
-                  <li><a href = "tempAddScholarship.php">Add Scholarships</a></li>
-                </ul>
-              </li>
-              <li class = "submenu">
-                <a href = "#">Applications</a>
-               <ul>
-                  <li><a href = "tempSigApplication.php?app=Pending">Pending applications</a></li>
-                  <li><a href = "tempSigApplication.php?app=Approved">Accepted Applicaitons</a></li>
-                  <li><a href = "tempSigApplication.php?app=Rejected">Rejected Applicaitons</a></li>
-                </ul>
-              </li>
-              <li><?php echo $_SESSION['currentUserName']. " (ID:" . $_SESSION['currentUserID'] . ")"?></li>
-              <li><a href = "../backend/logout.php" class = "button special">Logout</a></li>
-            </ul>
-          </nav>
-        </header>
+      <div class = "nav">
+            <div class="topnav" id="myTopnav">
+              <div><a>Scholarship Application System</a> </div>
+              <div class="banner desktop-view">
+                  <div>
+                    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/profile-sample3.jpg" alt="profile-sample3" class="profile" />
+                  </div>
+                  <div>
+                    <h2> Hello, <?php echo $_SESSION['currentUserName']. " (ID:" . $_SESSION['currentUserID'] . ")"?>. </h2>
+                  </div>
+              </div>
+              <div class="">
+              <a href = "../backend/logout.php" class = "button special">Logout</a>
+              
+              <a href = "tempSigProfile.php">Profile</a>
+              <a class="dropdown-btn"> Scholarship
+              </a>
+              <div class="dropdown-container">
+                <a href = "tempSigScholarship.php">My Scholarships</a>
+                <a href = "tempAddScholarship.php">Add Scholarships</a> 
+              </div>        
+              <a class="dropdown-btn"> Scholarship Status
+              </a>
+              <div class="dropdown-container">
+                <a href = "tempSigApplication.php?app=Pending">Pending applications</a>
+                <a href = "tempSigApplication.php?app=Approved">Accepted Applicaitons</a>
+                <a href = "tempSigApplication.php?app=Rejected">Rejected Applicaitons</a> 
+              </div> 
+              <a class = "current" href="tempSigHome.php">Home</a>
+              <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+                <img src="../images/menu.png" alt="" />
+                </a>
+              </div>  
+            </div>
+          </div>
 
 
       <!-- Main -->
-        <article id="main">
-
-          <header class="special container">
-            <span class="icon fa-mobile"></span>
-          </header>
-
-          <!-- One -->
-            <section class="wrapper style4 container">
-
+        
               <!-- Content -->
                 <div class="content">
-                  <section>
+                 
 
-                  <header><h1><b style="margin: 10% 0% 0% 42%;">User Profile</b></h1></header>
+                  <h1><b >User Profile</b></h1>
                             <!-- Compare user details -->
                         <div id="display">
-                          <form method="post" action="../backend/sigdata.php" class="form-horizontal" role="form">
+                          <form method="post" action="../backend/sigdata.php" class="login" role="form">
 
                             <?php if($upMail==NULL || $upMail==""){} else{ ?>
-                              <div class="form-group">
-                                <label class="control-label col-sm-2" for="upMail">Email:</label>
-                                <div class="col-sm-10">
-                                  <input type="email" class="form-control" value="<?php echo $upMail;?>" disabled>
+                              <div class="row">
+                                <label class="col-10" for="upMail">Email:</label>
+                                <div class="col-90">
+                                  <input type="text" class="form-control" value="<?php echo $upMail;?>" disabled>
                                 </div>
                               </div>
                             <?php } ?>
 
                             <?php if($lastName==NULL || $lastName==""){} else{ ?>
-                              <div class="form-group">
-                                <label class="control-label col-sm-2" for="lastName">Last Name:</label>
-                                <div class="col-sm-10">
-                                  <input type="name" class="form-control" value="<?php echo $lastName;?>" disabled>
+                              <div class="row">
+                                <label class="col-10" for="lastName">Last Name:</label>
+                                <div class="col-90">
+                                  <input type="text" class="form-control" value="<?php echo $lastName;?>" disabled>
                                 </div>
                               </div>
                             <?php } ?>
 
                             <?php if($firstName ==NULL || $firstName ==""){} else{ ?>
-                            <div class="form-group">
-                              <label class="control-label col-sm-2" for="firstName">First Name:</label>
-                              <div class="col-sm-10">
-                                <input type="name" class="form-control" value="<?php echo $firstName?>" disabled>
+                            <div class="row">
+                              <label class="col-10" for="firstName">First Name:</label>
+                              <div class="col-90">
+                                <input type="text" class="form-control" value="<?php echo $firstName?>" disabled>
                               </div>
                             </div>
                             <?php } ?>
 
                             <?php if($middleName ==NULL || $middleName==""){} else{ ?>
-                            <div class="form-group">
-                              <label class="control-label col-sm-2" for="middleName">Middle Name:</label>
-                              <div class="col-sm-10">
-                                <input type="name" class="form-control" value="<?php echo $middleName?>" disabled>
+                            <div class="row">
+                              <label class="col-10" for="middleName">Middle Name:</label>
+                              <div class="col-90">
+                                <input type="text" class="form-control" value="<?php echo $middleName?>" disabled>
                               </div>
                             </div>
                             <?php } ?>
 
                             <?php if($position==NULL || $position==""){} else{ ?>
-                            <div class="form-group">
-                              <label class="control-label col-sm-2" for="position">Position:</label>
-                              <div class="col-sm-10">
-                                <input type="name" class="form-control" value="<?php echo $position ?>" disabled>
+                            <div class="row">
+                              <label class="col-10" for="position">Position:</label>
+                              <div class="col-90">
+                                <input type="text" class="form-control" value="<?php echo $position ?>" disabled>
                               </div>
                             </div>
                             <?php } ?>
 
-                            <?php// if($contactNo==NULL || $contactNo=="0"){} else{ ?>
-                            <!-- <div class="form-group">
-                              <label class="control-label col-sm-2" for="contactNo">Contact Number:</label>
-                              <div class="col-sm-10">
-                                <input type="name" class="form-control" value="<?php// echo $contactNo?>" disabled>
+                            <?php if($phonenumber ==NULL || $phonenumber==""){} else{ ?>
+                            <div class="row">
+                              <label class="col-10" for="phonenumber">Contact Number:</label>
+                              <div class="col-90">
+                                <input type="text" class="form-control" value="<?php echo $phonenumber?>" disabled>
                               </div>
-                            </div> -->
-                            <?php// } ?>
+                            </div>
+                            <?php } ?>
 
 
                           </form>
@@ -184,38 +183,43 @@ foreach ($rows9 as $key => $value)
                       </div>
 
                       <div id="editDiv" style="display:none">
-                          <form method="POST" action="../backend/sigdata.php" class="form-horizontal" role="form">
-                            <div class="form-group">
-                              <label class="control-label col-sm-2" for="firstName">Email:</label>
-                              <div class="col-sm-10">
-                                <input type="email" class="form-control" value="<?php echo $upMail ?>" disabled>
+                          <form method="POST" action="../backend/sigdata.php" class="login" role="form">
+                              <div class="row">
+                                <label class="col-10" for="upMail">Email:</label>
+                                <div class="col-90">
+                                  <input type="text" class="form-control" value="<?php echo $upMail;?>" disabled>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <label class="col-10" for="lastName">Last Name:</label>
+                                <div class="col-90">
+                                  <input type="text" name="lastName" class="form-control" value="<?php echo $lastName;?>">
+                                </div>
+                              </div>
+                              <div class="row">
+                              <label class="col-10" for="firstName">First Name:</label>
+                              <div class="col-90">
+                                <input type="text" name="firstName" class="form-control" value="<?php echo $firstName?>" >
                               </div>
                             </div>
-                            <div class="form-group">
-                              <label class="control-label col-sm-2" for="lastName">Last Name:</label>
-                              <div class="col-sm-10">
-                                <input type="name" class="form-control" name="lastName" value="<?php echo $lastName;?>">
+                            <div class="row">
+                              <label class="col-10" for="middleName">Middle Name:</label>
+                              <div class="col-90">
+                                <input type="text" name="middlename" class="form-control" value="<?php echo $middleName?>">
                               </div>
                             </div>
-                            <div class="form-group">
-                              <label class="control-label col-sm-2" for="firstName">First Name:</label>
-                              <div class="col-sm-10">
-                                <input type="name" class="form-control" name="firstName" value="<?php echo $firstName?>">
+                            <div class="row">
+                              <label class="col-10" for="position">Position:</label>
+                              <div class="col-90">
+                                <input type="text" name="position" class="form-control" value="<?php echo $position ?>">
                               </div>
                             </div>
-                            <div class="form-group">
-                              <label class="control-label col-sm-2" for="middleName">Middle Name:</label>
-                              <div class="col-sm-10">
-                                <input type="name" class="form-control" name="middleName" value="<?php echo $middleName?>">
+                            <div class="row">
+                              <label class="col-10" for="contactNo">Contact Number:</label>
+                              <div class="col-90">
+                                <input type="text" name="phonenumber" class="form-control" value="<?php echo $phonenumber?>">
                               </div>
                             </div>
-                            <div class="form-group">
-                              <label class="control-label col-sm-2" for="position">Position:</label>
-                              <div class="col-sm-10">
-                                <input type="name" class="form-control" name="position" value="<?php echo $position?>">
-                              </div>
-                            </div>
-
                             <div class="form-group">
                               <div class="col-sm-offset-2 col-sm-10">
                                 <button type="submit" class="btn btn-default" style="margin:2% 0% 3% 42%;">Submit</button>
@@ -224,33 +228,15 @@ foreach ($rows9 as $key => $value)
                           </form>
 
                       </div>
-                  </section>
+                      <div class="footer">
+                        <h3>SCHOLARSHIP MANAGEMENT SYSTEM</h3>
+                        <p>copyright &copy;2021</p>
+                    </div>
                 </div>
 
-            </section>
+           
 
-          <!-- footer -->
-
-        </article>
-
-      <!-- Footer -->
-        <footer id="footer">
-
-          <ul class="icons">
-            <li><a href="#" class="icon circle fa-twitter"><span class="label">Twitter</span></a></li>
-            <li><a href="#" class="icon circle fa-facebook"><span class="label">Facebook</span></a></li>
-            <li><a href="#" class="icon circle fa-google-plus"><span class="label">Google+</span></a></li>
-            <li><a href="#" class="icon circle fa-github"><span class="label">Github</span></a></li>
-            <li><a href="#" class="icon circle fa-dribbble"><span class="label">Dribbble</span></a></li>
-          </ul>
-
-          <ul class="copyright">
-            <li>&copy; Untitled</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-          </ul>
-
-        </footer>
-
-    </div>
+   
 
     <!-- Scripts -->
     <script type="text/javascript">
@@ -266,26 +252,9 @@ foreach ($rows9 as $key => $value)
   			}
   		}
   	</script>
-    <script src="../js/jquery.min.js"></script>
-    <script src="../js/jquery.dropotron.min.js"></script>
-    <script src="../js/jquery.scrolly.min.js"></script>
-    <script src="../js/jquery.scrollgress.min.js"></script>
-    <script src="../js/skel.min.js"></script>
-    <script src="../js/util.js"></script>
-    <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
-    <script src="../js/main.js"></script>
-  <script src="../js/jquery.js"></script>
-
-  <!-- Bootstrap Core JavaScript -->
-  <script src="../js/bootstrap.min.js"></script>
-
-  <!-- Plugin JavaScript -->
-  <script src="../js/jquery.easing.min.js"></script>
-  <script src="../js/jquery.fittext.js"></script>
-  <script src="../js/wow.min.js"></script>
-
-  <!-- Custom Theme JavaScript -->
-  <script src="../js/creative.js"></script>
+    
+    <script src="../js/script.js"></script>
+ 
 
 
 <!-- Display Div Script -->

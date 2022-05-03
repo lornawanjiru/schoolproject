@@ -73,15 +73,24 @@ foreach ($rows9 as $key => $value)
                     <h2> Hello, <?php echo $_SESSION['currentUserName']. " (ID:" . $_SESSION['currentUserID'] . ")"?>. </h2>
                   </div>
               </div>
-          <div class="">
-              <a class = "current" href="tempSigHome.php">Home</a>
-              <a href = "tempSigProfile.php">User Profile</a></li>               
-              <a href = "tempSigScholarship.php">My Scholarships</a></li>
-              <a href = "tempAddScholarship.php">Add Scholarships</a></li>  
-              <a href = "tempSigApplication.php?app=Pending">Pending applications</a>
-              <a href = "tempSigApplication.php?app=Approved">Accepted Applicaitons</a>
-              <a href = "tempSigApplication.php?app=Rejected">Rejected Applicaitons</a> 
+              <div class="">
               <a href = "../backend/logout.php" class = "button special">Logout</a>
+              
+              <a href = "tempSigProfile.php">Profile</a>
+              <a class="dropdown-btn"> Scholarship
+              </a>
+              <div class="dropdown-container">
+                <a href = "tempSigScholarship.php">My Scholarships</a>
+                <a href = "tempAddScholarship.php">Add Scholarships</a> 
+              </div>        
+              <a class="dropdown-btn"> Scholarship Status
+              </a>
+              <div class="dropdown-container">
+                <a href = "tempSigApplication.php?app=Pending">Pending applications</a>
+                <a href = "tempSigApplication.php?app=Approved">Accepted Applicaitons</a>
+                <a href = "tempSigApplication.php?app=Rejected">Rejected Applicaitons</a> 
+              </div> 
+              <a class = "current" href="tempSigHome.php">Home</a>
               <a href="javascript:void(0);" class="icon" onclick="myFunction()">
                 <img src="../images/menu.png" alt="" />
                 </a>
@@ -94,7 +103,7 @@ foreach ($rows9 as $key => $value)
                  <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/profile-sample3.jpg" alt="profile-sample3" class="profile" />
               </div>
               <div>
-                <h2> Hello, Lorna Wanjiru Muchangi. </h2>
+                <h2> Hello,<?php echo $_SESSION['currentUserName']. " (ID:" . $_SESSION['currentUserID'] . ")"?>. </h2>
                 <h3> Manage Your Scholarship in one application </h3>
               </div>
           </div>
