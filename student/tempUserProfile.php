@@ -84,7 +84,7 @@
                     <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/profile-sample3.jpg" alt="profile-sample3" class="profile" />
                   </div>
                   <div>
-                    <h2> Hello, Lorna Wanjiru Muchangi. </h2>
+                    <h2> Hello, <?php echo $_SESSION['currentUserName']. " (ID:" . $_SESSION['currentUserID'] . ")"?>. </h2>
                   </div>
               </div>
               
@@ -246,25 +246,25 @@
                             <div class="row">
                               <label class="col-10" for="phonenumber">Phonenumber</label>:</label>
                               <div class="col-90">
-                                <input type="text"  class="form-control" value="<?php echo $phonenumber?>">
+                                <input type="text" name="phonenumber" class="form-control" value="<?php echo $phonenumber?>">
                               </div>
                             </div>
                             <div class="row">
                               <label class="col-10" for="specialization">Specialization:</label>
                               <div class="col-90">
-                                <input type="text"  class="form-control" value="<?php echo $specialization?>">
+                                <input type="text" name="specialization" class="form-control" value="<?php echo $specialization?>">
                               </div>
                             </div>
                             <div class="form-group">
                               <label class="col-10" for="level">Level:</label>
                               <div class="col-90">
-                                <input type="text"  class="form-control" value="<?php echo $level?>">
+                                <input type="text"  name="level" class="form-control" value="<?php echo $level?>">
                               </div>
                             </div>
                             <div class="row">
                               <label class="col-10" for="results">Results:</label>
                               <div class="col-sm-10">
-                                <input type="text" class="form-control" value="<?php echo $results?>">
+                                <input type="text" name="results"class="form-control" value="<?php echo $results?>">
                               </div>
                             </div>
                           

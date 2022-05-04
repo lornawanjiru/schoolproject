@@ -9,7 +9,7 @@
   }
 
   // Connect to database
-    $conn = new mysqli("localhost:3309","root","","sms");
+  $conn = new mysqli("localhost","scholar", "","sms");
 
   // Checks Connection
     if ($conn->connect_error) {
@@ -56,13 +56,12 @@ foreach ($rows9 as $key => $value)
       <meta name="description" content="">
       <meta name="author" content="">
 
-      <link href="../css/bootstrap.min.css" rel="stylesheet">
-
       <link href="../css/main.css" rel="stylesheet">
+      <link href="../css/general.css" rel="stylesheet">
 
   </head>
 
-  <body class = "no-sidebar">
+  <body class = "user">
   	<script type="text/javascript">
   		function viewcontent(){
   			var selectone=document.getElementById("class").value;
@@ -76,49 +75,49 @@ foreach ($rows9 as $key => $value)
   			}
   		}
   	</script>
-    <div id = "page-wrapper">
+    
 
       <!-- Header -->
-        <header id = "header" >
-          <h1 id = "logo"><a href = "javascript:history.back()" class="button special">Back</a></h1>
-          <nav id = "nav">
-            <ul>
-              <li ><a href = "tempSigHome.php">Home</a></li>
-              <li><a href = "tempSigProfile.php">User Profile</a></li>
-               <li class = "submenu">
-                <a href = "#">Scholarships</a>
-                <ul>
-                  <li><a href = "tempSigScholarship.php">My Scholarships</a></li>
-                  <li><a href = "tempAddScholarship.php">Add Scholarships</a></li>
-                </ul>
-              </li>
-              <li class = "current submenu">
-                <a href = "#">Applications</a>
-                <ul>
-                  <li><a href = "tempSigApplication.php?app=Pending">Pending applications</a></li>
-                  <li><a href = "tempSigApplication.php?app=Approved">Accepted Applicaitons</a></li>
-                  <li><a href = "tempSigApplication.php?app=Rejected">Rejected Applicaitons</a></li>
-                </ul>
-              </li>
-              <li><?php echo $_SESSION['currentUserName']. " (ID:" . $_SESSION['currentUserID'] . ")"?></li>
-              <li><a href = "../backend/logout.php" class = "button special">Logout</a></li>
-            </ul>
-          </nav>
-        </header>
+      <div class = "nav">
+            <div class="topnav" id="myTopnav">
+              <div><a>Scholarship Application System</a> </div>
+              <div class="banner desktop-view">
+                  <div>
+                    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/profile-sample3.jpg" alt="profile-sample3" class="profile" />
+                  </div>
+                  <div>
+                    <h2> Hello, <?php echo $_SESSION['currentUserName']. " (ID:" . $_SESSION['currentUserID'] . ")"?>. </h2>
+                  </div>
+              </div>
+              <div class="">
+              <a href = "../backend/logout.php" class = "button special">Logout</a>
+              
+              <a href = "tempSigProfile.php">Profile</a>
+              <a class="dropdown-btn"> Scholarship
+              </a>
+              <div class="dropdown-container">
+                <a href = "tempSigScholarship.php">My Scholarships</a>
+                <a href = "tempAddScholarship.php">Add Scholarships</a> 
+              </div>        
+              <a class="dropdown-btn"> Scholarship Status
+              </a>
+              <div class="dropdown-container">
+                <a href = "tempSigApplication.php?app=Pending">Pending applications</a>
+                <a href = "tempSigApplication.php?app=Approved">Accepted Applicaitons</a>
+                <a href = "tempSigApplication.php?app=Rejected">Rejected Applicaitons</a> 
+              </div> 
+              <a class = "current" href="tempSigHome.php">Home</a>
+              <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+                <img src="../images/menu.png" alt="" />
+                </a>
+              </div>  
+            </div>
+          </div>
 
 
 			<!-- Main -->
-				<article id="main">
-
-					<header class="special container">
-						<span class="icon fa-mobile"></span>
-					</header>
-
-					<!-- One -->
-						<section class="wrapper style4 container">
-							<!-- Content -->
-						<div class="content">
-                            <div class="form-group">
+			<div class = "content">					
+                    <div class="login">
                             <?php
                             try{
                               $app = NULL;
@@ -447,26 +446,14 @@ foreach ($rows9 as $key => $value)
              mysqli_close($conn);
           } catch(Exception $e){}
           ?>
-					</div>
-				</section>
-			</article>
-			<!-- Footer -->
-				<footer id="footer">
-
-					<ul class="icons">
-						<li><a href="#" class="icon circle fa-twitter"><span class="label">Twitter</span></a></li>
-						<li><a href="#" class="icon circle fa-facebook"><span class="label">Facebook</span></a></li>
-						<li><a href="#" class="icon circle fa-google-plus"><span class="label">Google+</span></a></li>
-						<li><a href="#" class="icon circle fa-github"><span class="label">Github</span></a></li>
-						<li><a href="#" class="icon circle fa-dribbble"><span class="label">Dribbble</span></a></li>
-					</ul>
-
-					<ul class="copyright">
-						<li>&copy; Untitled</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-					</ul>
-
-				</footer>
-
+          <div class="footer">
+            <h3>SCHOLARSHIP MANAGEMENT SYSTEM</h3>
+            <p>copyright &copy;2021</p>
+         </div>
+			</div>
+			
+			
+				
 		</div>
 
 		<!-- Scripts -->
@@ -488,13 +475,7 @@ foreach ($rows9 as $key => $value)
       }
     </script>
 
-      <script src="../js/jquery.min.js"></script>
-      <script src="../js/jquery.dropotron.min.js"></script>
-      <script src="../js/jquery.scrolly.min.js"></script>
-      <script src="../js/jquery.scrollgress.min.js"></script>
-      <script src="../js/skel.min.js"></script>
-      <script src="../js/util.js"></script>
-      <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
-      <script src="../js/main.js"></script>
+     
+      <script src="../js/script.js"></script>
 	</body>
 </html>

@@ -69,7 +69,7 @@ foreach ($rows9 as $key => $value)
                     <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/profile-sample3.jpg" alt="profile-sample3" class="profile" />
                   </div>
                   <div>
-                    <h2> Hello, Lorna Wanjiru Muchangi. </h2>
+                    <h2> Hello, <?php echo $_SESSION['currentUserName']. " (ID:" . $_SESSION['currentUserID'] . ")"?>. </h2>
                   </div>
               </div>
               

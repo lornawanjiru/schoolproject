@@ -131,7 +131,14 @@ foreach ($rows9 as $key => $value)
                                 </div>
                               </div>
                             <?php } ?>
-
+                            <?php if($organization==NULL || $organization==""){} else{ ?>
+                            <div class="row">
+                              <label class="col-10" for="position">Organization Name:</label>
+                              <div class="col-90">
+                                <input type="text" class="form-control" value="<?php echo $organization ?>" disabled>
+                              </div>
+                            </div>
+                            <?php } ?>
                             <?php if($lastName==NULL || $lastName==""){} else{ ?>
                               <div class="row">
                                 <label class="col-10" for="lastName">Last Name:</label>
@@ -167,6 +174,7 @@ foreach ($rows9 as $key => $value)
                               </div>
                             </div>
                             <?php } ?>
+                          
 
                             <?php if($phonenumber ==NULL || $phonenumber==""){} else{ ?>
                             <div class="row">
@@ -191,6 +199,12 @@ foreach ($rows9 as $key => $value)
                                 </div>
                               </div>
                               <div class="row">
+                                <label class="col-10" for="position">Organization Name:</label>
+                                  <div class="col-90">
+                                    <input type="text" class="form-control" value="<?php echo $organization ?>" disabled>
+                                  </div>
+                              </div>
+                              <div class="row">
                                 <label class="col-10" for="lastName">Last Name:</label>
                                 <div class="col-90">
                                   <input type="text" name="lastName" class="form-control" value="<?php echo $lastName;?>">
@@ -205,7 +219,7 @@ foreach ($rows9 as $key => $value)
                             <div class="row">
                               <label class="col-10" for="middleName">Middle Name:</label>
                               <div class="col-90">
-                                <input type="text" name="middlename" class="form-control" value="<?php echo $middleName?>">
+                                <input type="text" name="middleName" class="form-control" value="<?php echo $middleName?>">
                               </div>
                             </div>
                             <div class="row">
