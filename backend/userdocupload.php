@@ -19,7 +19,7 @@
   if($schid==NULL || $sigID==NULL){
   	header("Location:../student/tempUserApply.php");
   }
-	if($_POST['apply'] == "Apply >>"){
+	if($_POST['Apply Now '] == "Apply >>"){
 
 		//inserting into database
 		$flag=0;

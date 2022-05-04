@@ -39,7 +39,7 @@
                           <label for="email">Email *</label>
                       </div>
                       <div class="col-90">
-                          <input type="text" id="email" name="email" placeholder="Enter your email address" value="<?php echo $email ?>">
+                          <input type="text" id="email" name="email" placeholder="Enter your email address">
                       </div>
             </div>
             <div class="row">

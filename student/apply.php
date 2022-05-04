@@ -89,9 +89,9 @@
             </div>
           </div>
  	<!-- Main -->
-   <div>
+   <div class="content">
           <?php
-          	$conn = new mysqli("localhost","root","","sms");
+          	$conn = new mysqli("localhost","scholar","","sms");
             $schid=$_SESSION["schid"];
             $sigID = $_POST['sigID'];
             $_SESSION['sigID'] = $sigID;
@@ -118,16 +118,17 @@
                     <input type="submit" id="apply" name="apply" value="Continue Otherwise >>" title="Click here only if your Profile is Completed!!" formaction="applyprocess.php">
 
                    </form>
-            <?php
-        }
-    		$conn->close();
-
-            ?>
+           
 
             <div class="footer">
             <h3>SCHOLARSHIP MANAGEMENT SYSTEM</h3>
             <p>copyright &copy;2021</p>
          </div>
+         <?php
+        }
+    		$conn->close();
+
+            ?>
         </div>
         <!-- Footer -->
        

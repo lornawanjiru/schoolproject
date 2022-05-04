@@ -95,7 +95,7 @@
 
           <!-- One -->
           <?php
-            $conn = new mysqli("localhost","root","","sms");
+            $conn = new mysqli("localhost","scholar","","sms");
             $schid=$_GET['sch'];
             $sigID = NULL;
             $xml=simplexml_load_file("../backend/scholarship_data.xml") or die("Error: Cannot create object");
@@ -169,7 +169,7 @@
                       <input type="disabled" name="sigID" value = "<?php echo $sigID;?>">
                       <input type="submit" name="apply" value="Apply >>">
                   </form>
-                  <?php } }  $conn->close(); ?>
+                  
                    <!-- Footer -->
                   <div class="footer">
                       <h3>SCHOLARSHIP MANAGEMENT SYSTEM</h3>
@@ -177,7 +177,7 @@
                   </div>
                 </div>
 
-           
+                <?php } }  $conn->close(); ?>
        
    
 

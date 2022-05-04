@@ -28,13 +28,18 @@
 
     	//inserting Record to the database
     	$firstName = $_POST['firstName'];
-		$middleName = $_POST['middleName'];
+		  $middleName = $_POST['middleName'];
     	$lastName = $_POST['lastName'];
-    	
+    	$currentlocation = $_POST['currentlocation'];
+      $gender = $_POST["gender"];
+      $phonenumber = $_POST["phonenumber"];
+      $specialization = $_POST["specialization"];
+      $level = $_POST["level"];
+      $results = $_POST["results"];
     	
     	
 
-    	$sql = "UPDATE student set firstName='$firstName', middleName='$middleName', lastName='$lastName' where studentID = '$currentUserID'";
+    	$sql = "UPDATE student set firstName='$firstName', middleName='$middleName', lastName='$lastName',currentlocation='$currentlocation',gender='$gender',phonenumber='$phonenumber',specialization='$specialization',level='$level',results='$results' where studentID = '$currentUserID'";
 
     	if($conn->query($sql)){
       ?>

@@ -142,11 +142,12 @@ foreach ($rows9 as $key => $value)
                               $app = $_POST['app'];
                             }
                            		$sql="SELECT scholarshipID,schname FROM scholarship where sigID=$currentUserID";
-					                     $result = mysqli_query($conn,$sql);
+					                    $result = mysqli_query($conn,$sql);
+                                
                              ?>
                               <label style="margin-left: 30%"><h2><b>Select Your Scholarship</b></h2></label>
                               <div class="col-sm-10">
-                              <center>
+                            
                                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" name="login" >
                                 <select name="class" id="class" onchange="viewcontent()" style="padding-top:2%;padding-bottom:2%;padding-left:2%;display:block;">
                                     <option value="select" selected><strong>Select Your Scholarship</strong></option>
@@ -169,7 +170,7 @@ foreach ($rows9 as $key => $value)
                                   <input type="submit" id="apply" name="apply" value="Select Scholarship >>" style="margin-top:2%;float:inherit">
                                   <input type="submit" id="showall" name="showall" value="<Show all>" style="margin-left:2%;margin-top:2%;float:inherit">
                                 </form>
-                              </center>
+                            
                               </div>
                             </div>
                             <br><br><br><br><br><br><br>
