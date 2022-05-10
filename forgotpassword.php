@@ -1,5 +1,10 @@
 <?php session_start();
-  require 'PHPMailer\PHPMailerAutoload.php';
+  use PHPMailer\PHPMailer\PHPMailer;
+  use PHPMailer\PHPMailer\SMTP;
+  use PHPMailer\PHPMailer\Exception;
+  
+  //Load Composer's autoloader
+  require 'vendor/autoload.php';
  ?>
 <!DOCTYPE html>
 <html>
@@ -8,7 +13,7 @@
   <?php
     if(isset($_POST['submit'])){
       $email = $_POST['email'];
-      $conn = new mysqli("localhost","root", "","sms");
+      $conn = new mysqli("localhost","scholar", "","sms");
 
       if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
@@ -26,8 +31,8 @@
           $sixdigitnum = mt_rand ( $min ,  $max );
           $verify="INSERT INTO reset_password(upMail,num) VALUES ('$email','$sixdigitnum')";
           if(mysqli_query($conn, $verify)){
-            $emailfrom = "bindrani.rb7@gmail.com";
-            $passfrom = "8128962439rb";
+            $emailfrom = "demo73451@gmail.com";
+            $passfrom = "Test1234#";
             $mail = new PHPMailer;
             $mail->isSMTP();                            // Set mailer to use SMTP
             $mail->Host = 'smtp.gmail.com';             // Specify main and backup SMTP servers
@@ -40,8 +45,6 @@
             $mail->setFrom($emailfrom, 'SMS');
             $mail->addReplyTo($emailfrom, 'SMS');
             $mail->addAddress($email);                  // Add a recipient
-            // $mail->addCC('cc@example.com');
-            // $mail->addBCC('bcc@example.com');
             $mail->isHTML(true);  // Set email format to HTML
 
             $bodyContent = '

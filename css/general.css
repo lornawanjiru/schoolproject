@@ -1,5 +1,4 @@
 /*General */
-@import url(http://fonts.googleapis.com/css?family=Exo:100,200,400);
 
 body, html {
   margin: 0;
@@ -11,12 +10,10 @@ body, html {
 }
 h1 {
   font-size: 3.0em;
-  font-family: 'Exo', sans-serif;
   font-weight: 500;
 }
 h2, h3, h4, h5, h6 {
     font-size: 1.0em;
-    font-family: 'Exo', sans-serif;
     font-weight: 700;
 }
 a {
@@ -36,7 +33,12 @@ a {
 }
 
 /* Style the links inside the navigation bar */
+.topnav .header a {
+	font-size:1.5em !important;
+  font-weight: 700;
+}
 .topnav a {
+ 
   float: right;
   display: none;
   color: #272727;
@@ -49,6 +51,10 @@ a {
 /* Change the color of links on hover */
 .topnav a:hover {
   background-color: #ddd;
+  color: black;
+}
+.topnav .header a:hover {
+  background-color: transparent;
   color: black;
 }
 
@@ -219,7 +225,9 @@ input[type=submit] , button{
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  
+}
+.full button{
+  width:100%;
 }
 .row:after{
   content: "";

@@ -58,7 +58,7 @@
             if(!empty($_SESSION['errMsg'])){ ?>
               <div class = "">
                 <div class="" style="margin-top:20px;">
-                  <center><strong>Invalid! </strong><?php echo $_SESSION['errMsg']; ?></center>
+                  <strong>Invalid! </strong><?php echo $_SESSION['errMsg']; ?>
                 </div>
               </div>
           <?php unset($_SESSION['errMsg']); }?>

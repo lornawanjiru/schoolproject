@@ -3,16 +3,19 @@
 function validateControls() {
     
     //Email
-    var email = document.getElementById("email")
-    if (email.value == "") {
+    var email = document.getElementById("email");
+    var format = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if (email.value == "" || !format.test(email.value)) {
         window.alert("please enter your valid email Id");
         email.focus();
         return false;
     }
+   
     //Password
     var password = document.getElementById("password")
-    if (password.value == "") {
-        window.alert("please enter your password");
+    var Chars = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
+    if (password.value == "" || !Chars.test(password.value) ) {
+        window.alert("please enter your password that is 8-15 characters which contain at least one lowercase letter, one uppercase letter, one numeric digit, and one special character");
         password.focus();
         return false;
     }
@@ -25,21 +28,22 @@ function validateControls() {
     }
    //FirstName
    var firstname = document.getElementById("firstname")
-   if (firstname.value == "") {
-	   window.alert("please enter your first name");
+   var letters = /^[A-Za-z]+$/;
+   if (firstname.value == "" || !letters.test(firstname.value)) {
+	   window.alert("please enter your first name with no special characters");
 	   firstname.focus();
 	   return false;
    }
    //MiddleName
    var middlename = document.getElementById("middlename")
-   if (middlename.value == "") {
+   if (middlename.value == "" || !letters.test(middlename.value)) {
 	   window.alert("please enter your middle name");
 	   middlename.focus();
 	   return false;
    }
    //LastName
    var lastname = document.getElementById("lastname")
-   if (lastname.value == "") {
+   if (lastname.value == "" || !letters.test(lastname.value)) {
 	   window.alert("please enter your last name");
 	   lastname.focus();
 	   return false;

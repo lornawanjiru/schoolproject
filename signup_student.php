@@ -15,11 +15,7 @@
       <meta name="description" content="">
       <meta name="author" content="">
       <title>Student Signup</title>
-  <!-- Custom Google Web Font -->
-    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Arvo:400,700' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Exo:100,200,400' rel = 'sylesheet' type = 'text/css'>
+  
     <!-- Custom CSS-->
     <link href="css/general.css" rel="stylesheet">
   </head>
@@ -45,7 +41,8 @@
             $specialization = $_POST['specialization'];
             $level = $_POST['level'];
             $results = $_POST['results'];
-           
+            $images = $_POST['images'];
+
             $conn = new mysqli("localhost","scholar", "","sms");
 
             if ($conn->connect_error) {
@@ -134,6 +131,7 @@
         echo $e->getMessage();
       }
     ?>
+
     <div class = "intro-header">
       
       <div class = "text-center">
@@ -143,7 +141,7 @@
           <h4 class = "">Create Your Account</h4>
      
         <div class="login">
-          <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" onsubmit="return SaveStudentDetails()" method="POST" name="login" >
+          <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" onsubmit="return validateControls()" method="POST" name="login" >
           <div class="row">
                     <div class="col-10">
                         <label for="email">Email *</label>
@@ -240,7 +238,14 @@
               <input type="text" id="results" name="results" placeholder="Please enter your Results">
             </div>
           </div>
-            
+          <div class="row">
+                    <div class="col-10">
+                        <label for="photo">Upload your photo</label>
+                    </div>
+                    <div class="col-90">
+                        <input type="text" id="photo" name="photo" placeholder="Enter your profile photo">
+                    </div>
+          </div>   
 
             <input type = "submit" id="submit" class = "btn">
 
@@ -253,7 +258,7 @@
             if(!empty($_SESSION['errMsg'])){ ?>
               <div class = "">
                 <div class="text-center" style="margin-top:20px;">
-                  <center><strong>Invalid! </strong><?php echo $_SESSION['errMsg']; ?></center>
+                  <strong>Invalid! </strong><?php echo $_SESSION['errMsg']; ?>
                 </div>
               </div>
           <?php unset($_SESSION['errMsg']); }?>

@@ -11,7 +11,7 @@
   }
 
   // Connect to database
-  $conn = new mysqli("localhost","scholar", "","sms");
+    $conn = new mysqli("localhost","scholar","","sms");
 
   // Checks Connection
     if ($conn->connect_error) {
@@ -49,8 +49,6 @@
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="description" content="">
       <meta name="author" content="">
-
-      <!-- Custom CSS -->
       <link href="../css/main.css" rel="stylesheet">
       <link href="../css/general.css" rel="stylesheet">
   </head>
@@ -73,45 +71,54 @@
           }
           </script>
 
-
-    
-
       <!-- Header -->
       <div class = "nav">
             <div class="topnav" id="myTopnav">
-              <div><a>Scholarship Application System</a> </div>
+              <div class="header"><a >Scholarship Application System</a> </div>
               <div class="banner desktop-view">
                   <div>
                     <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/profile-sample3.jpg" alt="profile-sample3" class="profile" />
                   </div>
                   <div>
-                    <h2> Hello, Lorna Wanjiru Muchangi. </h2>
+                    <h2> Hello, <?php echo $_SESSION['currentUserName']. " (ID:" . $_SESSION['currentUserID'] . ")"?>. </h2>
                   </div>
               </div>
-              
               <div class="">
-                     <a href = "../backend/logout.php" class = "button special">Logout</a>
-                      <!-- <a href = "#"><?php echo $_SESSION['currentUserName']. " (ID:" . $_SESSION['currentUserID'] . ")"?></a></div> -->
-                      <a href = "tempUserProfile.php">Profile</a>
-                      <a href = "tempUserApply.php">Apply</a>
-                      <a href = "tempUserView.php">Status</a>
-                      <a class = "current" href="tempUserHome.php">Home</a>
-                    
-                <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+              <a href = "../backend/logout.php" class = "button special">Logout</a>
+              
+              <a href = "tempSigProfile.php">Profile</a>
+              <a class="dropdown-btn"> Scholarship
+              </a>
+              <div class="dropdown-container">
+                <a href = "tempSigScholarship.php">My Scholarships</a>
+                <a href = "tempAddScholarship.php">Add Scholarships</a> 
+              </div>        
+              <a class="dropdown-btn"> Status
+              </a>
+              <div class="dropdown-container">
+                <a href = "tempSigApplication.php?app=Pending">Pending applications</a>
+                <a href = "tempSigApplication.php?app=Approved">Accepted Applicaitons</a>
+                <a href = "tempSigApplication.php?app=Rejected">Rejected Applicaitons</a> 
+              </div> 
+              <a class = "current" href="tempSigHome.php">Home</a>
+              <a href="javascript:void(0);" class="icon" onclick="myFunction()">
                 <img src="../images/menu.png" alt="" />
                 </a>
               </div>  
             </div>
           </div>
+
       <!-- Main -->
         <div class="content">
 
-          
-            <h1>SUPPORTING DOCUMENTS</h1>
-           
+          <div class="special container">            
+            <h2>SUPPORTING DOCUMENTS</h2>
+          </div>
+
+        
               <h2>Please Submit all the Documents as mentioned below.</h2>
               <h2><b>NOTE : </b>The documents must be of the format- <u><b>PDF</b></u></h2><br>
-              <form action="../backend/userdocupload.php" method="post" enctype="multipart/form-data">
+              <form action="../backend/userdocupload.php" method="post" class = "login" enctype="multipart/form-data">
 
                   <label><b>1. <u>Aadhar Card : </u></b></label>
                   <label>This must contain two copies of AADHAR Card, both front and back side copy.Collate into one pdf and upload it HERE(MAX SIZE : 800kb)<span style="color: red">*</span> </label>
@@ -131,18 +138,19 @@
                   <label>This must contain first page of your saving account passbook.Deatils such as your fullname, IFSC code, bank account number, branch name must be clearly visible in the document (MAX SIZE : 800kb)<span style="color: red">*</span> </label>
                   <input type="file"  name="file[]" id="passbook" onchange="return fileValidation('passbook')" required><br><br>
 
-                  <input type = "submit" value="Apply Now" class = "btn">
+                  <input type="submit" name="apply" value="Apply >>">
 
               </form>
-  
-        <!-- Footer -->
-        <div class="footer">
+            <div class="footer">
             <h3>SCHOLARSHIP MANAGEMENT SYSTEM</h3>
-            <p>copyright &copy;2021</p>
+            <p>copyright &copy;2022</p>
          </div>
+        </div>
+        <!-- Footer -->
+        
     </div>
 
-    
+     
       <script src="../js/script.js"></script>
 
   </body>

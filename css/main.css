@@ -10,12 +10,10 @@ body, html {
 }
 h1 {
 	font-size: 3.0em;
-	font-family: 'Exo', sans-serif;
 	font-weight: 500;
   }
 h2, h3, h4, h5, h6 {
 	font-size: 1.0em;
-	font-family: 'Exo', sans-serif;
 	font-weight: 700;
 }
 a {

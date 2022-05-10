@@ -64,7 +64,7 @@ foreach ($rows9 as $key => $value)
       <!-- Header -->
       <div class = "nav">
             <div class="topnav" id="myTopnav">
-              <div><a>Scholarship Application System</a> </div>
+              <div class="header"><a>Scholarship Application System</a> </div>
               <div class="banner desktop-view">
                   <div>
                     <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/profile-sample3.jpg" alt="profile-sample3" class="profile" />
@@ -83,7 +83,7 @@ foreach ($rows9 as $key => $value)
                 <a href = "tempSigScholarship.php">My Scholarships</a>
                 <a href = "tempAddScholarship.php">Add Scholarships</a> 
               </div>        
-              <a class="dropdown-btn"> Scholarship Status
+              <a class="dropdown-btn"> Status
               </a>
               <div class="dropdown-container">
                 <a href = "tempSigApplication.php?app=Pending">Pending applications</a>
@@ -115,10 +115,9 @@ foreach ($rows9 as $key => $value)
                 <img src="../images/hero.jpg" alt="" />
             </div>
             <div class="hero-content">
-                <h1>SCHOLARSHIPS AND GRANTS</h1>
-                <p>College can be expensive — which is why we offer generous scholarships to high-achieving students. Scholarships are based on academic merit and do not need to be repaid. The application is proud to award more than $400,000 in scholarships to our students each year through private funding.
-                   Students seeking financial assistance to pay for their education may also qualify for grants. Grants are need-based money that does not have to be repaid and are funded by Federal, state, or institutional resources. </p>
-                <a href="tempUserApply.php"> <input type = "submit" value="Apply Now" class = "btn"> </a>
+                <h1>OUR SCHOLARSHIPS</h1>
+                <p>Our Organization is proud to offer the international education scholarship for International Students. Our educational scholarships for new international students is a testament to our commitment to providing individuals with the opportunity to pursue a world-class education. </p>
+                <a href="tempSigScholarship.php"> <input type = "submit" value="Our Scholarship" class = "btn"> </a>
             </div>
            </div>
 
@@ -184,7 +183,7 @@ foreach ($rows9 as $key => $value)
           <!-- Footer -->
          <div class="footer">
             <h3>SCHOLARSHIP MANAGEMENT SYSTEM</h3>
-            <p>copyright &copy;2021</p>
+            <p>copyright &copy;2022</p>
          </div>
 
 

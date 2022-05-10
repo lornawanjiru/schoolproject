@@ -8,11 +8,7 @@
       <meta name="description" content="">
       <meta name="author" content="">
       <title>Home</title>  
-    <!-- Custom Google Web Font -->
-    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Arvo:400,700' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Exo:100,200,400' rel = 'sylesheet' type = 'text/css'>
+    
 
     <!-- Custom CSS-->
     <link href="css/general.css" rel="stylesheet">
@@ -22,7 +18,7 @@
   <body id = "home">
      <div class = "nav">
         <div class="topnav" id="myTopnav">
-           <div> <a>Scholarship Application System</a> </div>
+        <div class="header"><a>Scholarship Application System</a> </div>
             <div>
                 <a href="login.php">Login</a>
                 <a href="signup_sig.php">Signatory</a>
@@ -141,7 +137,7 @@
          </div>
          <div class="footer">
             <h3>SCHOLARSHIP MANAGEMENT SYSTEM</h3>
-            <p>copyright &copy;2021</p>
+            <p>copyright &copy;2022</p>
          </div>
      </div>
     <!-- JavaScript -->

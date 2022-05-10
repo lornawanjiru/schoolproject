@@ -80,7 +80,7 @@ foreach ($rows9 as $key => $value)
       <!-- Header -->
       <div class = "nav">
             <div class="topnav" id="myTopnav">
-              <div><a>Scholarship Application System</a> </div>
+            <div class="header"><a>Scholarship Application System</a> </div>
               <div class="banner desktop-view">
                   <div>
                     <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/profile-sample3.jpg" alt="profile-sample3" class="profile" />
@@ -192,7 +192,7 @@ foreach ($rows9 as $key => $value)
                                   	$qSchoResult = mysqli_query($conn, $queryScholarship);
                                     if($qSchoResult->num_rows > 0){
                                       ?>
-                                      <h1><strong><center>Displaying All <?php echo $app; ?> Applications</center> </strong></h1>
+                                      <h1><strong>Displaying All <?php echo $app; ?> Applications </strong></h1>
                                       <table class="table table-bordered">
                                         <thead>
                                             <tr>
@@ -248,7 +248,7 @@ foreach ($rows9 as $key => $value)
 
                                     </td><td>
 
-                                      <form action="sigAppView.php" method="post">
+                                      <form action="sigAppView.php" class="full" method="post">
                                         <input type="hidden" name="appID" value="<?php echo $appID; ?>">
                                          <input type="hidden" name="schID" value="<?php echo $schID; ?>">
                                         <input type="hidden" name="studentID" value="<?php echo $studentID; ?>">
@@ -257,7 +257,7 @@ foreach ($rows9 as $key => $value)
 
                                       </td><td>
 
-                                    		<form action="../backend/sigAcceptReject.php" method="post">
+                                    		<form action="../backend/sigAcceptReject.php" class="full" method="post">
                                           <input type="hidden" name="appID" value="<?php echo $appID; ?>">
                                           <button name="accrej" value="Accept" <?php if ($verifiedBySignatory == 'Approved'){
                                             echo "disabled";
@@ -267,7 +267,7 @@ foreach ($rows9 as $key => $value)
 
                                         </td><td>
 
-                                        <form action="../backend/sigAcceptReject.php" method="post">
+                                        <form action="../backend/sigAcceptReject.php" class="full" method="post">
                                           <input type="hidden" name="appID" value="<?php echo $appID; ?>">
                                           <button name="accrej" value="Reject" <?php if ($verifiedBySignatory == 'Rejected'){
                                             echo "disabled";
@@ -277,7 +277,7 @@ foreach ($rows9 as $key => $value)
 
                                         </td><td>
 
-                                        <form name="blockform" action="../backend/sigBlockUnblockApp.php" method="post" onsubmit="confirmblock(this)">
+                                        <form name="blockform" class="full" action="../backend/sigBlockUnblockApp.php" method="post" onsubmit="confirmblock(this)">
                                           <input type="hidden" name="appID" value="<?php echo $appID; ?>">
                                           <button name="blk_unblk_app" value="blockapp" <?php if($status == 'inactive'){
                                             echo "disabled";
@@ -287,7 +287,7 @@ foreach ($rows9 as $key => $value)
 
                                       </td><td>
 
-                                      <form name="unblockform" action="../backend/sigBlockUnblockApp.php" method="post" onsubmit="confirmunblock(this)">
+                                      <form name="unblockform" action="../backend/sigBlockUnblockApp.php" class="full" method="post" onsubmit="confirmunblock(this)">
                                         <input type="hidden" name="appID" value="<?php echo $appID; ?>">
                                         <button name="blk_unblk_app" value="unblockapp" <?php if($status != 'inactive'){
                                           echo "disabled";
@@ -449,7 +449,7 @@ foreach ($rows9 as $key => $value)
           ?>
           <div class="footer">
             <h3>SCHOLARSHIP MANAGEMENT SYSTEM</h3>
-            <p>copyright &copy;2021</p>
+            <p>copyright &copy;2022</p>
          </div>
 			</div>
 			

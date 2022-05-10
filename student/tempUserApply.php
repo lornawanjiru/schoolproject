@@ -301,7 +301,7 @@ foreach ($rows9 as $key => $value)
 <!-- Footer -->
          <div class="footer">
             <h3>SCHOLARSHIP MANAGEMENT SYSTEM</h3>
-            <p>copyright &copy;2021</p>
+            <p>copyright &copy;2022</p>
          </div>
       </div>
         

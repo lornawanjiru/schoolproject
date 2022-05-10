@@ -19,15 +19,14 @@
   if($schid==NULL || $sigID==NULL){
   	header("Location:../student/tempUserApply.php");
   }
-	if($_POST['Apply Now '] == "Apply >>"){
+	if($_POST['apply'] == "Apply >>"){
 
 		//inserting into database
 		$flag=0;
 		$date1=date("Y-m-d H:i:s");
 
 		// Connect to database
-	    $conn = new mysqli("localhost","scholar", "","sms");
-
+	    $conn = new mysqli("localhost","scholar","","sms");
 
      	  // Checks Connection
 	    if ($conn->connect_error) {
@@ -42,6 +41,7 @@
 			echo "Error: " . $sql . "<br>" . mysqli_error($conn);
 			$flag=0;
 		}
+		//tmp_name is the temporary name of the uploaded file which is generated automatically by php, and stored on the temporary folder on the server. name is the original name of the file which is store on the local machine.
 
 		//uploading docs
 		if($flag==1){

@@ -102,8 +102,8 @@
                               if($name == NULL || $name == ""){
                                 $name = "NULL";
                               }
-                              $org = $row['organization/university'];
-                              $con = $row['contact'];
+                              $org = $row['organization'];
+                              $con = $row['phonenumber'];
                               $status = $row['status'];
                           ?>
                               <tr>
