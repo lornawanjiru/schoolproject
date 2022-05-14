@@ -23,61 +23,58 @@
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="description" content="">
       <meta name="author" content="">
-
-      <link href="../css/bootstrap.min.css" rel="stylesheet">
-
       <link href="../css/main.css" rel="stylesheet">
+      <link href="../css/general.css" rel="stylesheet">
+      <link href="../css/admin.css" rel="stylesheet">
 
   </head>
 
-  <body class = "no-sidebar">
-    <div id = "page-wrapper">
-
+  <body class = "user">
       <!-- Header -->
-         <header id = "header">
-           <h1 id = "logo"><a href = "javascript:history.back()" class="button special">Back</a></h1>
-          <nav id = "nav">
-            <ul>
-              <li class = ""><a href = "#">Home</a></li>
-              <li class = "submenu">
-                <a href = "#">Applications</a>
-                <ul>
-                  <li><a href = "tempPendingApp.php">Pending Students</a></li>
-                  <li><a href = "tempAcceptedApp.php">Accepted Students</a></li>
-                  <li><a href = "tempRejectedApp.php">Rejected Students</a></li>
-                </ul>
-              </li>
-              <li class = "submenu current">
-                <a href = "tempScholarship.php">Scholarships</a>
-                <ul>
-                  <li><a href = "tempScholarship.php?scholarship=Pending">Pending Scholarships</a></li>
-                  <li><a href = "tempScholarship.php?scholarship=Approved">Accepted Scholarships</a></li>
-                  <li><a href = "tempScholarship.php?scholarship=Rejected">Rejected Scholarships</a></li>
-                </ul>
-              </li>
-              <li class = "submenu">
-                <a href = "">Users</a>
-                <ul>
+      <div class = "nav">
+        <div class="header"><a>Scholarship Application System</a> </div>
+            <div class="banner desktop-view">
+                  <div>
+                    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/profile-sample3.jpg" alt="profile-sample3" class="profile" />
+                  </div>
+                  <div>
+                    <h2> Hello, <?php echo $_SESSION['currentUserName']. " (ID:" . $_SESSION['currentUserID'] . ")"?>. </h2>
+                  </div>
+            </div>
+            <div class="">
+              <a href = "../backend/logout.php" class = "button special">Logout</a>
+              <a class = "current" href = "#">Home</a>
+             
+                <a class="dropdown-btn">Applications</a>
+                <div class="dropdown-container">
+                  <a href = "tempPendingApp.php">Pending Students</a>
+                  <a href = "tempAcceptedApp.php">Accepted Students</a>
+                  <a href = "tempRejectedApp.php">Rejected Students</a>
+                </div>
+                <a class="dropdown-btn">Scholarships</a>
+                <div class="dropdown-container">
+                  <a href = "tempScholarship.php?scholarship=Pending">Pending Scholarships</a></li>
+                  <a href = "tempScholarship.php?scholarship=Approved">Accepted Scholarships</a></li>
+                  <a href = "tempScholarship.php?scholarship=Rejected">Rejected Scholarships</a></li>
+                </div>
+             
+                
+                <a class="dropdown-btn">Users</a>
+                <div class="dropdown-container">
                   <li><a href = "tempAdminShow.php">Admin</a></li>
                   <li><a href = "tempSignatoryShow.php">Signatory</a></li>
                   <li><a href = "tempStudentShow.php">Students</a></li>
-                </ul>
-              </li>
-              <li><a href = "../backend/logout.php" class = "button special">Logout</a></li>
-            </ul>
-          </nav>
-        </header>
+                </div>
+                <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+                <img src="../images/menu.png" alt="" />
+                </a>
+              </div>  
+            </div>
+          </div>
 
 
 			<!-- Main -->
-				<article id="main">
-
-					<header class="special container">
-						<span class="icon fa-mobile"></span>
-					</header>
-
-					<!-- One -->
-						<section class="wrapper style4 container">
+      <div class="content">
               <span style="text-align:center">
                 <br><h1 style="font-size : 28px"><strong><?php echo $_POST['schname']; ?> </strong></h1>
                 <hr style=" height: 1px;color: red;background-color: grey;border: none;">
@@ -120,7 +117,7 @@
                         $contact = $sch->contact;
               ?>
 
-                        <div class="content">
+                       
                           <section style="text-align: justify;">
                             <h1><b>What is <?php echo $schname; ?> ?</b></h1>
                             <p><?php echo $description; ?></p>
@@ -266,24 +263,10 @@
 		echo $e->getMessage();
 	}
 ?>
-				</section>
-			</article>
-			<!-- Footer -->
-				<footer id="footer">
-
-					<ul class="icons">
-						<li><a href="#" class="icon circle fa-twitter"><span class="label">Twitter</span></a></li>
-						<li><a href="#" class="icon circle fa-facebook"><span class="label">Facebook</span></a></li>
-						<li><a href="#" class="icon circle fa-google-plus"><span class="label">Google+</span></a></li>
-						<li><a href="#" class="icon circle fa-github"><span class="label">Github</span></a></li>
-						<li><a href="#" class="icon circle fa-dribbble"><span class="label">Dribbble</span></a></li>
-					</ul>
-
-					<ul class="copyright">
-						<li>&copy; Untitled</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-					</ul>
-
-				</footer>
+		 <div class="footer">
+            <h3>SCHOLARSHIP MANAGEMENT SYSTEM</h3>
+            <p>copyright &copy;2022</p>
+         </div>
 
 		</div>
 
@@ -318,13 +301,7 @@
       }
     }
     </script>
-      <script src="../js/jquery.min.js"></script>
-      <script src="../js/jquery.dropotron.min.js"></script>
-      <script src="../js/jquery.scrolly.min.js"></script>
-      <script src="../js/jquery.scrollgress.min.js"></script>
-      <script src="../js/skel.min.js"></script>
-      <script src="../js/util.js"></script>
-      <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
-      <script src="../js/main.js"></script>
+     
+      <script src="../js/script.js"></script>
 	</body>
 </html>
