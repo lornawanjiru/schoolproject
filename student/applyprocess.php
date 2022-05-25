@@ -1,42 +1,47 @@
 <?php
-  session_start();
-  $_SESSION['selectedAppID'] = 0;
+session_start();
+$_SESSION['selectedAppID'] = 0;
 
-  $_SESSION['appList'] = NULL;
+$_SESSION['appList'] = null;
 
-  //check validity of the user
-  $currentUserID=$_SESSION['currentUserID'];
-  if($currentUserID==NULL){
-    header("Location:../index.php");
-  }
+//check validity of the user
+$currentUserID = $_SESSION['currentUserID'];
+if ($currentUserID == null) {
+    header('Location:../index.php');
+}
 
-  // Connect to database
-    $conn = new mysqli("localhost","scholar","","sms");
+// Connect to database
+$conn = new mysqli('localhost', 'scholar', '', 'sms');
 
-  // Checks Connection
-    if ($conn->connect_error) {
-      die("Connection failed: " . $conn->connect_error);
+// Checks Connection
+if ($conn->connect_error) {
+    die('Connection failed: ' . $conn->connect_error);
+}
+
+$getName =
+    "select S.firstName, S.middleName, S.lastName from student S where S.studentID = '" .
+    $_SESSION['currentUserID'] .
+    "'";
+
+$nameResult = mysqli_query($conn, $getName);
+
+// Get every row of the table formed from the query
+while ($rows9 = mysqli_fetch_row($nameResult)) {
+    foreach ($rows9 as $key => $value) {
+        if ($key == 0) {
+            $_SESSION['currentUserName'] = $value;
+        }
+        if ($key == 1) {
+            $_SESSION['currentUserName'] =
+                $_SESSION['currentUserName'] . ' ' . $value;
+        }
+        if ($key == 2) {
+            $_SESSION['currentUserName'] =
+                $_SESSION['currentUserName'] . '. ' . $value;
+        }
     }
-
-  $getName = "select S.firstName, S.middleName, S.lastName from student S where S.studentID = '".$_SESSION['currentUserID']."'";
-
-  $nameResult = mysqli_query($conn,$getName);
-
-  // Get every row of the table formed from the query
-    while($rows9=mysqli_fetch_row($nameResult)){
-      foreach ($rows9 as $key => $value){
-	 	    if($key == 0){
-          $_SESSION['currentUserName'] = $value;
-		    }
-    		if($key == 1){
-    			$_SESSION['currentUserName'] = $_SESSION['currentUserName'] . " " . $value;
-    		}
-        if($key == 2){
-          $_SESSION['currentUserName'] = $_SESSION['currentUserName'] . ". " . $value;
-  		  }
-	    }
-    }
-    $conn->close();
+}
+$conn->close();
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -80,7 +85,10 @@
                     <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/profile-sample3.jpg" alt="profile-sample3" class="profile" />
                   </div>
                   <div>
-                    <h2> Hello, <?php echo $_SESSION['currentUserName']. " (ID:" . $_SESSION['currentUserID'] . ")"?>. </h2>
+                    <h2> Hello, <?php echo $_SESSION['currentUserName'] .
+                        ' (ID:' .
+                        $_SESSION['currentUserID'] .
+                        ')'; ?>. </h2>
                   </div>
               </div>
               <div class="">
@@ -111,33 +119,41 @@
       <!-- Main -->
         <div class="content">
 
-          <div class="special container">            
-            <h2>SUPPORTING DOCUMENTS</h2>
-          </div>
-
-        
+         
+              <form action="../backend/userdocupload.php" method="post" class = "login" enctype="multipart/form-data">
+              <div class="special container">            
+                <h2>SUPPORTING DOCUMENTS</h2>
+              </div>        
               <h2>Please Submit all the Documents as mentioned below.</h2>
               <h2><b>NOTE : </b>The documents must be of the format- <u><b>PDF</b></u></h2><br>
-              <form action="../backend/userdocupload.php" method="post" class = "login" enctype="multipart/form-data">
-
-                  <label><b>1. <u>Aadhar Card : </u></b></label>
-                  <label>This must contain two copies of AADHAR Card, both front and back side copy.Collate into one pdf and upload it HERE(MAX SIZE : 800kb)<span style="color: red">*</span> </label>
-                  <input type="file"  name="file[]" id="aadharcard" onchange=" return fileValidation('aadharcard')" required><br>
-
-                  <!-- <hr> not working -->
-                  <label>_____________________________________________________________________________________________________________________________________</label><br><br>
-
-                  <label><b>2. <u> Fee Receipt : </u></b></label>
-                  <label>This must contain Receipt of the fees of entire year(Collate into one pdf if you have more than one document) and upload it HERE(MAX SIZE : 800kb)<span style="color: red">*</span> </label>
-                  <input type="file"  name="file[]" id="feereceipt" onchange=" return fileValidation('feereceipt')" required><br>
-
-                  <!-- <hr> not working -->
-                  <label>_____________________________________________________________________________________________________________________________________</label><br><br>
-
-                  <label><b>3. <u> First Page of Saving Account Passbook : </u></b></label>
-                  <label>This must contain first page of your saving account passbook.Deatils such as your fullname, IFSC code, bank account number, branch name must be clearly visible in the document (MAX SIZE : 800kb)<span style="color: red">*</span> </label>
-                  <input type="file"  name="file[]" id="passbook" onchange="return fileValidation('passbook')" required><br><br>
-
+                  <label><b>1. <u>Certificates of your previous education( transcript of records, diploma) : </u></b></label>
+                  <label>This must contain certified copies of your transcript. Collate into one pdf and upload it HERE(MAX SIZE : 800kb)<span style="color: red">*</span> </label>
+                  <input type="file"  name="file[]" id="transcript" onchange=" return fileValidation('transcript')" ><br>                  
+                 <br/>
+                  <hr/>
+                 <br/><br/>
+                  <label><b>2. <u> Letters of recommendation : </u></b></label>
+                  <label>This must contain letters of recommendation(Collate into one pdf if you have more than one document) and upload it HERE(MAX SIZE : 800kb)<span style="color: red">*</span> </label>
+                  <input type="file"  name="file[]" id="recommendation" onchange=" return fileValidation('recommendation')" required><br>
+                  <br/>
+                  <hr/>
+                 <br/><br/>
+                  <label><b>3. <u> Language certificates (E.g: TOEFL,IELTS) : </u></b></label>
+                  <label>This must contain the language certificate. (MAX SIZE : 800kb)<span style="color: red">*</span> </label>
+                  <input type="file"  name="file[]" id="language" onchange="return fileValidation('language')" required><br><br>
+                  <br/>
+                  <hr/>
+                  <br/><br/>
+                  <label><b>3. <u> Motivation Letter: </u></b></label>
+                  <label>This must contain the language certificate.(MAX SIZE : 800kb)<span style="color: red">*</span> </label>
+                  <input type="file"  name="file[]" id="motivation" onchange="return fileValidation('motivation')" required><br><br>
+                  <br/>
+                  <hr/>
+                  <br/><br/>
+                  
+                  <label><b>3. <u> Resume/Curriculum Vitae : </u></b></label>
+                  <label>This must contain the updated Resume.(MAX SIZE : 800kb)<span style="color: red">*</span> </label>
+                  <input type="file"  name="file[]" id="resume" onchange="return fileValidation('resume')" required><br><br>
                   <input type="submit" name="apply" value="Apply >>">
 
               </form>

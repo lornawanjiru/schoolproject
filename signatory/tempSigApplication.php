@@ -436,7 +436,7 @@ foreach ($rows9 as $key => $value)
                           	</table>
                           <?php } else{ ?>
                             <script type="text/javascript">
-                              alert('Please Select A Scholarship');
+                              alert('Please Select a Scholarship');
                               location.replace('tempSigApplication.php');
                             </script>
                           <?php } ?>

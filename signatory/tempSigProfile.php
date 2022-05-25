@@ -1,58 +1,58 @@
 <?php
-  session_start();
-  $_SESSION['selectedAppID'] = 0;
+session_start();
+$_SESSION['selectedAppID'] = 0;
 
-  $_SESSION['appList'] = NULL;
+$_SESSION['appList'] = null;
 
-  //check validity of the user
-  $currentUserID=$_SESSION['currentUserID'];
-  if($currentUserID==NULL){
-    header("Location:../index.php");
-  }
-
-  // Connect to database
-    $conn = new mysqli("localhost","scholar","","sms");
-  // Checks Connection
-    if ($conn->connect_error) {
-      die("Connection failed: " . $conn->connect_error);
-    }
-
-$getName = "select S.firstName, S.middleName, S.lastName from signatory S where S.sigID = '".$_SESSION['currentUserID']."'";
-
-$nameResult = mysqli_query($conn,$getName);
-
-while($rows9=mysqli_fetch_row($nameResult))
-{
-foreach ($rows9 as $key => $value)
-	{
-	 	if($key == 0)
-		{
-			$_SESSION['currentUserName'] = $value;
-		}
-		if($key == 1)
-		{
-			$_SESSION['currentUserName'] = $_SESSION['currentUserName'] . " " . $value;
-		}
-	    if($key == 2)
-	    {
-			$_SESSION['currentUserName'] = $_SESSION['currentUserName'] . ". " . $value;
-		}
-	}
+//check validity of the user
+$currentUserID = $_SESSION['currentUserID'];
+if ($currentUserID == null) {
+    header('Location:../index.php');
 }
 
-  $firstName = $lastName = $middleName = $position =  $organization = $phonenumber = NULL;
-  //Get User Details
-  $sql = "SELECT * FROM signatory WHERE sigID = '".$currentUserID."'";
-  $result = $conn->query($sql);
-  while($row = $result->fetch_assoc()) {
-    $upMail = $row["upMail"];
-    $firstName = $row["firstName"];
-    $lastName = $row["lastName"];
-    $middleName = $row["middleName"];
-    $phonenumber = $row["phonenumber"];
+// Connect to database
+$conn = new mysqli('localhost', 'scholar', '', 'sms');
+// Checks Connection
+if ($conn->connect_error) {
+    die('Connection failed: ' . $conn->connect_error);
+}
+
+$getName =
+    "select S.firstName, S.middleName, S.lastName from signatory S where S.sigID = '" .
+    $_SESSION['currentUserID'] .
+    "'";
+
+$nameResult = mysqli_query($conn, $getName);
+
+while ($rows9 = mysqli_fetch_row($nameResult)) {
+    foreach ($rows9 as $key => $value) {
+        if ($key == 0) {
+            $_SESSION['currentUserName'] = $value;
+        }
+        if ($key == 1) {
+            $_SESSION['currentUserName'] =
+                $_SESSION['currentUserName'] . ' ' . $value;
+        }
+        if ($key == 2) {
+            $_SESSION['currentUserName'] =
+                $_SESSION['currentUserName'] . '. ' . $value;
+        }
+    }
+}
+
+$firstName = $lastName = $middleName = $position = $organization = $phonenumber = null;
+//Get User Details
+$sql = "SELECT * FROM signatory WHERE sigID = '" . $currentUserID . "'";
+$result = $conn->query($sql);
+while ($row = $result->fetch_assoc()) {
+    $upMail = $row['upMail'];
+    $firstName = $row['firstName'];
+    $lastName = $row['lastName'];
+    $middleName = $row['middleName'];
+    $phonenumber = $row['phonenumber'];
     $organization = $row['organization'];
-    $position = $row["position"];
-  }
+    $position = $row['position'];
+}
 ?>
 
 <!DOCTYPE HTML>
@@ -83,7 +83,10 @@ foreach ($rows9 as $key => $value)
                     <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/profile-sample3.jpg" alt="profile-sample3" class="profile" />
                   </div>
                   <div>
-                    <h2> Hello, <?php echo $_SESSION['currentUserName']. " (ID:" . $_SESSION['currentUserID'] . ")"?>. </h2>
+                    <h2> Hello, <?php echo $_SESSION['currentUserName'] .
+                        ' (ID:' .
+                        $_SESSION['currentUserID'] .
+                        ')'; ?>. </h2>
                   </div>
               </div>
               <div class="">
@@ -115,7 +118,7 @@ foreach ($rows9 as $key => $value)
       <!-- Main -->
         
               <!-- Content -->
-                <div class="content">
+                <div class="content edit-back">
                  
 
                   <h1><b >User Profile</b></h1>
@@ -123,67 +126,97 @@ foreach ($rows9 as $key => $value)
                         <div id="display">
                           <form method="post" action="../backend/sigdata.php" class="login" role="form">
 
-                            <?php if($upMail==NULL || $upMail==""){} else{ ?>
+                            <?php if ($upMail == null || $upMail == '') {
+                            } else {
+                                 ?>
                               <div class="row">
                                 <label class="col-10" for="upMail">Email:</label>
                                 <div class="col-90">
-                                  <input type="text" class="form-control" value="<?php echo $upMail;?>" disabled>
+                                  <input type="text" class="form-control" value="<?php echo $upMail; ?>" disabled>
                                 </div>
                               </div>
-                            <?php } ?>
-                            <?php if($organization==NULL || $organization==""){} else{ ?>
+                            <?php
+                            } ?>
+                            <?php if (
+                                $organization == null ||
+                                $organization == ''
+                            ) {
+                            } else {
+                                 ?>
                             <div class="row">
                               <label class="col-10" for="position">Organization Name:</label>
                               <div class="col-90">
-                                <input type="text" class="form-control" value="<?php echo $organization ?>" disabled>
+                                <input type="text" class="form-control" value="<?php echo $organization; ?>" disabled>
                               </div>
                             </div>
-                            <?php } ?>
-                            <?php if($lastName==NULL || $lastName==""){} else{ ?>
+                            <?php
+                            } ?>
+                            <?php if ($lastName == null || $lastName == '') {
+                            } else {
+                                 ?>
                               <div class="row">
                                 <label class="col-10" for="lastName">Last Name:</label>
                                 <div class="col-90">
-                                  <input type="text" class="form-control" value="<?php echo $lastName;?>" disabled>
+                                  <input type="text" class="form-control" value="<?php echo $lastName; ?>" disabled>
                                 </div>
                               </div>
-                            <?php } ?>
+                            <?php
+                            } ?>
 
-                            <?php if($firstName ==NULL || $firstName ==""){} else{ ?>
+                            <?php if ($firstName == null || $firstName == '') {
+                            } else {
+                                 ?>
                             <div class="row">
                               <label class="col-10" for="firstName">First Name:</label>
                               <div class="col-90">
-                                <input type="text" class="form-control" value="<?php echo $firstName?>" disabled>
+                                <input type="text" class="form-control" value="<?php echo $firstName; ?>" disabled>
                               </div>
                             </div>
-                            <?php } ?>
+                            <?php
+                            } ?>
 
-                            <?php if($middleName ==NULL || $middleName==""){} else{ ?>
+                            <?php if (
+                                $middleName == null ||
+                                $middleName == ''
+                            ) {
+                            } else {
+                                 ?>
                             <div class="row">
                               <label class="col-10" for="middleName">Middle Name:</label>
                               <div class="col-90">
-                                <input type="text" class="form-control" value="<?php echo $middleName?>" disabled>
+                                <input type="text" class="form-control" value="<?php echo $middleName; ?>" disabled>
                               </div>
                             </div>
-                            <?php } ?>
+                            <?php
+                            } ?>
 
-                            <?php if($position==NULL || $position==""){} else{ ?>
+                            <?php if ($position == null || $position == '') {
+                            } else {
+                                 ?>
                             <div class="row">
                               <label class="col-10" for="position">Position:</label>
                               <div class="col-90">
-                                <input type="text" class="form-control" value="<?php echo $position ?>" disabled>
+                                <input type="text" class="form-control" value="<?php echo $position; ?>" disabled>
                               </div>
                             </div>
-                            <?php } ?>
+                            <?php
+                            } ?>
                           
 
-                            <?php if($phonenumber ==NULL || $phonenumber==""){} else{ ?>
+                            <?php if (
+                                $phonenumber == null ||
+                                $phonenumber == ''
+                            ) {
+                            } else {
+                                 ?>
                             <div class="row">
                               <label class="col-10" for="phonenumber">Contact Number:</label>
                               <div class="col-90">
-                                <input type="text" class="form-control" value="<?php echo $phonenumber?>" disabled>
+                                <input type="text" class="form-control" value="<?php echo $phonenumber; ?>" disabled>
                               </div>
                             </div>
-                            <?php } ?>
+                            <?php
+                            } ?>
 
 
                           </form>
@@ -195,43 +228,43 @@ foreach ($rows9 as $key => $value)
                               <div class="row">
                                 <label class="col-10" for="upMail">Email:</label>
                                 <div class="col-90">
-                                  <input type="text" class="form-control" value="<?php echo $upMail;?>" disabled>
+                                  <input type="text" class="form-control" value="<?php echo $upMail; ?>" disabled>
                                 </div>
                               </div>
                               <div class="row">
                                 <label class="col-10" for="position">Organization Name:</label>
                                   <div class="col-90">
-                                    <input type="text" class="form-control" value="<?php echo $organization ?>" disabled>
+                                    <input type="text" class="form-control" value="<?php echo $organization; ?>" disabled>
                                   </div>
                               </div>
                               <div class="row">
                                 <label class="col-10" for="lastName">Last Name:</label>
                                 <div class="col-90">
-                                  <input type="text" name="lastName" class="form-control" value="<?php echo $lastName;?>">
+                                  <input type="text" name="lastName" class="form-control" value="<?php echo $lastName; ?>">
                                 </div>
                               </div>
                               <div class="row">
                               <label class="col-10" for="firstName">First Name:</label>
                               <div class="col-90">
-                                <input type="text" name="firstName" class="form-control" value="<?php echo $firstName?>" >
+                                <input type="text" name="firstName" class="form-control" value="<?php echo $firstName; ?>" >
                               </div>
                             </div>
                             <div class="row">
                               <label class="col-10" for="middleName">Middle Name:</label>
                               <div class="col-90">
-                                <input type="text" name="middleName" class="form-control" value="<?php echo $middleName?>">
+                                <input type="text" name="middleName" class="form-control" value="<?php echo $middleName; ?>">
                               </div>
                             </div>
                             <div class="row">
                               <label class="col-10" for="position">Position:</label>
                               <div class="col-90">
-                                <input type="text" name="position" class="form-control" value="<?php echo $position ?>">
+                                <input type="text" name="position" class="form-control" value="<?php echo $position; ?>">
                               </div>
                             </div>
                             <div class="row">
                               <label class="col-10" for="contactNo">Contact Number:</label>
                               <div class="col-90">
-                                <input type="text" name="phonenumber" class="form-control" value="<?php echo $phonenumber?>">
+                                <input type="text" name="phonenumber" class="form-control" value="<?php echo $phonenumber; ?>">
                               </div>
                             </div>
                             <div class="form-group">

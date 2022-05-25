@@ -8,14 +8,6 @@
       <meta name="description" content="">
       <meta name="author" content="">
       <title>Login</title>
-
-      
-    <!-- Custom Google Web Font -->
-    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Arvo:400,700' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Exo:100,200,400' rel = 'sylesheet' type = 'text/css'>
-
     <!-- Custom CSS-->
     <link href="css/general.css" rel="stylesheet">
     
@@ -54,14 +46,13 @@
             <h5 class = "">Don't have an Account<a style="color:black" href="signup.php">: Click Here</a></h5>
             <h5 class = ""><a style="color:black" href="forgotpassword.php"><u>Forgot Password</u></a></h5>
           </form>
-          <?php
-            if(!empty($_SESSION['errMsg'])){ ?>
+          <?php if (!empty($_SESSION['errMsg'])) { ?>
               <div class = "">
                 <div class="" style="margin-top:20px;">
                   <strong>Invalid! </strong><?php echo $_SESSION['errMsg']; ?>
                 </div>
               </div>
-          <?php unset($_SESSION['errMsg']); }?>
+          <?php unset($_SESSION['errMsg']);} ?>
 
         </div>
      </div>

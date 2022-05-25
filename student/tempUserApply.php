@@ -1,42 +1,42 @@
  <?php
-  session_start();
-  $_SESSION['selectedAppID'] = 0;
-  $_SESSION['currentUserName'] = NULL;
-  $_SESSION['appList'] = NULL;
-  $currentUserID=$_SESSION['currentUserID'];
-  if($currentUserID==NULL){
-    header("Location:../index.php");
-  }
-  /* Connect to database */
-  $conn = new mysqli("localhost","scholar", "","sms");
-  /* Checks Connection */
-    if ($conn->connect_error) {
-      die("Connection failed: " . $conn->connect_error);
-    }
-$getName = "select S.firstName, S.middleName, S.lastName from student S where S.studentID = '".$_SESSION['currentUserID']."'";
-$nameResult = mysqli_query($conn,$getName);
-// Get every row of the table formed from the query
-while($rows9=mysqli_fetch_row($nameResult))
-{
-foreach ($rows9 as $key => $value)
-  {
-    if($key == 0)
-    {
-      $_SESSION['currentUserName'] = $value;
-    }
+ session_start();
+ $_SESSION['selectedAppID'] = 0;
+ $_SESSION['currentUserName'] = null;
+ $_SESSION['appList'] = null;
+ $currentUserID = $_SESSION['currentUserID'];
+ if ($currentUserID == null) {
+     header('Location:../index.php');
+ }
+ /* Connect to database */
+ $conn = new mysqli('localhost', 'scholar', '', 'sms');
+ /* Checks Connection */
+ if ($conn->connect_error) {
+     die('Connection failed: ' . $conn->connect_error);
+ }
+ $getName =
+     "select S.firstName, S.middleName, S.lastName from student S where S.studentID = '" .
+     $_SESSION['currentUserID'] .
+     "'";
+ $nameResult = mysqli_query($conn, $getName);
+ // Get every row of the table formed from the query
+ while ($rows9 = mysqli_fetch_row($nameResult)) {
+     foreach ($rows9 as $key => $value) {
+         if ($key == 0) {
+             $_SESSION['currentUserName'] = $value;
+         }
 
-    if($key == 1)
-    {
-      $_SESSION['currentUserName'] = $_SESSION['currentUserName'] . " " . $value;
-    }
+         if ($key == 1) {
+             $_SESSION['currentUserName'] =
+                 $_SESSION['currentUserName'] . ' ' . $value;
+         }
 
-      if($key == 2)
-      {
-      $_SESSION['currentUserName'] = $_SESSION['currentUserName'] . ". " . $value;
-    }
-  }
-}
-?>
+         if ($key == 2) {
+             $_SESSION['currentUserName'] =
+                 $_SESSION['currentUserName'] . '. ' . $value;
+         }
+     }
+ }
+ ?>
 
 
 
@@ -69,13 +69,21 @@ foreach ($rows9 as $key => $value)
                     <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/profile-sample3.jpg" alt="profile-sample3" class="profile" />
                   </div>
                   <div>
-                    <h2> Hello, <?php echo $_SESSION['currentUserName']. " (ID:" . $_SESSION['currentUserID'] . ")"?>. </h2>
+                    <h2> Hello, <?php echo $_SESSION['currentUserName'] .
+                        ' (ID:' .
+                        $_SESSION['currentUserID'] .
+                        ')'; ?>. </h2>
                   </div>
               </div>
               
               <div class="">
                      <a href = "../backend/logout.php" class = "button special">Logout</a>
-                      <!-- <a href = "#"><?php echo $_SESSION['currentUserName']. " (ID:" . $_SESSION['currentUserID'] . ")"?></a></div> -->
+                      <!-- <a href = "#"><?php echo $_SESSION[
+                          'currentUserName'
+                      ] .
+                          ' (ID:' .
+                          $_SESSION['currentUserID'] .
+                          ')'; ?></a></div> -->
                       <a href = "tempUserProfile.php">Profile</a>
                       <a href = "tempUserApply.php">Apply</a>
                       <a href = "tempUserView.php">Status</a>
@@ -98,70 +106,74 @@ foreach ($rows9 as $key => $value)
                 <table>
                   <thead>
                      <tr>
-                       <th>Class</th>
-                       <th style="padding-left: 4%">Gender</th>
-                       <th style="padding-left: 4%">Religion</th>
+                       <th>Education Level</th>
+                       <th style="padding-left: 4%;">Gender</th>
+                       <th style="padding-left: 4%">Ethnic</th>
                        <th style="padding-left: 4%">Scholarship</th>
+                       <th style="padding-left: 4%">Career Field</th>
                       </tr>
                   </thead>
                   <tbody>
-                 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" name="login" >
+                 <form action="<?php echo htmlspecialchars(
+                     $_SERVER['PHP_SELF']
+                 ); ?>" method="POST" name="login" >
                       <tr>
                         <td >
-                        <select name="class" style="display: inline;">
+                        <select name="educationlevel" style="display: inline; ">
                           <option value="select" selected>Select</option>
-                          <option value="class1">Class 1</option>
-                          <option value="class2">Class 2</option>
-                          <option value="class3">Class 3</option>
-                          <option value="class4">Class 4</option>
-                          <option value="class5">Class 5</option>
-                          <option value="class6">Class 6</option>
-                          <option value="class7">Class 7</option>
-                          <option value="class8">Class 8</option>
-                          <option value="class9">Class 9</option>
-                          <option value="class10">Class 10</option>
-                          <option value="class11">Class 11</option>
-                          <option value="class12passed">Class 12 Passed</option>
+                          <option value="highschool">High school</option>
                           <option value="diploma">Diploma</option>
-                          <option value="graduation">Graduation</option>
-                          <option value="postgraduation">Post-Graduation</option>
+                          <option value="bachelors">Bachelors</option>
+                          <option value="masters">Masters</option>
                           <option value="phd">PhD</option>
                         </select>
                        </td>
-                       <td style="padding-left: 4%">
+                       <td style="padding-left: 4%;">
                         <select name="gender" style="display: inline;">
                           <option value="select" selected>Select</option>
                           <option value="male">Male</option>
                           <option value="female">Female</option>
-                          <option value="both">Both</option>
+                          <option value="nonbinary">Non-binary</option>
                           <option value="transgender">Transgender</option>
                         </select>
                        </td>
                        <td style="padding-left: 4%">
-                        <select name="religion" style="display: inline;">
+                        <select name="ethnic" style="display: inline;">
                           <option value="select" selected>Select</option>
-                          <option value="buddhism">Buddhism</option>
-                          <option value="christian">Christian</option>
-                          <option value="hindu">Hindu</option>
-                          <option value="jain">Jain</option>
-                          <option value="muslim">Muslim</option>
-                          <option value="parsi">Parsi</option>
-                          <option value="sikh">Sikh</option>
+                          <option value="americanindian">American Indian</option>
+                          <option value="asian">Asian</option>
+                          <option value="black">Black/African American</option>
+                          <option value="latino">Latino/ Hispanics</option>
+                          <option value="white">White</option>
+                          <option value="hawaiian">Native Hawaiian/Pacific Islander</option>
                         </select>
                       </td>
                       <td style="padding-left: 4%">
                         <select name="scholarship" style="display: inline;">
                           <option value="select" selected>Select</option>
-                          <option value="merit">Merit Based</option>
-                          <option value="mean">Means Based</option>
-                          <option value="cultural">Cultural Talent</option>
-                          <option value="visual">Visual Art</option>
-                          <option value="sport">Sports Talent</option>
-                          <option value="science">Science, Maths Based</option>
-                          <option value="tech">Technology Based</option>
+                          <option value="merit">Athletic Based</option>
+                          <option value="mean">Needy based</option>
+                          <option value="mean">Creative Development</option>
+                          <option value="cultural">Community services</option>
                         </select>
                       </td>
-                      
+                      <td style="padding-left: 4%">
+                        <select name="careerfield" style="display: inline;">
+                          <option value="select" selected>Select</option>
+                          <option value="agriculture">Agriculture</option>
+                          <option value="arts">Arts</option>
+                          <option value="biologicalsciences">Biological Sciences</option>
+                          <option value="administration">Administration</option>
+                          <option value="dentistry">Dentistry</option>
+                          <option value="education">Education</option>
+                          <option value="engineering">Engineering</option>
+                          <option value="environmentscience">Environement Science</option>
+                          <option value="law">Law</option>
+                          <option value="medicalscience">Medical Science</option>
+                          <option value="veterinary">Veterinary</option>
+                          <option value="socialscience">Social Science</option>
+                        </select>
+                      </td>
                     </tr>
                     <td>
                         <input type = "submit" id="submit" class = "btn">
@@ -176,31 +188,43 @@ foreach ($rows9 as $key => $value)
       <div class="scholarship-content">
         <div> 
           <?php
-              $date1 =date("Y-m-d");
-              $class=$gender=$religion=$scholarship="";
-              $classflag=$genderflag=$religionflag=$scholarshipflag=0;
-              $text="All Scholarships";
-              if (strtoupper($_SERVER['REQUEST_METHOD']) == 'POST'){
-                  if($_POST['class']!='select'){
-                    $class=$_POST['class'];
-                    $classflag=1;
-                  }
-                  if($_POST['gender']!='select'){
-                    $gender=$_POST['religion'];
-                    $genderflag=1;
-                  }
-                  if($_POST['religion']!='select'){
-                    $religion=$_POST['religion'];
-                    $religionflag=1;
-                  }
-                  if($_POST['scholarship']!='select'){
-                    $scholarship=$_POST['scholarship'];
-                    $scholarshipflag=1;
-                  }
-                  if($classflag==1 || $religionflag==1 || $genderflag==1 || $scholarshipflag==1){
-                      $text="Filter Based Scholarships";
-                  }
+          $date1 = date('Y-m-d');
+          $educationlevel = $gender = $ethnic = $scholarship = $careerfield =
+              '';
+          $educationlevelflag = $genderflag = $ethnicflag = $scholarshipflag = $careerfieldflag = 0;
+          $text = 'All Scholarships';
+          //strtoupper converts letters to uppercase so if the POST method was 'post' then it will be converted and will return True.
+          if (strtoupper($_SERVER['REQUEST_METHOD']) == 'POST') {
+              if ($_POST['educationlevel'] != 'select') {
+                  $educationlevel = $_POST['educationlevel'];
+                  $educationallevelflag = 1;
               }
+              if ($_POST['gender'] != 'select') {
+                  $gender = $_POST['gender'];
+                  $genderflag = 1;
+              }
+              if ($_POST['ethnic'] != 'select') {
+                  $ethnic = $_POST['ethnic'];
+                  $ethnicflag = 1;
+              }
+              if ($_POST['scholarship'] != 'select') {
+                  $scholarship = $_POST['scholarship'];
+                  $scholarshipflag = 1;
+              }
+              if ($_POST['careerfield'] != 'select') {
+                  $careerfield = $_POST['careerfield'];
+                  $careerfieldflag = 1;
+              }
+              if (
+                  $educationlevelflag == 1 ||
+                  $ethnicflag == 1 ||
+                  $genderflag == 1 ||
+                  $scholarshipflag == 1 ||
+                  $careerfieldflag == 1
+              ) {
+                  $text = 'Filter Based Scholarships';
+              }
+          }
           ?>
           <h1><?php echo $text; ?></h1>
                       <table class="table">
@@ -212,84 +236,145 @@ foreach ($rows9 as $key => $value)
                           </thead>
                           <tbody>
                             <?php
-                              if($classflag==1){   /* start4 */
+                            if ($educationlevelflag == 1) {
+                                /* start5 */
+                                if ($genderflag == 1) {
+                                    /* start4 */
 
-                                if($genderflag==1){   /* start3 */
-
-                                  if($religionflag==1){ /* start2 */
-
-                                    if($scholarshipflag==1) {/* start1 */
-                                      $to_query = "SELECT * FROM scholarship WHERE degree LIKE '$class' AND gender LIKE '$gender' AND religion LIKE '$religion' AND sch LIKE '$scholarship' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
-                                    } else{
-                                      $to_query = "SELECT * FROM scholarship WHERE degree LIKE '$class' AND gender LIKE '$gender' AND religion LIKE '$religion' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
-                                    } /* end1 */
-                                  } else{
-                                    if($scholarshipflag==1){
-                                      $to_query = "SELECT * FROM scholarship WHERE degree LIKE '$class' AND gender LIKE '$gender' AND sch LIKE '$scholarship' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
-                                    } else{
-                                      $to_query = "SELECT * FROM scholarship WHERE degree LIKE '$class' AND gender LIKE '$gender' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
+                                    if ($ethnicflag == 1) {
+                                        /* start3 */
+                                        if ($scholarshipflag == 1) {
+                                            /* start2 */
+                                            if ($careerfieldflag == 1) {
+                                                $to_query = "SELECT * FROM scholarship WHERE degree LIKE '$educationlevel' AND gender LIKE '$gender' AND ethnic LIKE '$ethnic' AND sch LIKE '$scholarship' AND career LIKE '$careerfield' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
+                                            } else {
+                                                $to_query = "SELECT * FROM scholarship WHERE degree LIKE '$educationlevel' AND gender LIKE '$gender' AND ethnic LIKE '$ethnic' AND sch LIKE '$scholarship' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
+                                            } /* end1 */
+                                        } else {
+                                            if ($careerfieldflag == 1) {
+                                                $to_query = "SELECT * FROM scholarship WHERE degree LIKE '$educationlevel' AND gender LIKE '$gender' AND ethnic LIKE '$ethnic' AND career LIKE '$careerfield' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
+                                            } else {
+                                                $to_query = "SELECT * FROM scholarship WHERE degree LIKE '$educationlevel' AND gender LIKE '$gender' AND ethnic LIKE '$ethnic' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
+                                            }
+                                        } /* end2 */
+                                    } else {
+                                        if ($scholarshipflag == 1) {
+                                            if ($careerfieldflag == 1) {
+                                                $to_query = "SELECT * FROM scholarship WHERE degree LIKE '$educationlevel' AND gender LIKE '$gender' AND career LIKE '$careerfield' AND sch LIKE '$scholarship' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
+                                            } else {
+                                                $to_query = "SELECT * FROM scholarship WHERE degree LIKE '$educationlevel' AND gender LIKE '$gender' AND sch LIKE '$scholarship' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
+                                            } /* end1 */
+                                        } else {
+                                            if ($careerfieldflag == 1) {
+                                                $to_query = "SELECT * FROM scholarship WHERE degree LIKE '$educationlevel' AND gender LIKE '$gender' AND career LIKE '$careerfield' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
+                                            } else {
+                                                $to_query = "SELECT * FROM scholarship WHERE degree LIKE '$educationlevel' AND gender LIKE '$gender' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
+                                            }
+                                        }
+                                    } /* end3 */
+                                } else {
+                                    if ($ethnicflag == 1) {
+                                        if ($scholarshipflag == 1) {
+                                            if ($careerfieldflag == 1) {
+                                                $to_query = "SELECT * FROM scholarship WHERE degree LIKE '$educationlevel' AND ethnic LIKE '$ethnic' AND sch LIKE '$scholarship' AND career LIKE '$careerfield' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
+                                            } else {
+                                                $to_query = "SELECT * FROM scholarship WHERE degree LIKE '$educationlevel' AND ethnic LIKE '$ethnic' AND sch LIKE '$scholarship'' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
+                                            }
+                                        } else {
+                                            if ($careerfieldflag == 1) {
+                                                $to_query = "SELECT * FROM scholarship WHERE degree LIKE '$educationlevel' AND ethnic LIKE '$ethnic'  AND career LIKE '$careerfield' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
+                                            } else {
+                                                $to_query = "SELECT * FROM scholarship WHERE degree LIKE '$educationlevel' AND ethnic LIKE '$ethnic' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
+                                            }
+                                        }
+                                    } else {
+                                        if ($scholarshipflag == 1) {
+                                            if ($careerfieldflag == 1) {
+                                                $to_query = "SELECT * FROM scholarship WHERE degree LIKE '$educationlevel' AND sch LIKE '$scholarship' AND career LIKE '$careerfield' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
+                                            } else {
+                                                $to_query = "SELECT * FROM scholarship WHERE degree LIKE '$educationlevel' AND sch LIKE '$scholarship' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
+                                            }
+                                        } else {
+                                            if ($careerfieldflag == 1) {
+                                                $to_query = "SELECT * FROM scholarship WHERE degree LIKE '$educationlevel'  AND career LIKE '$careerfield' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
+                                            } else {
+                                                $to_query = "SELECT * FROM scholarship WHERE degree LIKE '$educationlevel' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
+                                            }
+                                        }
                                     }
-                                  } /* end2 */
-                                } else{
-                                  if($religionflag==1){
-
-                                    if($scholarshipflag==1) {
-                                      $to_query = "SELECT * FROM scholarship WHERE degree LIKE '$class' AND religion LIKE '$religion' AND sch LIKE '$scholarship' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
-                                    } else{
-                                      $to_query = "SELECT * FROM scholarship WHERE degree LIKE '$class' AND religion LIKE '$religion' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
-                                    } /* end1 */
-                                  } else{
-                                    if($scholarshipflag==1){
-                                      $to_query = "SELECT * FROM scholarship WHERE degree LIKE '$class' AND sch LIKE '$scholarship' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
-                                    } else{
-                                      $to_query = "SELECT * FROM scholarship WHERE degree LIKE '$class' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
-                                    }
-                                  }
-                                }  /* end3 */
-                              } else{
-                                 if($genderflag==1){
-
-                                  if($religionflag==1){
-
-                                    if($scholarshipflag==1) {
-                                      $to_query = "SELECT * FROM scholarship WHERE gender LIKE '$gender' AND religion LIKE '$religion' AND sch LIKE '$scholarship' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
-                                    } else{
-                                      $to_query = "SELECT * FROM scholarship WHERE gender LIKE '$gender' AND religion LIKE '$religion' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
-                                    }
-                                  } else{
-                                    if($scholarshipflag==1){
-                                      $to_query = "SELECT * FROM scholarship WHERE gender LIKE '$gender' AND sch LIKE '$scholarship' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
-                                    } else{
-                                      $to_query = "SELECT * FROM scholarship WHERE gender LIKE '$gender' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
-                                    }
-                                  }
-                                } else{
-                                  if($religionflag==1){
-
-                                    if($scholarshipflag==1) {
-                                      $to_query = "SELECT * FROM scholarship WHERE religion LIKE '$religion' AND sch LIKE '$scholarship' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
-                                    } else{
-                                      $to_query = "SELECT * FROM scholarship WHERE religion LIKE '$religion' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
-                                    }
-                                  } else{
-                                    if($scholarshipflag==1){
-                                      $to_query = "SELECT * FROM scholarship WHERE sch LIKE '$scholarship' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
-                                    } else{
-                                      $to_query = "SELECT * FROM scholarship WHERE adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
-                                    }
-                                  }
                                 }
-                              } /* end4 */
-                              $sql_result = mysqli_query($conn, $to_query);
-                              while($row=mysqli_fetch_row($sql_result)){
-                                ?>
+                            } /* end4 */ else {
+                                if ($genderflag == 1) {
+                                    if ($ethnicflag == 1) {
+                                        if ($scholarshipflag == 1) {
+                                            if ($careerfieldflag == 1) {
+                                                $to_query = "SELECT * FROM scholarship WHERE gender LIKE '$gender' AND ethnic LIKE '$ethnic' AND sch LIKE '$scholarship' AND career LIKE '$careerfield' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
+                                            } else {
+                                                $to_query = "SELECT * FROM scholarship WHERE gender LIKE '$gender' AND ethnic LIKE '$ethnic' AND sch LIKE '$scholarship'' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
+                                            }
+                                        } else {
+                                            if ($careerfieldflag == 1) {
+                                                $to_query = "SELECT * FROM scholarship WHERE gender LIKE '$gender' AND ethnic LIKE '$ethnic'  AND career LIKE '$careerfield' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
+                                            } else {
+                                                $to_query = "SELECT * FROM scholarship WHERE gender LIKE '$gender' AND ethnic LIKE '$ethnic' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
+                                            }
+                                        }
+                                    } else {
+                                        if ($scholarshipflag == 1) {
+                                            if ($careerfieldflag == 1) {
+                                                $to_query = "SELECT * FROM scholarship WHERE gender LIKE '$gender' AND sch LIKE '$scholarship' AND career LIKE '$careerfield' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
+                                            } else {
+                                                $to_query = "SELECT * FROM scholarship WHERE gender LIKE '$gender' AND sch LIKE '$scholarship' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
+                                            }
+                                        } else {
+                                            if ($careerfieldflag == 1) {
+                                                $to_query = "SELECT * FROM scholarship WHERE gender LIKE '$gender'  AND career LIKE '$careerfield' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
+                                            } else {
+                                                $to_query = "SELECT * FROM scholarship WHERE gender LIKE '$gender' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
+                                            }
+                                        }
+                                    }
+                                } else {
+                                    if ($ethnicflag == 1) {
+                                        if ($scholarshipflag == 1) {
+                                            if ($careerfieldflag == 1) {
+                                                $to_query = "SELECT * FROM scholarship WHERE  ethnic LIKE '$ethnic' AND sch LIKE '$scholarship' AND career LIKE '$careerfield' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
+                                            } else {
+                                                $to_query = "SELECT * FROM scholarship WHERE  ethnic LIKE '$ethnic' AND sch LIKE '$scholarship'' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
+                                            }
+                                        } else {
+                                            if ($careerfieldflag == 1) {
+                                                $to_query = "SELECT * FROM scholarship WHERE  ethnic LIKE '$ethnic'  AND career LIKE '$careerfield' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
+                                            } else {
+                                                $to_query = "SELECT * FROM scholarship WHERE  ethnic LIKE '$ethnic' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
+                                            }
+                                        }
+                                    } else {
+                                        if ($scholarshipflag == 1) {
+                                            if ($careerfieldflag == 1) {
+                                                $to_query = "SELECT * FROM scholarship WHERE  sch LIKE '$scholarship' AND career LIKE '$careerfield' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
+                                            } else {
+                                                $to_query = "SELECT * FROM scholarship WHERE  sch LIKE '$scholarship' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
+                                            }
+                                        } else {
+                                            if ($careerfieldflag == 1) {
+                                                $to_query = "SELECT * FROM scholarship WHERE  career LIKE '$careerfield' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
+                                            } else {
+                                                $to_query = "SELECT * FROM scholarship WHERE  adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            // end 5
+                            $sql_result = mysqli_query($conn, $to_query);
+                            while ($row = mysqli_fetch_row($sql_result)) { ?>
                                 <tr>
-                                  <td><a href="tempschdesc.php?sch=<?php echo $row[0]?>" title="<?php echo $row[2]?>"><?php echo $row[2]; ?></td>
+                                  <td><a href="tempschdesc.php?sch=<?php echo $row[0]; ?>" title="<?php echo $row[2]; ?>"><?php echo $row[2]; ?></td>
                                   <td><?php echo $row[12]; ?></td>
                                 </tr>
-                                <?php
-                              }
-                              ?>
+                                <?php }
+                            ?>
                           </tbody>
                       </table>
         </div>

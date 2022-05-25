@@ -41,6 +41,7 @@
             </div>
          </div>
          <div class="users">  
+            
            <h1>WHY US ?</h1>      
            <div class="scholars">
              <h2>STUDENTS</h2>

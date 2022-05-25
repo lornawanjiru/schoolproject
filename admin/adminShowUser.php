@@ -1,7 +1,7 @@
 <?php
-  $studentID = NULL;
-  $status =NULL;
- ?>
+$studentID = null;
+$status = null;
+?>
 
 <!DOCTYPE HTML>
 <html>
@@ -24,13 +24,17 @@
   
       <!-- Header -->
       <div class = "nav">
-        <div class="header"><a>Scholarship Application System</a> </div>
+          <div class="topnav" id="myTopnav">
+            <div><a>Scholarship Application System</a> </div>
             <div class="banner desktop-view">
                   <div>
                     <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/profile-sample3.jpg" alt="profile-sample3" class="profile" />
                   </div>
                   <div>
-                    <h2> Hello, <?php echo $_SESSION['currentUserName']. " (ID:" . $_SESSION['currentUserID'] . ")"?>. </h2>
+                    <h2> Hello, <?php echo $_SESSION['currentUserName'] .
+                        ' (ID:' .
+                        $_SESSION['currentUserID'] .
+                        ')'; ?>. </h2>
                   </div>
             </div>
             <div class="">
@@ -63,30 +67,27 @@
               </div>  
             </div>
           </div>
-
-
-			<!-- Main -->
+          </div>
 				
 
 							<!-- Content -->
-								<div class="content">
+								<div class="content admin">
 									<section>
-                      <?php
-                      try{
-                        $conn = new mysqli("localhost","scholar", "","sms");
-                        if ($conn->connect_error) {
-                          die("Connection failed: " . $conn->connect_error);
-                        }
+                      <?php try {
+                          $conn = new mysqli('localhost', 'scholar', '', 'sms');
+                          if ($conn->connect_error) {
+                              die('Connection failed: ' . $conn->connect_error);
+                          }
 
-/* Student */         if(isset($_POST['showUser']) AND $_POST['showUser'] == "showStudent"){
-                          ?><h1 style="text-align:center; font-size:25px">Student Details</h1><?php
-
-                          $studentID = $_POST['ID'];
-                          $sql = "SELECT * FROM student WHERE studentID='$studentID'";
-                          $result = $conn->query($sql);
-                          if ($result->num_rows > 0) {
-                            while($row = $result->fetch_assoc()) {
-                        ?>
+                          /* Student */ if (
+                              isset($_POST['showUser']) and
+                              $_POST['showUser'] == 'showStudent'
+                          ) { ?><h1 style="text-align:center; font-size:25px">Student Details</h1><?php
+$studentID = $_POST['ID'];
+$sql = "SELECT * FROM student WHERE studentID='$studentID'";
+$result = $conn->query($sql);
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) { ?>
                         <table class="table">
                               <tr>
                                   <th style="width:50%"><b>Student ID</b></th>
@@ -98,7 +99,11 @@
                               </tr>
                               <tr>
                                   <th style="width:50%"><b>Name</b></th>
-                                    <td><?php echo $row['firstName'].' '.$row['middleName'].' '.$row['lastName']; ?></td>
+                                    <td><?php echo $row['firstName'] .
+                                        ' ' .
+                                        $row['middleName'] .
+                                        ' ' .
+                                        $row['lastName']; ?></td>
                               </tr>
                               <tr>
                                   <th style="width:50%"><b>Nationality</b></th>
@@ -118,11 +123,19 @@
                               </tr>
                               <tr>
                                   <th style="width:50%"><b>Present address </b></th>
-                                  <td><?php echo $row['presStreetAddr'].'<br/>'.$row['presProvCity'].'<br/>'.$row['presRegion']; ?></td>
+                                  <td><?php echo $row['presStreetAddr'] .
+                                      '<br/>' .
+                                      $row['presProvCity'] .
+                                      '<br/>' .
+                                      $row['presRegion']; ?></td>
                               </tr>
                               <tr>
                                   <th style="width:50%"><b>Permanent address </b></th>
-                                  <td><?php echo $row['permStreetAddr'].'<br/>'.$row['permProvCity'].'<br/>'.$row['permRegion']; ?></td>
+                                  <td><?php echo $row['permStreetAddr'] .
+                                      '<br/>' .
+                                      $row['permProvCity'] .
+                                      '<br/>' .
+                                      $row['permRegion']; ?></td>
                               </tr>
                               <tr>
                                   <th style="width:50%"><b>Contact </b></th>
@@ -138,7 +151,10 @@
                               </tr>
                               <tr>
                                   <th style="width:50%"><b>Status</b></th>
-                                  <td><?php echo $row['status']; $status = $row['status'] ?></td>
+                                  <td><?php
+                                  echo $row['status'];
+                                  $status = $row['status'];
+                                  ?></td>
                               </tr>
                               <tr>
                                 <th><b>Applications : </b></th>
@@ -162,25 +178,32 @@
                             	</thead>
                             	<tbody>
                                 	<?php
-                                  	$queryScholarship = "SELECT A.applicationID, S.schname, A.scholarshipID, A.verifiedBySignatory, A.appDate, A.appstatus  FROM application A join scholarship S on A.scholarshipID = S.scholarshipID WHERE A.studentID = $studentID";
-                                  	$qSchoResult = mysqli_query($conn, $queryScholarship);
+                                 $queryScholarship = "SELECT A.applicationID, S.schname, A.scholarshipID, A.verifiedBySignatory, A.appDate, A.appstatus  FROM application A join scholarship S on A.scholarshipID = S.scholarshipID WHERE A.studentID = $studentID";
+                                 $qSchoResult = mysqli_query(
+                                     $conn,
+                                     $queryScholarship
+                                 );
 
-                                  	while($rows=mysqli_fetch_row($qSchoResult))
-                                  	{
-
-                                    	foreach($rows as $key => $value){
-                                          if ($key == 0){
-                                            ?> <tr><td> <?php echo $value;
-                                          }
-                                          if ($key == 1 || $key == 2 ||$key == 3 ||$key == 4 ||$key == 5){
-                                          	?> </td><td> <?php echo $value;
-                                        	}
-                                        	if($key == 6){
-                                        	?></td><td><?php echo $value; ?></td></tr><?php
-                                        	}
-                                    	}
-                                  	}
-                                	?>
+                                 while (
+                                     $rows = mysqli_fetch_row($qSchoResult)
+                                 ) {
+                                     foreach ($rows as $key => $value) {
+                                         if (
+                                             $key == 0
+                                         ) { ?> <tr><td> <?php echo $value;}
+                                         if (
+                                             $key == 1 ||
+                                             $key == 2 ||
+                                             $key == 3 ||
+                                             $key == 4 ||
+                                             $key == 5
+                                         ) { ?> </td><td> <?php echo $value;}
+                                         if (
+                                             $key == 6
+                                         ) { ?></td><td><?php echo $value; ?></td></tr><?php }
+                                     }
+                                 }
+                                 ?>
                             	</tbody>
                           	</table>
 
@@ -188,30 +211,34 @@
                         <section style="text-align:center">
                           <form name="blockform" method="post" onsubmit="confirmblock(this,'This will Block Student as well as All his Applications.\n Are your Sure?')" action="../backend/adminBlockUser.php">
                             <input type="hidden" name="ID" value="<?php echo $studentID; ?>">
-                            <input type="submit"  name="blockUser" id="blockUserbtn" value="blockStudent" <?php if($status === "inactive"){
-                              echo " style = 'color:#fff;display:none'";
+                            <input type="submit"  name="blockUser" id="blockUserbtn" value="blockStudent" <?php if (
+                                $status === 'inactive'
+                            ) {
+                                echo " style = 'color:#fff;display:none'";
                             } ?>>
                           </form><br>
 
                           <form name="unblockform" action="../backend/adminUnblockUser.php" onsubmit="confirmunblock(this,'This will unblock Student as well as All his Applications.\n Are your Sure?')"  method="post">
                             <input type="hidden" name="ID" value="<?php echo $studentID; ?>">
-                            <input type="submit" name="unblockUser" id="unblockUserbtn" value="unblockStudent" <?php if($status === "active"){
-                              echo " style = 'color:#fff;display:none;'";
+                            <input type="submit" name="unblockUser" id="unblockUserbtn" value="unblockStudent" <?php if (
+                                $status === 'active'
+                            ) {
+                                echo " style = 'color:#fff;display:none;'";
                             } ?>>
                           </form>
                         </section>
-                        <?php
-                            }
-                          }
-/* Signatory */         } else if(isset($_POST['showUser']) AND $_POST['showUser'] == "showSig"){
-                          ?><h1 style="text-align:center; font-size:25px">Signatory Details</h1><?php
-
-                          $sigID = $_POST['ID'];
-                          $sql = "SELECT * FROM signatory WHERE sigID='$sigID'";
-                          $result = $conn->query($sql);
-                          if ($result->num_rows > 0) {
-                            while($row = $result->fetch_assoc()) {
-                        ?>
+                        <?php }
+}
+/* Signatory */
+} elseif (
+                              isset($_POST['showUser']) and
+                              $_POST['showUser'] == 'showSig'
+                          ) { ?><h1 style="text-align:center; font-size:25px">Signatory Details</h1><?php
+$sigID = $_POST['ID'];
+$sql = "SELECT * FROM signatory WHERE sigID='$sigID'";
+$result = $conn->query($sql);
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) { ?>
                         <table class="table">
                               <tr>
                                   <th style="width:50%"><b>Signatory ID</b></th>
@@ -223,11 +250,17 @@
                               </tr>
                               <tr>
                                   <th style="width:50%"><b>Name</b></th>
-                                    <td><?php echo $row['firstName'].' '.$row['middleName'].' '.$row['lastName']; ?></td>
+                                    <td><?php echo $row['firstName'] .
+                                        ' ' .
+                                        $row['middleName'] .
+                                        ' ' .
+                                        $row['lastName']; ?></td>
                               </tr>
                               <tr>
                                   <th style="width:50%"><b>Organization/University</b></th>
-                                  <td><?php echo $row['organization/university']; ?></td>
+                                  <td><?php echo $row[
+                                      'organization/university'
+                                  ]; ?></td>
                               </tr>
                               <tr>
                                   <th style="width:50%"><b>Position</b></th>
@@ -239,7 +272,10 @@
                               </tr>
                               <tr>
                                   <th style="width:50%"><b>Status</b></th>
-                                  <td><?php echo $row['status']; $status = $row['status'] ?></td>
+                                  <td><?php
+                                  echo $row['status'];
+                                  $status = $row['status'];
+                                  ?></td>
                               </tr>
                               <tr>
                                 <th><b>Scholarships : </b></th>
@@ -251,10 +287,9 @@
                         </table>
                         <section id="scholarship" style="display: none;">
                                 	<?php
-                                  	$queryScholarship = "SELECT * FROM scholarship WHERE sigID = $sigID";
-                                    $result = $conn->query($queryScholarship);
-          													if ($result->num_rows > 0) {
-        				                                ?>
+                                 $queryScholarship = "SELECT * FROM scholarship WHERE sigID = $sigID";
+                                 $result = $conn->query($queryScholarship);
+                                 if ($result->num_rows > 0) { ?>
                                                 <table class = "table table-bordered">
             				                              <thead>
             				                                <tr>
@@ -271,20 +306,29 @@
             				                                </tr>
             				                              </thead>
             				                              <tbody>
-          				                                	<?php
-          				                              			while($row = $result->fetch_assoc()) {
-          				                              		?>
+          				                                	<?php while (
+                                                   $row = $result->fetch_assoc()
+                                               ) { ?>
                                                     <tr>
                                                       <td><?php
-                                                        $schID=$row['scholarshipID'];
-                                                        echo $row['scholarshipID']; ?></td>
+                                                      $schID =
+                                                          $row['scholarshipID'];
+                                                      echo $row[
+                                                          'scholarshipID'
+                                                      ];
+                                                      ?></td>
                                                       <td><?php
-                                                        $sigID=$row['sigID'];
-                                                        echo $row['sigID']; ?></td>
+                                                      $sigID = $row['sigID'];
+                                                      echo $row['sigID'];
+                                                      ?></td>
                                                         <td><a href="#" data-toggle="modal" data-target="#scholarshipDescription"><?php
-                                                          $schname=$row['schname'];
-                                                          echo $row['schname']; ?></a></td>
-                                                        <td><?php echo $row['appDeadline']; ?></td>
+                                                        $schname =
+                                                            $row['schname'];
+                                                        echo $row['schname'];
+                                                        ?></a></td>
+                                                        <td><?php echo $row[
+                                                            'appDeadline'
+                                                        ]; ?></td>
                                                         <td>
                                                           <form action="tempSchView.php" method="post">
                                                               <input type="hidden" name="schname" value="<?php echo $schname; ?>">
@@ -296,36 +340,54 @@
                                                         <td>
                                                           <form action="../backend/adminAcceptReject.php" method="post">
                                                             <input type="hidden" name="schID" value="<?php echo $schID; ?>">
-                                                            <button name="accrej" value="Accept" <?php if($row['adminapproval'] === "Approved"){
-                                                              echo "disabled";
-                                                              echo " style = 'color:#fff'";
+                                                            <button name="accrej" value="Accept" <?php if (
+                                                                $row[
+                                                                    'adminapproval'
+                                                                ] === 'Approved'
+                                                            ) {
+                                                                echo 'disabled';
+                                                                echo " style = 'color:#fff'";
                                                             } ?>>Approve</button>
                                                           </form>
                                                         </td>
                                                         <td>
                                                            <form action="../backend/adminAcceptReject.php" method="post">
                                                               <input type="hidden" name="schID" value="<?php echo $schID; ?>">
-                                                              <button name="accrej" value="Reject" <?php if($row['adminapproval'] === "Rejected"){
-                                                                echo "disabled";
-                                                                echo " style = 'color:#fff'";
+                                                              <button name="accrej" value="Reject" <?php if (
+                                                                  $row[
+                                                                      'adminapproval'
+                                                                  ] ===
+                                                                  'Rejected'
+                                                              ) {
+                                                                  echo 'disabled';
+                                                                  echo " style = 'color:#fff'";
                                                               } ?>>Reject</button>
                                                            </form>
                                                         </td>
                                                         <td>
                                                            <form action="../backend/adminBlockUnblockSch.php" method="post">
                                                               <input type="hidden" name="schID" value="<?php echo $schID; ?>">
-                                                              <button name="blk_unblk" value="blockScholarship" <?php if($row['schstatus'] === "inactive"){
-                                                                echo "disabled";
-                                                                echo " style = 'color:#fff'";
+                                                              <button name="blk_unblk" value="blockScholarship" <?php if (
+                                                                  $row[
+                                                                      'schstatus'
+                                                                  ] ===
+                                                                  'inactive'
+                                                              ) {
+                                                                  echo 'disabled';
+                                                                  echo " style = 'color:#fff'";
                                                               } ?>>Block</button>
                                                            </form>
                                                         </td>
                                                         <td>
                                                            <form action="../backend/adminBlockUnblockSch.php" method="post">
                                                               <input type="hidden" name="schID" value="<?php echo $schID; ?>">
-                                                              <button name="blk_unblk" value="unblockScholarship" <?php if($row['schstatus'] === "active"){
-                                                                echo "disabled";
-                                                                echo " style = 'color:#fff'";
+                                                              <button name="blk_unblk" value="unblockScholarship" <?php if (
+                                                                  $row[
+                                                                      'schstatus'
+                                                                  ] === 'active'
+                                                              ) {
+                                                                  echo 'disabled';
+                                                                  echo " style = 'color:#fff'";
                                                               } ?>>Unblock</button>
                                                            </form>
                                                         </td>
@@ -334,31 +396,35 @@
           				                              <?php } ?>
           				                            </table>
           				                            <?php }
-                                	?>
+                                 ?>
             						</section><br>
                         <section style="text-align:center">
                           <form name="blockform" method="post" onsubmit="confirmblock(this,'This will Block Signatory, the Scholarships corresponding to them as well as All Applications.\n Are your Sure?')" action="../backend/adminBlockUser.php">
                             <input type="hidden" name="ID" value="<?php echo $sigID; ?>">
-                            <input type="submit"  name="blockUser" id="blockUserbtn" value="blockSig" <?php if($status === "inactive"){
-                              echo " style = 'color:#fff;display:none'";
+                            <input type="submit"  name="blockUser" id="blockUserbtn" value="blockSig" <?php if (
+                                $status === 'inactive'
+                            ) {
+                                echo " style = 'color:#fff;display:none'";
                             } ?>>
                           </form><br>
 
                           <form name="unblockform" action="../backend/adminUnblockUser.php" onsubmit="confirmunblock(this,'This will Unblock Signatory, the Scholarships corresponding to them as well as All Applications.\n Are your Sure?')"  method="post">
                             <input type="hidden" name="ID" value="<?php echo $sigID; ?>">
-                            <input type="submit" name="unblockUser" id="unblockUserbtn" value="unblockSig" <?php if($status === "active"){
-                              echo " style = 'color:#fff;display:none;'";
+                            <input type="submit" name="unblockUser" id="unblockUserbtn" value="unblockSig" <?php if (
+                                $status === 'active'
+                            ) {
+                                echo " style = 'color:#fff;display:none;'";
                             } ?>>
                           </form>
                         </section>
-                        <?php
-                            }
+                        <?php }
+}
+/* ADMIN  */
+} elseif (isset($_POST['showUser']) and $_POST['showUser'] == 'showAdmin') {
+                              echo 'Admin';
                           }
-/* ADMIN  */          } else if(isset($_POST['showUser']) AND $_POST['showUser'] == "showAdmin"){
-                          echo "Admin";
-                        }
-                      } catch(Exception $e){}
-                       ?>
+                      } catch (Exception $e) {
+                      } ?>
 									</section>
 								</div>
                 <div class="footer">

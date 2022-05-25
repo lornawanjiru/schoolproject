@@ -4,13 +4,15 @@ body, html {
   margin: 0;
 	padding: 0;
   height: 100%;
-  background-color: #f3f3f3;
+  background-color: #FFf;
   width: 100%;
  
 }
 h1 {
   font-size: 3.0em;
   font-weight: 500;
+  margin: 0;
+  padding: 5%;
 }
 h2, h3, h4, h5, h6 {
     font-size: 1.0em;
@@ -20,6 +22,17 @@ a {
   text-decoration: none;
 }
 
+.landingimg{
+  margin-top:10%;
+  margin-left: 12%;
+}
+.landingimg img{
+  width:85%;
+  height:25vh;
+}
+.user{
+  background-color:#F4F6FA;
+}
 /* Navigation */
 /* Add a black background color to the top navigation */
 .topnav {
@@ -203,7 +216,7 @@ a {
   padding-top: 2%;
 }
 input[type=text], [type=password],select, textarea {
-  width: 100%;
+  width: 90%;
   padding: 12px;
   background-color: inherit;
   border: 2px solid rgb(66, 66, 66);
@@ -338,6 +351,10 @@ input[type=submit] , button{
   } 
 }
 @media only screen and (min-width: 1200px){
+  .login{
+    width: 80%;
+    padding: 0;
+  }
   .hero-image{
     width: 45%;
     height: 70vh;
@@ -357,6 +374,31 @@ input[type=submit] , button{
     width:5%;
     margin-top:0;
   }
+  .form-container{
+    margin-top: 10%;
+    padding:3%;
+    display:flex;
+    justify-content:space-between;
+}
+.landingimg{
+    margin-top:0%;
+    margin-left: 25%;
+}
+.landingimg img{
+    width:auto;
+    height:40vh;
+}
+.card-info{
+    width:50%;
+}
+.form{
+    background-color: #fcc84f;
+    padding:3%;
+    width:50%;
+    height: 60vh;
+    overflow-x:hidden;
+    overflow-y:scroll;
+}
 }
 
 

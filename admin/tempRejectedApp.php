@@ -21,13 +21,17 @@
 
       <!-- Header -->
       <div class = "nav">
-        <div class="header"><a>Scholarship Application System</a> </div>
+          <div class="topnav" id="myTopnav">
+            <div><a>Scholarship Application System</a> </div>
             <div class="banner desktop-view">
                   <div>
                     <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/profile-sample3.jpg" alt="profile-sample3" class="profile" />
                   </div>
                   <div>
-                    <h2> Hello, <?php echo $_SESSION['currentUserName']. " (ID:" . $_SESSION['currentUserID'] . ")"?>. </h2>
+                    <h2> Hello, <?php echo $_SESSION['currentUserName'] .
+                        ' (ID:' .
+                        $_SESSION['currentUserID'] .
+                        ')'; ?>. </h2>
                   </div>
             </div>
             <div class="">
@@ -60,7 +64,7 @@
               </div>  
             </div>
           </div>
-
+          </div>
 
 		
 								<div class="content">
@@ -71,16 +75,16 @@
 										</header>
                         <?php
                         /* Connect to database */
-                        $conn = new mysqli("localhost","scholar", "","sms");
+                        $conn = new mysqli('localhost', 'scholar', '', 'sms');
                         /* Checks Connection */
                         if ($conn->connect_error) {
-                          die("Connection failed: " . $conn->connect_error);
+                            die('Connection failed: ' . $conn->connect_error);
                         }
 
-                        $to_query = "SELECT A.applicationID,A.studentID,A.scholarshipID,S.schname,A.appDate,A.appstatus,A.verifiedBySignatory from application AS A join scholarship AS S ON A.scholarshipID=S.scholarshipID WHERE A.verifiedBySignatory='Rejected'";
-                        $sql_result = mysqli_query($conn,$to_query);
-                        if(mysqli_num_rows($sql_result) > 0){
-                          ?>
+                        $to_query =
+                            "SELECT A.applicationID,A.studentID,A.scholarshipID,S.schname,A.appDate,A.appstatus,A.verifiedBySignatory from application AS A join scholarship AS S ON A.scholarshipID=S.scholarshipID WHERE A.verifiedBySignatory='Rejected'";
+                        $sql_result = mysqli_query($conn, $to_query);
+                        if (mysqli_num_rows($sql_result) > 0) { ?>
                           <table class="table table-bordered">
                             <thead>
                               <tr>
@@ -96,47 +100,34 @@
                               </tr>
                             </thead>
                             <tbody>
-                            <?php
-                            while($rows=mysqli_fetch_row($sql_result))
-                            {
-                              $appID = 0;
-                              foreach ($rows as $key => $value)
-                                  {
-                                    if ($key == 0)
-                                    {
-                                      $appID = $value;
-                                      ?><tr><td><?php echo $appID;?></td><?php
+                            <?php while (
+                                $rows = mysqli_fetch_row($sql_result)
+                            ) {
+                                $appID = 0;
+                                foreach ($rows as $key => $value) {
+                                    if ($key == 0) {
+                                        $appID = $value; ?><tr><td><?php echo $appID; ?></td><?php
                                     }
-                                        if($key == 1)
-                                        {
-                                          ?><td><?php echo $value;?></td><?php
-                                        }
-                                        if($key == 2)
-                                        {
-                                           ?><td><?php echo $value;?></td><?php
-                                        }
-                                        if($key == 3)
-                                        {
-                                        	?><td><?php echo $value;?></td><?php
-                                        }
-                                        if($key == 4)
-                                        {
-                          				?><td><?php echo $value;?></td><?php
-                                        }
-                                    if ($key == 5)
-                                    {
-                                      ?><td><?php echo $value;?></td><?php
-                                    }
-                                    if($key == 6){
-                                      ?>
-                                        <td><?php echo $value;?></td>
-                                <?php
-                                    }
-                                  }
-                            }
-                          } else{
-                              echo "No Rejected Applications";
-                          }
+                                    if (
+                                        $key == 1
+                                    ) { ?><td><?php echo $value; ?></td><?php }
+                                    if (
+                                        $key == 2
+                                    ) { ?><td><?php echo $value; ?></td><?php }
+                                    if (
+                                        $key == 3
+                                    ) { ?><td><?php echo $value; ?></td><?php }
+                                    if (
+                                        $key == 4
+                                    ) { ?><td><?php echo $value; ?></td><?php }
+                                    if (
+                                        $key == 5
+                                    ) { ?><td><?php echo $value; ?></td><?php }
+                                    if ($key == 6) { ?>
+                                        <td><?php echo $value; ?></td>
+                                <?php }
+                                }
+                            }} else {echo 'No Rejected Applications';}
                         mysqli_close($conn);
                         ?>
                         </tbody>

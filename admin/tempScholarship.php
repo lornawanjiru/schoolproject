@@ -36,14 +36,18 @@
    
 
       <!-- Header -->
-      <div class = "nav">
-        <div class="header"><a>Scholarship Application System</a> </div>
+	  <div class = "nav">
+          <div class="topnav" id="myTopnav">
+            <div><a>Scholarship Application System</a> </div>
             <div class="banner desktop-view">
                   <div>
                     <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/profile-sample3.jpg" alt="profile-sample3" class="profile" />
                   </div>
                   <div>
-                    <h2> Hello, <?php echo $_SESSION['currentUserName']. " (ID:" . $_SESSION['currentUserID'] . ")"?>. </h2>
+                    <h2> Hello, <?php echo $_SESSION['currentUserName'] .
+                        ' (ID:' .
+                        $_SESSION['currentUserID'] .
+                        ')'; ?>. </h2>
                   </div>
             </div>
             <div class="">
@@ -75,6 +79,7 @@
                 </a>
               </div>  
             </div>
+          </div>
           </div>
 
 
@@ -126,13 +131,13 @@
                     					                        <input type="hidden" name="schname" value="<?php echo $schname; ?>">
                     					                        <input type="hidden" name="sigID" value="<?php echo $sigID; ?>">
                                                       <input type="hidden" name="schID" value="<?php echo $schID; ?>">
-                    					                        <button name="view" value="View">View</button>
+                    					                        <button name="view" style="width: 100%;" value="View">View</button>
                     					                    </form>
                     														</td>
 				                                      	<td>
 				                                      		<form action="../backend/adminAcceptReject.php" method="post">
 					                                          <input type="hidden" name="schID" value="<?php echo $schID; ?>">
-					                                          <button name="accrej" value="Accept" <?php if($row['adminapproval'] === "Approved"){
+					                                          <button name="accrej" style="width: 100%;" value="Accept" <?php if($row['adminapproval'] === "Approved"){
                                                       echo "disabled";
                                                       echo " style = 'color:#fff'";
                                                     } ?>>Approve</button>
@@ -141,7 +146,7 @@
                     														<td>
                     															 <form action="../backend/adminAcceptReject.php" method="post">
                     						                      <input type="hidden" name="schID" value="<?php echo $schID; ?>">
-                    						                      <button name="accrej" value="Reject" <?php if($row['adminapproval'] === "Rejected"){
+                    						                      <button name="accrej" style="width: 100%;" value="Reject" <?php if($row['adminapproval'] === "Rejected"){
                                                         echo "disabled";
                                                         echo " style = 'color:#fff'";
                                                       } ?>>Reject</button>
@@ -150,7 +155,7 @@
                                                 <td>
                     															 <form action="../backend/adminBlockUnblockSch.php" method="post" onsubmit="confirmblock(this,'This will Block the Scholarship and corresponding Applications.\n This wont Block the corresponding Signatory.\n Are your Sure?')">
                     						                      <input type="hidden" name="schID" value="<?php echo $schID; ?>">
-                    						                      <button name="blk_unblk" value="blockScholarship" <?php if($row['schstatus'] === "inactive"){
+                    						                      <button name="blk_unblk" style="width: 100%;" value="blockScholarship" <?php if($row['schstatus'] === "inactive"){
                                                         echo "disabled";
                                                         echo " style = 'color:#fff'";
                                                       } ?>>Block</button>
@@ -159,7 +164,7 @@
                                                 <td>
                     															 <form action="../backend/adminBlockUnblockSch.php" method="post" onsubmit="confirmunblock(this,'This will Unblock the Scholarships and corresponding Applications.\n This wont Unblock the corresponding Signatory.\n Are your Sure?')">
                     						                      <input type="hidden" name="schID" value="<?php echo $schID; ?>">
-                    						                      <button name="blk_unblk" value="unblockScholarship" <?php if($row['schstatus'] === "active"){
+                    						                      <button name="blk_unblk" style="width: 100%;"  value="unblockScholarship" <?php if($row['schstatus'] === "active"){
                                                         echo "disabled";
                                                         echo " style = 'color:#fff'";
                                                       } ?>>Unblock</button>
@@ -216,13 +221,13 @@
                                                      <input type="hidden" name="schname" value="<?php echo $schname; ?>">
                                                     <input type="hidden" name="sigID" value="<?php echo $sigID; ?>">
                                                     <input type="hidden" name="schID" value="<?php echo $schID; ?>">
-                                                    <button name="view" value="View">View</button>
+                                                    <button name="view" style="width: 100%;" value="View">View</button>
                                                   </form>
                                                 </td>
 				                                      	<td>
 				                                      		<form action="../backend/adminAcceptReject.php" method="post">
 					                                          <input type="hidden" name="schID" value="<?php echo $schID; ?>">
-					                                          <button name="accrej" value="Accept" <?php if($row['adminapproval'] === "Approved"){
+					                                          <button name="accrej" style="width: 100%;" value="Accept" <?php if($row['adminapproval'] === "Approved"){
                                                       echo "disabled";
                                                       echo " style = 'color:#fff'";
                                                     } ?>>Approve</button>
@@ -231,7 +236,7 @@
                     														<td>
                     															 <form action="../backend/adminAcceptReject.php" method="post">
 						                                          <input type="hidden" name="schID" value="<?php echo $schID; ?>">
-						                                          <button name="accrej" value="Reject" <?php if($row['adminapproval'] === "Rejected"){
+						                                          <button name="accrej" style="width: 100%;" value="Reject" <?php if($row['adminapproval'] === "Rejected"){
                                                         echo "disabled";
                                                         echo " style = 'color:#fff'";
                                                       } ?>>Reject</button>
@@ -240,7 +245,7 @@
                                                 <td>
                     															 <form action="../backend/adminBlockUnblockSch.php" method="post" onsubmit="confirmblock(this,'This will Block the Scholarship and corresponding Applications.\n This wont Block the corresponding Signatory.\n Are your Sure?')">
                     						                      <input type="hidden" name="schID" value="<?php echo $schID; ?>">
-                    						                      <button name="blk_unblk" value="blockScholarship" <?php if($row['schstatus'] === "inactive"){
+                    						                      <button name="blk_unblk" style="width: 100%;" value="blockScholarship" <?php if($row['schstatus'] === "inactive"){
                                                         echo "disabled";
                                                         echo " style = 'color:#fff'";
                                                       } ?>>Block</button>
@@ -249,7 +254,7 @@
                                                 <td>
                     															 <form action="../backend/adminBlockUnblockSch.php" method="post" onsubmit="confirmunblock(this,'This will Unblock the Scholarships and corresponding Applications.\n This wont Unblock the corresponding Signatory.\n Are your Sure?')">
                     						                      <input type="hidden" name="schID" value="<?php echo $schID; ?>">
-                    						                      <button name="blk_unblk" value="unblockScholarship" <?php if($row['schstatus'] === "active"){
+                    						                      <button name="blk_unblk" style="width: 100%;" value="unblockScholarship" <?php if($row['schstatus'] === "active"){
                                                         echo "disabled";
                                                         echo " style = 'color:#fff'";
                                                       } ?>>Unblock</button>
@@ -264,14 +269,15 @@
                 <?php } else {
                   echo "Invalid Request";
                 } ?>
-								</div>
-
-			
-			<!-- Footer -->
+					<!-- Footer -->
 			<div class="footer">
             <h3>SCHOLARSHIP MANAGEMENT SYSTEM</h3>
             <p>copyright &copy;2022</p>
-         </div>			
+         </div>	
+								</div>
+
+			
+				
 
 		</div>
 

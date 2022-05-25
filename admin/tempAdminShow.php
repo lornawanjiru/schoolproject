@@ -19,13 +19,17 @@
 
       <!-- Header -->
       <div class = "nav">
-        <div class="header"><a>Scholarship Application System</a> </div>
+          <div class="topnav" id="myTopnav">
+            <div><a>Scholarship Application System</a> </div>
             <div class="banner desktop-view">
                   <div>
                     <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/profile-sample3.jpg" alt="profile-sample3" class="profile" />
                   </div>
                   <div>
-                    <h2> Hello, <?php echo $_SESSION['currentUserName']. " (ID:" . $_SESSION['currentUserID'] . ")"?>. </h2>
+                    <h2> Hello, <?php echo $_SESSION['currentUserName'] .
+                        ' (ID:' .
+                        $_SESSION['currentUserID'] .
+                        ')'; ?>. </h2>
                   </div>
             </div>
             <div class="">
@@ -58,9 +62,7 @@
               </div>  
             </div>
           </div>
-
-
-			<!-- Main -->
+          </div>
 				
 
 							<!-- Content -->

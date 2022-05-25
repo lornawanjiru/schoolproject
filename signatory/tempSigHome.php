@@ -1,49 +1,46 @@
 <?php
-  session_start();
-  $_SESSION['selectedAppID'] = 0;
+session_start();
+$_SESSION['selectedAppID'] = 0;
 
-  $_SESSION['appList'] = NULL;
+$_SESSION['appList'] = null;
 
-  //check validity of the user
-  $currentUserID=$_SESSION['currentUserID'];
-  if($currentUserID==NULL){
-    header("Location:../index.php");
-  }
-
-  // Connect to database
-  $conn = new mysqli("localhost","scholar", "","sms");
-  // Checks Connection
-    if ($conn->connect_error) {
-      die("Connection failed: " . $conn->connect_error);
-    }
-
-$getName = "select S.firstName, S.middleName, S.lastName from signatory S where S.sigID = '".$_SESSION['currentUserID']."'";
-
-$nameResult = mysqli_query($conn,$getName);
-
-while($rows9=mysqli_fetch_row($nameResult))
-{
-foreach ($rows9 as $key => $value)
-	{
-	 	if($key == 0)
-		{
-			$_SESSION['currentUserName'] = $value;
-		}
-
-
-		if($key == 1)
-		{
-			$_SESSION['currentUserName'] = $_SESSION['currentUserName'] . " " . $value;
-		}
-
-
-	    if($key == 2)
-	    {
-			$_SESSION['currentUserName'] = $_SESSION['currentUserName'] . ". " . $value;
-		}
-	}
+//check validity of the user
+$currentUserID = $_SESSION['currentUserID'];
+if ($currentUserID == null) {
+    header('Location:../index.php');
 }
 
+// Connect to database
+$conn = new mysqli('localhost', 'scholar', '', 'sms');
+// Checks Connection
+if ($conn->connect_error) {
+    die('Connection failed: ' . $conn->connect_error);
+}
+
+$getName =
+    "select S.firstName, S.middleName, S.lastName from signatory S where S.sigID = '" .
+    $_SESSION['currentUserID'] .
+    "'";
+
+$nameResult = mysqli_query($conn, $getName);
+
+while ($rows9 = mysqli_fetch_row($nameResult)) {
+    foreach ($rows9 as $key => $value) {
+        if ($key == 0) {
+            $_SESSION['currentUserName'] = $value;
+        }
+
+        if ($key == 1) {
+            $_SESSION['currentUserName'] =
+                $_SESSION['currentUserName'] . ' ' . $value;
+        }
+
+        if ($key == 2) {
+            $_SESSION['currentUserName'] =
+                $_SESSION['currentUserName'] . '. ' . $value;
+        }
+    }
+}
 ?>
 
 
@@ -70,7 +67,10 @@ foreach ($rows9 as $key => $value)
                     <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/profile-sample3.jpg" alt="profile-sample3" class="profile" />
                   </div>
                   <div>
-                    <h2> Hello, <?php echo $_SESSION['currentUserName']. " (ID:" . $_SESSION['currentUserID'] . ")"?>. </h2>
+                    <h2> Hello, <?php echo $_SESSION['currentUserName'] .
+                        ' (ID:' .
+                        $_SESSION['currentUserID'] .
+                        ')'; ?>. </h2>
                   </div>
               </div>
               <div class="">
@@ -103,7 +103,10 @@ foreach ($rows9 as $key => $value)
                  <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/profile-sample3.jpg" alt="profile-sample3" class="profile" />
               </div>
               <div>
-                <h2> Hello,<?php echo $_SESSION['currentUserName']. " (ID:" . $_SESSION['currentUserID'] . ")"?>. </h2>
+                <h2> Hello,<?php echo $_SESSION['currentUserName'] .
+                    ' (ID:' .
+                    $_SESSION['currentUserID'] .
+                    ')'; ?>. </h2>
                 <h3> Manage Your Scholarship in one application </h3>
               </div>
           </div>
@@ -124,8 +127,9 @@ foreach ($rows9 as $key => $value)
         </div>
           <div class="scholarship-option"> 
             <div class="major">
-              <h1>Find the best-fit scholarship</h1>
-              <h4 class="text">Choosing the right scholarship is a daunting task. Apply for a relevant scholarships and wait for us to do the rest.</h4>
+              <h1>Types of Scholarship</h1>
+              <h4 class="text">Choosing the right scholarship is a daunting task. In this application we want to make your applicants have a easy experience when it comes to applying for a scholarship.</h4>
+              <p>The categories of applying are a number hence making applicants have a variety of choices and you to specify the group of applicants you need.</p>
              </div>
 
             <div class="pad">
@@ -136,7 +140,7 @@ foreach ($rows9 as $key => $value)
                   <div>
                     <h3>Scholarships for merit students</h3>
                   </div>
-                  <p>Aspirants whose score is high in the academic, artistic, atheletic and in other activities will be provided with scholarship wither by the private organization or by student intended institutes. Purely , this king is based on thee mmerit score of the aspirants</p>
+                  <p>Aspirants whose score is high in the academic, artistic, atheletic and in other activities will be provided with scholarship wither by the private organization or by student intended institutes. </p>
                 </div>
 
               </div>

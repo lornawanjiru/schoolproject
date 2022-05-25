@@ -1,48 +1,44 @@
 <?php
 
-  session_start();
+session_start();
 
+//check validity of the user
+$currentUserID = $_SESSION['currentUserID'];
+if ($currentUserID == null) {
+    header('Location:../index.php');
+}
 
+// Connect to database
+$conn = new mysqli('localhost', 'scholar', '', 'sms');
 
-	 //check validity of the user
-  $currentUserID=$_SESSION['currentUserID'];
-  if($currentUserID==NULL){
-    header("Location:../index.php");
-  }
+// Checks Connection
+if ($conn->connect_error) {
+    die('Connection failed: ' . $conn->connect_error);
+}
 
-  // Connect to database
-  $conn = new mysqli("localhost","scholar", "","sms");
+$getName =
+    "select S.firstName, S.middleName, S.lastName from signatory S where S.sigID = '" .
+    $_SESSION['currentUserID'] .
+    "'";
 
-  // Checks Connection
-    if ($conn->connect_error) {
-      die("Connection failed: " . $conn->connect_error);
+$nameResult = mysqli_query($conn, $getName);
+
+while ($rows9 = mysqli_fetch_row($nameResult)) {
+    foreach ($rows9 as $key => $value) {
+        if ($key == 0) {
+            $_SESSION['currentUserName'] = $value;
+        }
+
+        if ($key == 1) {
+            $_SESSION['currentUserName'] =
+                $_SESSION['currentUserName'] . ' ' . $value;
+        }
+
+        if ($key == 2) {
+            $_SESSION['currentUserName'] =
+                $_SESSION['currentUserName'] . '. ' . $value;
+        }
     }
-
-$getName = "select S.firstName, S.middleName, S.lastName from signatory S where S.sigID = '".$_SESSION['currentUserID']."'";
-
-$nameResult = mysqli_query($conn,$getName);
-
-while($rows9=mysqli_fetch_row($nameResult))
-{
-foreach ($rows9 as $key => $value)
-	{
-	 	if($key == 0)
-		{
-			$_SESSION['currentUserName'] = $value;
-		}
-
-
-		if($key == 1)
-		{
-			$_SESSION['currentUserName'] = $_SESSION['currentUserName'] . " " . $value;
-		}
-
-
-	    if($key == 2)
-	    {
-			$_SESSION['currentUserName'] = $_SESSION['currentUserName'] . ". " . $value;
-		}
-	}
 }
 ?>
 <!DOCTYPE HTML>
@@ -92,7 +88,10 @@ foreach ($rows9 as $key => $value)
                     <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/profile-sample3.jpg" alt="profile-sample3" class="profile" />
                   </div>
                   <div>
-                    <h2> Hello, <?php echo $_SESSION['currentUserName']. " (ID:" . $_SESSION['currentUserID'] . ")"?>. </h2>
+                    <h2> Hello, <?php echo $_SESSION['currentUserName'] .
+                        ' (ID:' .
+                        $_SESSION['currentUserID'] .
+                        ')'; ?>. </h2>
                   </div>
               </div>
               <div class="">
@@ -132,7 +131,7 @@ foreach ($rows9 as $key => $value)
 
 					<label><strong>Scholarship Name</strong></label><br>
 					<label style="font-size: 15px;">This will be displayed and used for searching your scholarship</label>
-					<br><input type = "text" name = "schname" placeholder="Eg:Joint Japan/World Bank Graduate Scholarship Program 2019" required>
+					<br><input type = "text" name = "schname" placeholder="Eg:Joint Japan/World Bank Graduate Scholarship Program 2019" >
 					<br><br>
 
 					<label><strong>Locations</strong></label><br>
@@ -140,31 +139,20 @@ foreach ($rows9 as $key => $value)
 					<br><input type = "text" name = "schlocation" placeholder="Select one or multiple">
 					<br><br>
 
-					<label><strong>Locations From</strong></label><br>
+					<!-- <label><strong>Locations From</strong></label><br>
 					<label style="font-size: 15px;">Is this scholarship specific for students from a specific state or region?</label>
 					<br><input type = "text" name = "schlocationfrom" placeholder="Select one or multiple">
-					<br><br>
+					<br><br> -->
 
 					<label><strong>Degrees</strong></label><br>
 					<label style="font-size: 15px;">This is a scholarship to study a ... (check all that apply)</label><br>
-					<select name="degree" style="padding-top: 10px;padding-bottom: 10px; padding-left: 5%">
+					<select name="educationlevel" style="padding-top: 10px;padding-bottom: 10px; padding-left: 5%">
 						<option value="select" selected>Select</option>
-						<option value="class1">Class 1</option>
-						<option value="class2">Class 2</option>
-						<option value="class3">Class 3</option>
-						<option value="class4">Class 4</option>
-						<option value="class5">Class 5</option>
-						<option value="class6">Class 6</option>
-						<option value="class7">Class 7</option>
-						<option value="class8">Class 8</option>
-						<option value="class9">Class 9</option>
-						<option value="class10">Class 10</option>
-						<option value="class11">Class 11</option>
-						<option value="class12passed">Class 12 Passed</option>
-						<option value="diploma">Diploma</option>
-						<option value="graduation">Graduation</option>
-						<option value="postgraduation">Post-Graduation</option>
-						<option value="phd">PhD</option>
+						  <option value="highschool">High school</option>
+                          <option value="diploma">Diploma</option>
+                          <option value="bachelors">Bachelors</option>
+                          <option value="masters">Masters</option>
+                          <option value="phd">PhD</option>
 					</select>
 					<br><br><br>
 
@@ -174,39 +162,53 @@ foreach ($rows9 as $key => $value)
 						<option value="select" selected>Select</option>
 						<option value="male">Male</option>
 						<option value="female">Female</option>
-						<option value="male+female">Both</option>
+						<option value="non-binary">Non-binary</option>
 						<option value="transgender">Transgender</option>
+						<option value="any">Any</option>
 					</select>
 					<br><br><br>
 
-					<label><strong>Religion </strong></label><br>
-					<label style="font-size: 15px;">This is a scholarship for a particular gender ...</label><br>
-					<input type="checkbox" name="religion[]" value="buddhism">Buddhism<br>
-					<input type="checkbox" name="religion[]" value="christian">Christian<br>
-					<input type="checkbox" name="religion[]" value="hindu">Hindu<br>
-					<input type="checkbox" name="religion[]" value="jain">Jain<br>
-					<input type="checkbox" name="religion[]" value="Muslim">Muslim<br>
-					<input type="checkbox" name="religion[]" value="Parsi">Parsi<br>
-					<input type="checkbox" name="religion[]" value="Sikh">Sikh<br>
+					<label><strong>Ethnic </strong></label><br>
+					<label style="font-size: 15px;">This is a scholarship for a particular ethnic ...</label><br>
+					<input type="checkbox" name="ethnic[]" value="americanindian">American Indian<br>
+					<input type="checkbox" name="ethnic[]" value="asian">Asian<br>
+					<input type="checkbox" name="ethnic[]" value="black">Black/African American<br>
+					<input type="checkbox" name="ethnic[]" value="latino">Latino/ Hispanics<br>
+					<input type="checkbox" name="ethnic[]" value="white">White<br>
+					<input type="checkbox" name="ethnic[]" value="hawaiian">Native Hawaiian/Pacific Islander<br>
 					<br><br>
 
 					<label><strong>Scholarship type</strong></label><br>
 					<label style="font-size: 15px;">Selct any Type of Scholarship from Below ...</label><br>
 					<select name="scholarship" style="padding-top: 10px;padding-bottom: 10px; padding-left: 10%">
 						<option value="select" selected>Select</option>
-						<option value="merit_based">Merit Based</option>
-						<option value="means_based">Means Based</option>
-						<option value="cultural_talent">Cultural Talent</option>
-						<option value="visual_art">Visual Art</option>
-						<option value="sports_talent">Sports Talent</option>
-						<option value="science_maths_based">Science, Maths Based</option>
-						<option value="technology_based">Technology Based</option>
+						<option value="merit">Athletic Based</option>
+                          <option value="neddy">Needy based</option>
+                          <option value="creative">Creative Development</option>
+                          <option value="cultural">Community services</option>
 						</select>
 					<br><br><br>
-
-					<label><strong>Application Deadline</strong></label><br>
+					<label><strong>Career field</strong></label><br>
+					<label style="font-size: 15px;">Selct any Type of career field from Below ...</label><br>
+					<select name="careerfield" style="padding-top: 10px;padding-bottom: 10px; padding-left: 10%">
+						<option value="select" selected>Select</option>
+						<option value="agriculture">Agriculture</option>
+                          <option value="arts">Arts</option>
+                          <option value="biologicalsciences">Biological Sciences</option>
+                          <option value="administration">Administration</option>
+                          <option value="dentistry">Dentistry</option>
+                          <option value="education">Education</option>
+                          <option value="engineering">Engineering</option>
+                          <option value="environmentscience">Environement Science</option>
+                          <option value="law">Law</option>
+                          <option value="medicalscience">Medical Science</option>
+                          <option value="veterinary">Veterinary</option>
+                          <option value="socialscience">Social Science</option>
+						</select>
+					<br><br><br>
+					<label><strong>Application Deadline:(yyyy/mm/dd)</strong></label><br>
 					<label style="font-size: 15px;">What is the deadline of application?</label>
-					<br><input type = "date" name = "appdeadline">
+					<br><input type = "text" name = "appdeadline">
 					<br><br>
 
 					<label><strong>Number of Applications maximum allowed</strong></label><br>

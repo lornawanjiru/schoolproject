@@ -18,13 +18,17 @@
   <body class = "user">
       <!-- Header -->
       <div class = "nav">
-        <div class="header"><a>Scholarship Application System</a> </div>
+          <div class="topnav" id="myTopnav">
+            <div><a>Scholarship Application System</a> </div>
             <div class="banner desktop-view">
                   <div>
                     <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/profile-sample3.jpg" alt="profile-sample3" class="profile" />
                   </div>
                   <div>
-                    <h2> Hello, <?php echo $_SESSION['currentUserName']. " (ID:" . $_SESSION['currentUserID'] . ")"?>. </h2>
+                    <h2> Hello, <?php echo $_SESSION['currentUserName'] .
+                        ' (ID:' .
+                        $_SESSION['currentUserID'] .
+                        ')'; ?>. </h2>
                   </div>
             </div>
             <div class="">
@@ -57,20 +61,20 @@
               </div>  
             </div>
           </div>
+          </div>
 
 		
 								<div class="content">
 									<section>
                       <h1 style="text-align:center; font-size:25px">Student Details</h1>
                       <?php
-                         $conn = new mysqli("localhost","scholar", "","sms");
-                        if ($conn->connect_error) {
-                          die("Connection failed: " . $conn->connect_error);
-                        }
-                        $sql = "SELECT * FROM student";
-                        $result = $conn->query($sql);
-                        if ($result->num_rows > 0) {
-                          ?>
+                      $conn = new mysqli('localhost', 'scholar', '', 'sms');
+                      if ($conn->connect_error) {
+                          die('Connection failed: ' . $conn->connect_error);
+                      }
+                      $sql = 'SELECT * FROM student';
+                      $result = $conn->query($sql);
+                      if ($result->num_rows > 0) { ?>
                           <table class="table table-bordered">
                             <thead>
                                 <tr>
@@ -84,16 +88,17 @@
                                 </tr>
                             </thead>
                             <tbody>
-                          <?php
-                            while($row = $result->fetch_assoc()) {
-                                $studentID =$row['studentID'];
-                                $email = $row['upMail'];
-                                $name = $row['firstName']." ".$row['lastName'];
-                                if($name == NULL || $name == ""){
-                                  $name = "NULL";
-                                }
-                                $status = $row['status'];
-                            ?>
+                          <?php while ($row = $result->fetch_assoc()) {
+
+                              $studentID = $row['studentID'];
+                              $email = $row['upMail'];
+                              $name =
+                                  $row['firstName'] . ' ' . $row['lastName'];
+                              if ($name == null || $name == '') {
+                                  $name = 'NULL';
+                              }
+                              $status = $row['status'];
+                              ?>
                                 <tr>
                                   <td><?php echo $studentID; ?></td>
                                   <td><?php echo $email; ?></td>
@@ -108,30 +113,32 @@
                                   <td>
                                     <form name="blockform" method="post" onsubmit="confirmblock(this)" action="../backend/adminBlockUser.php">
                                       <input type="hidden" name="ID" value="<?php echo $studentID; ?>">
-                                      <button  name="blockUser" id="blockUserbtn" value="blockStudent" <?php if($row['status'] === "inactive"){
-                                        echo "disabled";
-                                        echo " style = 'color:#fff'";
+                                      <button  name="blockUser" id="blockUserbtn" value="blockStudent" <?php if (
+                                          $row['status'] === 'inactive'
+                                      ) {
+                                          echo 'disabled';
+                                          echo " style = 'color:#fff'";
                                       } ?>>Block</button>
                                     </form>
                                   </td>
                                   <td>
                                     <form name="unblockform" action="../backend/adminUnblockUser.php" onsubmit="confirmunblock(this)"  method="post">
                                       <input type="hidden" name="ID" value="<?php echo $studentID; ?>">
-                                      <button name="unblockUser" id="unblockUserbtn" value="unblockStudent" <?php if($row['status'] === "active"){
-                                        echo "disabled";
-                                        echo " style = 'color:#fff'";
+                                      <button name="unblockUser" id="unblockUserbtn" value="unblockStudent" <?php if (
+                                          $row['status'] === 'active'
+                                      ) {
+                                          echo 'disabled';
+                                          echo " style = 'color:#fff'";
                                       } ?>>UnBlock</button>
                                     </form>
                                   </td>
                                 </tr>
-                            <?php } ?>
+                            <?php
+                          } ?>
                           </tbody>
                         </table>
-                        <?php
-                          } else {
-                              echo "No result";
-                          }
-                          $conn->close();
+                        <?php } else {echo 'No result';}
+                      $conn->close();
                       ?>
 									</section>
 								</div>

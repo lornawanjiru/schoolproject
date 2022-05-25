@@ -105,7 +105,7 @@
 
 
               <!-- Content -->
-                <div class="content">
+                <div class="content edit-back">
                     <h1>User Profile</h1>
                             <!-- Compare user details -->
                       <div id="display" class="login">
@@ -200,9 +200,9 @@
                               </div>
                             </div>
                             <?php } ?>
-
+                            <button id="showDivButton" type="button" class="btn btn-primary">Edit User Profile</button>
                           </form>
-                          <button id="showDivButton" type="button" class="btn btn-primary">Edit User Profile</button>
+                          
                       </div>
 
                       <div id="editDiv" class="login" style="display:none">
