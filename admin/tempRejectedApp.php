@@ -65,14 +65,13 @@
             </div>
           </div>
           </div>
-
 		
-								<div class="content">
+								<div class="content edit-back">
 									<section>
 
-										<header>
-											<h3><strong>Applications of Rejected Students</strong></h3>
-										</header>
+										
+											<h1>Applications of Rejected Students</h1>
+									
                         <?php
                         /* Connect to database */
                         $conn = new mysqli('localhost', 'scholar', '', 'sms');
@@ -85,7 +84,7 @@
                             "SELECT A.applicationID,A.studentID,A.scholarshipID,S.schname,A.appDate,A.appstatus,A.verifiedBySignatory from application AS A join scholarship AS S ON A.scholarshipID=S.scholarshipID WHERE A.verifiedBySignatory='Rejected'";
                         $sql_result = mysqli_query($conn, $to_query);
                         if (mysqli_num_rows($sql_result) > 0) { ?>
-                          <table class="table table-bordered">
+                          <table class="table table-bordered default login">
                             <thead>
                               <tr>
 
@@ -133,11 +132,12 @@
                         </tbody>
                     </table>
 									</section>
+                  <div class="footer">
+                      <h3>SCHOLARSHIP MANAGEMENT SYSTEM</h3>
+                      <p>copyright &copy;2022</p>
+                  </div>
 								</div>
-                <div class="footer">
-            <h3>SCHOLARSHIP MANAGEMENT SYSTEM</h3>
-            <p>copyright &copy;2022</p>
-         </div>
+               
 		</div>
 
 		

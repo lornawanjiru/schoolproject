@@ -121,31 +121,35 @@ while ($rows9 = mysqli_fetch_row($nameResult)) {
 
 
 			
-		<div class="content">
+		<div class="content edit-back">
 			
-				<header>
-					<h2 style="padding-left: 36%;"><strong><u>Add your Scholarship</u></strong></h2>
-				</header>
+		<h1><b >Add Your Scholarship</b></h1>
 
-				<form method = "post" class = "login"name = "scholarshiplist" id = "scholarshiplist" action = "../backend/adminAddDelSch.php" enctype="multipart/form-data">
 
-					<label><strong>Scholarship Name</strong></label><br>
-					<label style="font-size: 15px;">This will be displayed and used for searching your scholarship</label>
-					<br><input type = "text" name = "schname" placeholder="Eg:Joint Japan/World Bank Graduate Scholarship Program 2019" >
-					<br><br>
-
-					<label><strong>Locations</strong></label><br>
+				<form method = "post" onsubmit="return Validate()"  class = "login"name = "scholarshiplist" id = "scholarshiplist" action = "../backend/adminAddDelSch.php" enctype="multipart/form-data">
+				<div class="row">
+					<div class="col-10">
+					  <label><strong>Scholarship Name</strong></label><br>
+					  <label style="font-size: 15px;">This will be displayed and used for searching your scholarship</label>
+					</div>
+					<div class="col-90">
+					  <input type = "text" id = "schname" name = "schname" placeholder="Eg:Joint Japan/World Bank Graduate Scholarship Program 2022" >
+					</div>
+                </div>
+		        <div class="row">
+				  <div class="col-10">
+					<label><strong>Location</strong></label><br>
 					<label style="font-size: 15px;">In which states or regions do the students need to study to be able to receive the scholarship?</label>
-					<br><input type = "text" name = "schlocation" placeholder="Select one or multiple">
-					<br><br>
-
-					<!-- <label><strong>Locations From</strong></label><br>
-					<label style="font-size: 15px;">Is this scholarship specific for students from a specific state or region?</label>
-					<br><input type = "text" name = "schlocationfrom" placeholder="Select one or multiple">
-					<br><br> -->
-
+				  </div>
+				  <div class="col-90">
+					<input type = "text" id = "schlocation" name = "schlocation" placeholder="Eg:Kenya">
+				  </div>
+                </div>
+				<div class="row">
+				   <div class="col-10">
 					<label><strong>Degrees</strong></label><br>
 					<label style="font-size: 15px;">This is a scholarship to study a ... (check all that apply)</label><br>
+				   </div>
 					<select name="educationlevel" style="padding-top: 10px;padding-bottom: 10px; padding-left: 5%">
 						<option value="select" selected>Select</option>
 						  <option value="highschool">High school</option>
@@ -153,6 +157,7 @@ while ($rows9 = mysqli_fetch_row($nameResult)) {
                           <option value="bachelors">Bachelors</option>
                           <option value="masters">Masters</option>
                           <option value="phd">PhD</option>
+						  <option value="phd">All</option>
 					</select>
 					<br><br><br>
 
@@ -183,7 +188,7 @@ while ($rows9 = mysqli_fetch_row($nameResult)) {
 					<select name="scholarship" style="padding-top: 10px;padding-bottom: 10px; padding-left: 10%">
 						<option value="select" selected>Select</option>
 						<option value="merit">Athletic Based</option>
-                          <option value="neddy">Needy based</option>
+                          <option value="needy">Needy based</option>
                           <option value="creative">Creative Development</option>
                           <option value="cultural">Community services</option>
 						</select>
@@ -204,41 +209,42 @@ while ($rows9 = mysqli_fetch_row($nameResult)) {
                           <option value="medicalscience">Medical Science</option>
                           <option value="veterinary">Veterinary</option>
                           <option value="socialscience">Social Science</option>
+						  <option value="socialscience">Any</option>
 						</select>
 					<br><br><br>
 					<label><strong>Application Deadline:(yyyy/mm/dd)</strong></label><br>
 					<label style="font-size: 15px;">What is the deadline of application?</label>
-					<br><input type = "text" name = "appdeadline">
+					<br><input type = "text" id="appdeadline" name = "appdeadline">
 					<br><br>
 
 					<label><strong>Number of Applications maximum allowed</strong></label><br>
 					<label style="font-size: 15px;">You can limit the number of applicants[This wont be displayed]</label>
-					<br><input type = "text" name = "granteesNum">
+					<br><input type = "text" id = "granteesNum" name = "granteesNum">
 					<br><br>
 
 					<label><strong>Funding</strong></label><br>
 					<label style="font-size: 15px;">Short description about funding. e.g. "$5000,-" or "100% tuition fee"</label>
-					<br><input type = "text" name = "funding">
+					<br><input type = "text" id="funding" name = "funding">
 					<br><br>
 
 					<label><strong>Description</strong></label><br>
 					<label style="font-size: 15px;">Give a general description of the scholarship. This is the first text that users will read.</label>
-					<br><textarea name = "description" rows="5"></textarea>
+					<br><textarea id="description" name = "description" rows="5"></textarea>
 					<br><br>
 
 					<label><strong>Eligibility</strong></label><br>
 					<label style="font-size: 15px;">What students are eligible? Are there any requirements?</label>
-					<br><textarea name = "eligibility" rows="5"></textarea>
+					<br><textarea id="eligibility" name = "eligibility" rows="5"></textarea>
 					<br><br>
 
 					<label><strong>Benefits</strong></label><br>
 					<label style="font-size: 15px;">When a student gets the scholarship, what are their benefits?</label>
-					<br><textarea name = "benefits" rows="5"></textarea>
+					<br><textarea id="benefits" name = "benefits" rows="5"></textarea>
 					<br><br>
 
 					<label><strong>How can you apply ?</strong></label><br>
 					<label style="font-size: 15px;">How should a student apply? What are the requirements for application?</label>
-					<br><textarea name = "apply" rows="5"></textarea>
+					<br><textarea id="apply" name = "apply" rows="5"></textarea>
 					<br><br>
 
 					<label><strong>Important Links</strong></label><br>
@@ -248,13 +254,13 @@ while ($rows9 = mysqli_fetch_row($nameResult)) {
 
 					<label><strong>Contact Details</strong></label><br>
 					<label style="font-size: 15px;">Email, website, contact info ...</label>
-					<br><textarea name = "contact" rows="5"></textarea>
+					<br><textarea id="contact" name = "contact" rows="5"></textarea>
 					<br><br>
 
 						<label><strong>Upload Document</strong></label>&nbsp;&nbsp;<label style="font-size: 15px;color: red; ">* This is compulsory.</label><br>
 					<label style="font-size: 15px;">Provide a soft copy of your scholarship so as to validate your scholarship.</label>
 					<br>
-					<input type="file" name="validate" id="validate" onchange=" return fileValidation('validate')" required><br>
+					<input type="file" name="validate" id="validate" onchange=" return fileValidation('validate')"><br>
 
 					<br><br>
                     <input type="hidden" name="previous_adminapproval" value="Pending">
@@ -271,8 +277,12 @@ while ($rows9 = mysqli_fetch_row($nameResult)) {
 						<input type = "submit" value = "Back">
 					</form>
 				</div>
+				
 			</div>
-			
+			<div class="footer">
+                    <h3>SCHOLARSHIP MANAGEMENT SYSTEM</h3>
+                    <p>copyright &copy;2022</p>
+                </div>
 		
 		</div>
        
@@ -280,7 +290,7 @@ while ($rows9 = mysqli_fetch_row($nameResult)) {
 
 	
     <script src="../js/script.js"></script>
-
+   
 
     <script type="text/javascript">
     function selectAll(){
@@ -288,7 +298,69 @@ while ($rows9 = mysqli_fetch_row($nameResult)) {
       for (var i = 0; i < sel.options.length; i++){
         sel.options[i].selected = true;
       }
-    }
+     }
+	 function Validate(){
+		var schname = document.getElementById('schname')
+		if (schname.value == '') {
+			window.alert('please enter your Scholarship name')
+			results.focus()
+			return false
+		} 
+		var schlocation = document.getElementById('schlocation')
+		if (schlocation.value == '') {
+			window.alert('please enter your Scholarship Location')
+			results.focus()
+			return false
+		}
+		var appdeadline = document.getElementById('appdeadline')
+		if (appdeadline.value == '') {
+			window.alert('please enter the application deadline')
+			results.focus()
+			return false
+		} 
+		var granteesNum = document.getElementById('granteesNum')
+		if (granteesNum.value == '') {
+			window.alert('please enter your number of Applicants allowed')
+			results.focus()
+			return false
+		} 
+		var funding = document.getElementById('funding')
+		if (funding.value == '') {
+			window.alert('please enter your scholarship funding amount')
+			results.focus()
+			return false
+		} 
+		var description = document.getElementById('description')
+		if (description.value == '') {
+			window.alert('please enter your scholarship description')
+			results.focus()
+			return false
+		} 
+		var eligibility = document.getElementById('eligibility')
+		if (eligibility.value == '') {
+			window.alert('please enter your scholarship eligibility')
+			results.focus()
+			return false
+		} 
+		var benefits = document.getElementById('benefits')
+		if (benefits.value == '') {
+			window.alert('please enter your scholarship benefits')
+			results.focus()
+			return false
+		} 
+		var apply = document.getElementById('apply')
+		if (apply.value == '') {
+			window.alert('please enter steps on applying')
+			results.focus()
+			return false
+		} 
+		var contact = document.getElementById('contact')
+		if (contact.value == '') {
+			window.alert('please enter your contacts')
+			results.focus()
+			return false
+		} 
+	 }
 
     </script>
   </body>

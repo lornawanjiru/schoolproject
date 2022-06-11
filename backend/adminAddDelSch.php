@@ -24,10 +24,9 @@ if ($currentUserID == null) {
           $flag = 0;
           $name = $_POST['schname'];
           $schlocation = $_POST['schlocation'];
-
           $educationlevel = $_POST['educationlevel'];
           $gender = $_POST['gender'];
-          // $ethnic = $_POST['ethnic'];
+          //   $ethnic = $_POST['ethnic'];
           $scholarshipp = $_POST['scholarship'];
           $careerfield = $_POST['careerfield'];
           $appdeadline = $_POST['appdeadline'];
@@ -238,14 +237,14 @@ if ($currentUserID == null) {
                       );
                       $fileupload = '1';
                   } else {
-                      echo 'CP';
+                      echo '';
                   }
                   if ($fileupload == '1') { ?>
   				    <script type="text/javascript">
                 			alert("Scholarship is Updated and will be further processed by Admin to validate!");
                 			location.replace("../signatory/tempSigScholarship.php")
               		</script>
-  			  	<?php } else {echo 'CPFU';}
+  			  	<?php } else {echo 'Please Update the validation form also.';}
               } else {
                   echo 'dir not found';
               }

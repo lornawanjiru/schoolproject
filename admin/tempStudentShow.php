@@ -51,9 +51,9 @@
                 
                 <a class="dropdown-btn">Users</a>
                 <div class="dropdown-container">
-                  <li><a href = "tempAdminShow.php">Admin</a></li>
-                  <li><a href = "tempSignatoryShow.php">Signatory</a></li>
-                  <li><a href = "tempStudentShow.php">Students</a></li>
+                   <a href = "tempAdminShow.php">Admin</a>
+                 <a href = "tempSignatoryShow.php">Signatory</a>
+                  <a href = "tempStudentShow.php">Students</a>
                 </div>
                 <a href="javascript:void(0);" class="icon" onclick="myFunction()">
                 <img src="../images/menu.png" alt="" />
@@ -64,9 +64,9 @@
           </div>
 
 		
-								<div class="content">
+								<div class="content edit-back">
 									<section>
-                      <h1 style="text-align:center; font-size:25px">Student Details</h1>
+                      <h1 >Student Details</h1>
                       <?php
                       $conn = new mysqli('localhost', 'scholar', '', 'sms');
                       if ($conn->connect_error) {
@@ -75,14 +75,14 @@
                       $sql = 'SELECT * FROM student';
                       $result = $conn->query($sql);
                       if ($result->num_rows > 0) { ?>
-                          <table class="table table-bordered">
+                          <table class="table table-bordered default login">
                             <thead>
                                 <tr>
                                     <th style="width:10%">Student ID</th>
                                     <th style="width:30%">Email ID</th>
                                     <th style="width:20%">Name</th>
                                     <th style="width:10%">Status</th>
-                                    <th style="width:7%"></th>
+                                    <th ></th>
                                     <th style="width:7%"></th>
                                     <th style="width:7%"></th>
                                 </tr>
@@ -105,13 +105,13 @@
                                   <td><?php echo $name; ?></td>
                                   <td><?php echo $status; ?></td>
                                   <td>
-                                    <form action="adminShowUser.php" method="post">
+                                    <form action="adminShowUser.php" class="full" method="post">
                                       <input type="hidden" name="ID" value="<?php echo $studentID; ?>">
-                                      <button name="showUser" value="showStudent">View</button>
+                                      <button name="showUser"  value="showStudent">View</button>
                                     </form>
                                   </td>
                                   <td>
-                                    <form name="blockform" method="post" onsubmit="confirmblock(this)" action="../backend/adminBlockUser.php">
+                                    <form name="blockform" class="full" method="post" onsubmit="confirmblock(this)" action="../backend/adminBlockUser.php">
                                       <input type="hidden" name="ID" value="<?php echo $studentID; ?>">
                                       <button  name="blockUser" id="blockUserbtn" value="blockStudent" <?php if (
                                           $row['status'] === 'inactive'
@@ -122,7 +122,7 @@
                                     </form>
                                   </td>
                                   <td>
-                                    <form name="unblockform" action="../backend/adminUnblockUser.php" onsubmit="confirmunblock(this)"  method="post">
+                                    <form name="unblockform" class="full" action="../backend/adminUnblockUser.php" onsubmit="confirmunblock(this)"  method="post">
                                       <input type="hidden" name="ID" value="<?php echo $studentID; ?>">
                                       <button name="unblockUser" id="unblockUserbtn" value="unblockStudent" <?php if (
                                           $row['status'] === 'active'
@@ -141,11 +141,12 @@
                       $conn->close();
                       ?>
 									</section>
-								</div>
-        <div class="footer">
+                  <div class="footer">
             <h3>SCHOLARSHIP MANAGEMENT SYSTEM</h3>
             <p>copyright &copy;2022</p>
          </div>	
+								</div>
+        
 
 		</div>
 

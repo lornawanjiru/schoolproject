@@ -1,45 +1,39 @@
+
 <?php
+session_start();
+$_SESSION['selectedAppID'] = 0;
 
-?>
-<?php
-  session_start();
-  $_SESSION['selectedAppID'] = 0;
-
-  $_SESSION['appList'] = NULL;
-
-  //check validity of the user
-  $currentUserID=$_SESSION['currentUserID'];
-  if($currentUserID==NULL){
-    header("Location:../index.php");
-  }
-
-  // Connect to database
-  $conn = new mysqli("localhost","scholar", "","sms");
-
-  // Checks Connection
-    if ($conn->connect_error) {
-      die("Connection failed: " . $conn->connect_error);
+$_SESSION['appList'] = null;
+//check validity of the user
+$currentUserID = $_SESSION['currentUserID'];
+if ($currentUserID == null) {
+    header('Location:../index.php');
+} // Connect to database
+$conn = new mysqli('localhost', 'scholar', '', 'sms'); // Checks Connection
+if ($conn->connect_error) {
+    die('Connection failed: ' . $conn->connect_error);
+}
+$getName =
+    "select S.firstName, S.middleName, S.lastName from student S where S.studentID = '" .
+    $_SESSION['currentUserID'] .
+    "'";
+$nameResult = mysqli_query($conn, $getName); // Get every row of the table formed from the query
+while ($rows9 = mysqli_fetch_row($nameResult)) {
+    foreach ($rows9 as $key => $value) {
+        if ($key == 0) {
+            $_SESSION['currentUserName'] = $value;
+        }
+        if ($key == 1) {
+            $_SESSION['currentUserName'] =
+                $_SESSION['currentUserName'] . ' ' . $value;
+        }
+        if ($key == 2) {
+            $_SESSION['currentUserName'] =
+                $_SESSION['currentUserName'] . '. ' . $value;
+        }
     }
-
-  $getName = "select S.firstName, S.middleName, S.lastName from student S where S.studentID = '".$_SESSION['currentUserID']."'";
-
-  $nameResult = mysqli_query($conn,$getName);
-
-  // Get every row of the table formed from the query
-    while($rows9=mysqli_fetch_row($nameResult)){
-      foreach ($rows9 as $key => $value){
-	 	    if($key == 0){
-          $_SESSION['currentUserName'] = $value;
-		    }
-    		if($key == 1){
-    			$_SESSION['currentUserName'] = $_SESSION['currentUserName'] . " " . $value;
-    		}
-        if($key == 2){
-          $_SESSION['currentUserName'] = $_SESSION['currentUserName'] . ". " . $value;
-  		  }
-	    }
-    }
-    $conn->close();
+}
+$conn->close();
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -70,13 +64,21 @@
                     <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/profile-sample3.jpg" alt="profile-sample3" class="profile" />
                   </div>
                   <div>
-                    <h2> Hello, <?php echo $_SESSION['currentUserName']. " (ID:" . $_SESSION['currentUserID'] . ")"?>. </h2>
+                    <h2> Hello, <?php echo $_SESSION['currentUserName'] .
+                        ' (ID:' .
+                        $_SESSION['currentUserID'] .
+                        ')'; ?>. </h2>
                   </div>
               </div>
               
               <div class="">
                      <a href = "../backend/logout.php" class = "button special">Logout</a>
-                      <!-- <a href = "#"><?php echo $_SESSION['currentUserName']. " (ID:" . $_SESSION['currentUserID'] . ")"?></a></div> -->
+                      <!-- <a href = "#"><?php echo $_SESSION[
+                          'currentUserName'
+                      ] .
+                          ' (ID:' .
+                          $_SESSION['currentUserID'] .
+                          ')'; ?></a></div> -->
                       <a href = "tempUserProfile.php">Profile</a>
                       <a href = "tempUserApply.php">Apply</a>
                       <a href = "tempUserView.php">Status</a>
@@ -91,26 +93,25 @@
  	<!-- Main -->
    <div class="content">
           <?php
-          	$conn = new mysqli("localhost","scholar","","sms");
-            $schid=$_SESSION["schid"];
-            $sigID = $_POST['sigID'];
-            $_SESSION['sigID'] = $sigID;
-    		    $sql="SELECT * FROM application where scholarshipID=$schid AND studentID=$currentUserID AND sigID = $sigID";
-    		    $result = $conn->query($sql);
-    			  if($result->num_rows > 0){
-               	while($row = $result->fetch_assoc()){
-          ?>
+          $conn = new mysqli('localhost', 'scholar', '', 'sms');
+          $schid = $_SESSION['schid'];
+          $sigID = $_POST['sigID'];
+          $_SESSION['sigID'] = $sigID;
+          $sql = "SELECT * FROM application where scholarshipID=$schid AND studentID=$currentUserID AND sigID = $sigID";
+          $result = $conn->query($sql);
+          if ($result->num_rows > 0) {
+              while ($row = $result->fetch_assoc()) { ?>
              <script type="text/javascript">
               alert("You Have Already Applied for this scholarship!");
               location.replace("tempUserView.php")
             </script>
 
-           <?php
-      			   }
-    		    }
-            else{
-            ?>
-                <h1>Dear&nbsp;&nbsp;<b><?php echo $_SESSION['currentUserName'] ?></b>,</h1>
+           <?php }
+          } else {
+               ?>
+                <h1>Dear&nbsp;&nbsp;<b><?php echo $_SESSION[
+                    'currentUserName'
+                ]; ?></b>,</h1>
                 <h1>Make sure you have your Profile Completed.<br>Your Profile details will be submitted in this application.<br></h1>
                 <form style="padding-left: 20%; display: inline;" method="post">
                   <input type="submit" id="apply" name="apply" value="Check Your Profile Here >>" title="User Profile" formaction="tempUserProfile.php">
@@ -122,13 +123,12 @@
 
             <div class="footer">
             <h3>SCHOLARSHIP MANAGEMENT SYSTEM</h3>
-            <p>copyright &copy;2021</p>
+            <p>copyright &copy;2022</p>
          </div>
          <?php
-        }
-    		$conn->close();
-
-            ?>
+          }
+          $conn->close();
+          ?>
         </div>
         <!-- Footer -->
        

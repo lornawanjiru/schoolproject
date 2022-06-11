@@ -9,7 +9,7 @@ try
 {
   if(isset($_POST['submit'])){
     $num = $_POST['sixdn'];
-    $conn = new mysqli("localhost","root", "","sms");
+    $conn = new mysqli("localhost","scholar", "","sms");
 
     if ($conn->connect_error) {
       die("Connection failed: " . $conn->connect_error);

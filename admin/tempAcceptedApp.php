@@ -50,9 +50,9 @@
                 
                 <a class="dropdown-btn">Users</a>
                 <div class="dropdown-container">
-                  <li><a href = "tempAdminShow.php">Admin</a></li>
-                  <li><a href = "tempSignatoryShow.php">Signatory</a></li>
-                  <li><a href = "tempStudentShow.php">Students</a></li>
+                 <a href = "tempAdminShow.php">Admin</a></li>
+                  <a href = "tempSignatoryShow.php">Signatory</a></li>
+                 <a href = "tempStudentShow.php">Students</a></li>
                 </div>
                 <a href="javascript:void(0);" class="icon" onclick="myFunction()">
                 <img src="../images/menu.png" alt="" />
@@ -65,12 +65,10 @@
 
 			
 							<!-- Content -->
-								<div class="content">
+								<div class="content edit-back">
 									<div>
 
-										<header>
-											<h3><strong>Applications of Accepted Students</strong></h3>
-										</header>
+                  <h1>Application of accepted students</h1>
 			                  <?php
                      /* Connect to database */
                      $conn = new mysqli('localhost', 'scholar', '', 'sms');
@@ -83,7 +81,7 @@
                         A.appstatus,A.verifiedBySignatory from application AS A join scholarship AS S ON A.scholarshipID=S.scholarshipID WHERE A.verifiedBySignatory='Approved'";
                      $sql_result = mysqli_query($conn, $to_query);
                      if (mysqli_num_rows($sql_result) > 0) { ?>
-                          <table class="table table-bordered">
+                          <table class="table table-bordered default login">
                             <thead>
                               <tr>
 
@@ -133,14 +131,15 @@
                         </tbody>
                     </table>
                   </div>
+                  	<!-- Footer -->
+                  <div class="footer">
+                        <h3>SCHOLARSHIP MANAGEMENT SYSTEM</h3>
+                        <p>copyright &copy;2022</p>
+                    </div>
 								</div>
 						
 
-			<!-- Footer -->
-      <div class="footer">
-            <h3>SCHOLARSHIP MANAGEMENT SYSTEM</h3>
-            <p>copyright &copy;2022</p>
-         </div>
+		
 
 		</div>
 

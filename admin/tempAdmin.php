@@ -1,6 +1,7 @@
 
-<?php /*Start a session*/
-session_start(); ?>
+ /*Start a session*/<?php
+/*Start a session*/
+?>session_start(); ?>
 <!DOCTYPE html>
 
 <html lang="en">
@@ -49,17 +50,17 @@ session_start(); ?>
                 </div>
                 <a class="dropdown-btn">Scholarships</a>
                 <div class="dropdown-container">
-                  <a href = "tempScholarship.php?scholarship=Pending">Pending Scholarships</a></li>
-                  <a href = "tempScholarship.php?scholarship=Approved">Accepted Scholarships</a></li>
-                  <a href = "tempScholarship.php?scholarship=Rejected">Rejected Scholarships</a></li>
+                  <a href = "tempScholarship.php?scholarship=Pending">Pending Scholarships</a>
+                  <a href = "tempScholarship.php?scholarship=Approved">Accepted Scholarships</a>
+                  <a href = "tempScholarship.php?scholarship=Rejected">Rejected Scholarships</a>
                 </div>
              
                 
                 <a class="dropdown-btn">Users</a>
                 <div class="dropdown-container">
-                  <li><a href = "tempAdminShow.php">Admin</a></li>
-                  <li><a href = "tempSignatoryShow.php">Signatory</a></li>
-                  <li><a href = "tempStudentShow.php">Students</a></li>
+                  <a href = "tempAdminShow.php">Admin</a>
+                  <a href = "tempSignatoryShow.php">Signatory</a>
+                  <a href = "tempStudentShow.php">Students</a>
                 </div>
                 <a href="javascript:void(0);" class="icon" onclick="myFunction()">
                 <img src="../images/menu.png" alt="" />

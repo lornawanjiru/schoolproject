@@ -277,7 +277,7 @@ while ($row = $result->fetch_assoc()) {
                       </div>
                       <div class="footer">
                         <h3>SCHOLARSHIP MANAGEMENT SYSTEM</h3>
-                        <p>copyright &copy;2021</p>
+                        <p>copyright &copy;2022</p>
                     </div>
                 </div>
 

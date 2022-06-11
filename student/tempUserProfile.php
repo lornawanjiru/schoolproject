@@ -1,57 +1,64 @@
 <?php
-  session_start();
-  $_SESSION['selectedAppID'] = 0;
-  $_SESSION['currentUserName'] = NULL;
-  $_SESSION['appList'] = NULL;
+session_start();
+$_SESSION['selectedAppID'] = 0;
+$_SESSION['currentUserName'] = null;
+$_SESSION['appList'] = null;
 
-  //check validity of the user
-  $currentUserID=$_SESSION['currentUserID'];
-  if($currentUserID==NULL){
-    header("Location:../index.php");
-  }
+//check validity of the user
+$currentUserID = $_SESSION['currentUserID'];
+if ($currentUserID == null) {
+    header('Location:../index.php');
+}
 
-  // Connect to database
-  $conn = new mysqli("localhost","scholar", "","sms");
+// Connect to database
+$conn = new mysqli('localhost', 'scholar', '', 'sms');
 
-  // Checks Connection
-    if ($conn->connect_error) {
-      die("Connection failed: " . $conn->connect_error);
+// Checks Connection
+if ($conn->connect_error) {
+    die('Connection failed: ' . $conn->connect_error);
+}
+
+//Getting Name
+$getName =
+    "select S.firstName, S.middleName, S.lastName from student S where S.studentID = '" .
+    $_SESSION['currentUserID'] .
+    "'";
+$nameResult = mysqli_query($conn, $getName);
+while ($rows9 = mysqli_fetch_row($nameResult)) {
+    foreach ($rows9 as $key => $value) {
+        if ($key == 0) {
+            $_SESSION['currentUserName'] = $value;
+        }
+        if ($key == 1) {
+            $_SESSION['currentUserName'] =
+                $_SESSION['currentUserName'] . ' ' . $value;
+        }
+        if ($key == 2) {
+            $_SESSION['currentUserName'] =
+                $_SESSION['currentUserName'] . '. ' . $value;
+        }
     }
+}
 
-    //Getting Name
-    $getName = "select S.firstName, S.middleName, S.lastName from student S where S.studentID = '".$_SESSION['currentUserID']."'";
-    $nameResult = mysqli_query($conn,$getName);
-    while($rows9=mysqli_fetch_row($nameResult)){
-      foreach ($rows9 as $key => $value){
-        if($key == 0){
-          $_SESSION['currentUserName'] = $value;
-        }
-        if($key == 1){
-          $_SESSION['currentUserName'] = $_SESSION['currentUserName'] . " " . $value;
-        }
-        if($key == 2){
-          $_SESSION['currentUserName'] = $_SESSION['currentUserName'] . ". " . $value;
-        }
-      }
-    }
-
-
-  $upMail=$firstName=$lastName=$currentlocation=$gender=$phonenumber=$specialization=$level=$results= NULL;
-  //Get User Details
-  $sql = "SELECT * FROM student WHERE studentID = '".$_SESSION['currentUserID']."'";
-  $result = $conn->query($sql);
-  while($row = $result->fetch_assoc()) {
-    $upMail = $row["upMail"];
-    $firstName = $row["firstName"];
-    $middleName = $row["middleName"];
-    $lastName = $row["lastName"]; 
-    $currentlocation = $row["currentlocation"];
-    $gender = $row["gender"];
-    $phonenumber = $row["phonenumber"];
-    $specialization = $row["specialization"];
-    $level = $row["level"];
-    $results = $row["results"];
-  }
+$upMail = $firstName = $lastName = $currentlocation = $gender = $phonenumber = $specialization = $level = $results = null;
+//Get User Details
+$sql =
+    "SELECT * FROM student WHERE studentID = '" .
+    $_SESSION['currentUserID'] .
+    "'";
+$result = $conn->query($sql);
+while ($row = $result->fetch_assoc()) {
+    $upMail = $row['upMail'];
+    $firstName = $row['firstName'];
+    $middleName = $row['middleName'];
+    $lastName = $row['lastName'];
+    $currentlocation = $row['currentlocation'];
+    $gender = $row['gender'];
+    $phonenumber = $row['phonenumber'];
+    $specialization = $row['specialization'];
+    $level = $row['level'];
+    $results = $row['results'];
+}
 ?>
 
 <!DOCTYPE HTML>
@@ -84,13 +91,21 @@
                     <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/profile-sample3.jpg" alt="profile-sample3" class="profile" />
                   </div>
                   <div>
-                    <h2> Hello, <?php echo $_SESSION['currentUserName']. " (ID:" . $_SESSION['currentUserID'] . ")"?>. </h2>
+                    <h2> Hello, <?php echo $_SESSION['currentUserName'] .
+                        ' (ID:' .
+                        $_SESSION['currentUserID'] .
+                        ')'; ?>. </h2>
                   </div>
               </div>
               
               <div class="">
                      <a href = "../backend/logout.php" class = "button special">Logout</a>
-                      <!-- <a href = "#"><?php echo $_SESSION['currentUserName']. " (ID:" . $_SESSION['currentUserID'] . ")"?></a></div> -->
+                      <!-- <a href = "#"><?php echo $_SESSION[
+                          'currentUserName'
+                      ] .
+                          ' (ID:' .
+                          $_SESSION['currentUserID'] .
+                          ')'; ?></a></div> -->
                       <a href = "tempUserProfile.php">Profile</a>
                       <a href = "tempUserApply.php">Apply</a>
                       <a href = "tempUserView.php">Status</a>
@@ -111,95 +126,127 @@
                       <div id="display" class="login">
                           <form method="post" action="../backend/userdata.php" class="form-horizontal" role="form">
 
-                            <?php if($upMail==NULL || $upMail==""){} else{ ?>
+                            <?php if ($upMail == null || $upMail == '') {
+                            } else {
+                                 ?>
                               <div class="row">
                                 <div class="col-10" for="upMail">Email:</div>
                                 <div class="col-90">
-                                  <input type="text"  class="form-control" value="<?php echo $upMail;?>" disabled>
+                                  <input type="text"  class="form-control" value="<?php echo $upMail; ?>" disabled>
                                 </div>
                               </div>
-                            <?php } ?>
+                            <?php
+                            } ?>
 
                            
 
-                            <?php if($firstName ==NULL || $firstName ==""){} else{ ?>
+                            <?php if ($firstName == null || $firstName == '') {
+                            } else {
+                                 ?>
                             <div class="row">
                               <label class="col-10" for="firstName">First Name:</label>
                               <div class="col-90">
-                                <input type="text"  class="form-control" value="<?php echo $firstName?>" disabled>
+                                <input type="text"  class="form-control" value="<?php echo $firstName; ?>" disabled>
                               </div>
                             </div>
-                            <?php } ?>
+                            <?php
+                            } ?>
 
-                            <?php if($middleName ==NULL || $middleName==""){} else{ ?>
+                            <?php if (
+                                $middleName == null ||
+                                $middleName == ''
+                            ) {
+                            } else {
+                                 ?>
                             <div class="row">
                               <label class="col-10" for="middleName">Middle Name:</label>
                               <div class="col-90">
-                                <input type="text"  class="form-control" value="<?php echo $middleName?>" disabled>
+                                <input type="text"  class="form-control" value="<?php echo $middleName; ?>" disabled>
                               </div>
                             </div>
-                            <?php } ?>
-                            <?php if($lastName==NULL || $lastName==""){} else{ ?>
+                            <?php
+                            } ?>
+                            <?php if ($lastName == null || $lastName == '') {
+                            } else {
+                                 ?>
                               <div class="row">
                                 <label class="col-10" for="lastName">Last Name:</label>
                                 <div class="col-90">
-                                  <input type="text"  class="form-control" value="<?php echo $lastName;?>" disabled>
+                                  <input type="text"  class="form-control" value="<?php echo $lastName; ?>" disabled>
                                 </div>
                               </div>
-                            <?php } ?>
-                            <?php if($currentlocation==NULL || $currentlocation==""){} else{ ?>
+                            <?php
+                            } ?>
+                            <?php if (
+                                $currentlocation == null ||
+                                $currentlocation == ''
+                            ) {
+                            } else {
+                                 ?>
                             <div class="row">
                               <label class="col-10" for="currentlocation">Current Location:</label>
                               <div class="col-90">
-                                <input type="text"  class="form-control" value="<?php echo $currentlocation?>" disabled>
+                                <input type="text"  class="form-control" value="<?php echo $currentlocation; ?>" disabled>
                               </div>
                             </div>
-                            <?php } ?>
+                            <?php
+                            } ?>
 
-                            <?php if($gender==NULL || $gender==""){} else{ ?>
+                            <?php if ($gender == null || $gender == '') {
+                            } else {
+                                 ?>
                             <div class="row">
                               <label class="col-10" for="gender">Gender:</label>
                               <div class="col-90">
-                                <input type="text"  class="form-control" value="<?php echo $gender?>" disabled>
+                                <input type="text"  class="form-control" value="<?php echo $gender; ?>" disabled>
                               </div>
                             </div>
-                            <?php } ?>
+                            <?php
+                            } ?>
 
-                            <?php if($phonenumber==NULL || $phonenumber==""){} else{ ?>
+                            <?php if (
+                                $phonenumber == null ||
+                                $phonenumber == ''
+                            ) {
+                            } else {
+                                 ?>
                             <div class="row">
                               <label class="col-10" for="phonenumber">Phonenumber</label>:</label>
                               <div class="col-90">
-                                <input type="text"  class="form-control" value="<?php echo $phonenumber?>" disabled>
+                                <input type="text"  class="form-control" value="<?php echo $phonenumber; ?>" disabled>
                               </div>
                             </div>
-                            <?php } ?>
+                            <?php
+                            } ?>
 
-                            <?php if($specialization==NULL || $specialization==""){} else{ ?>
+                            <?php if (
+                                $specialization == null ||
+                                $specialization == ''
+                            ) {
+                            } else {
+                                 ?>
                             <div class="row">
                               <label class="col-10" for="specialization">Specialization:</label>
                               <div class="col-90">
-                                <input type="text"  class="form-control" value="<?php echo $specialization?>" disabled>
+                                <input type="text"  class="form-control" value="<?php echo $specialization; ?>" disabled>
                               </div>
                             </div>
-                            <?php } ?>
+                            <?php
+                            } ?>
 
-                            <?php if($level==NULL || $level==""){} else{ ?>
+                            <?php if ($level == null || $level == '') {
+                            } else {
+                                 ?>
                             <div class="form-group">
                               <label class="col-10" for="level">Level:</label>
                               <div class="col-90">
-                                <input type="text"  class="form-control" value="<?php echo $level?>" disabled>
+                                <input type="text"  class="form-control" value="<?php echo $level; ?>" disabled>
                               </div>
                             </div>
-                            <?php } ?>
+                            <?php
+                            } ?>
 
-                            <?php if($results==NULL || $results==""){} else{ ?>
-                            <div class="row">
-                              <label class="col-10" for="results">Results:</label>
-                              <div class="col-sm-10">
-                                <input type="text" class="form-control" value="<?php echo $results?>" disabled>
-                              </div>
-                            </div>
-                            <?php } ?>
+                            
                             <button id="showDivButton" type="button" class="btn btn-primary">Edit User Profile</button>
                           </form>
                           
@@ -210,63 +257,58 @@
                              <div class="row">
                                 <div class="col-10" for="upMail">Email:</div>
                                 <div class="col-90">
-                                  <input type="text"  class="form-control" value="<?php echo $upMail;?>" disabled>
+                                  <input type="text"  class="form-control" value="<?php echo $upMail; ?>" disabled>
                                 </div>
                               </div>
                               <div class="row">
                                 <label class="col-10" for="lastName">Last Name:</label>
                                 <div class="col-90">
-                                  <input type="text" name="lastName" class="form-control" value="<?php echo $lastName;?>">
+                                  <input type="text" name="lastName" class="form-control" value="<?php echo $lastName; ?>">
                                 </div>
                               </div>
                               <div class="row">
                               <label class="col-10" for="firstName">First Name:</label>
                               <div class="col-90">
-                                <input type="text" name="firstName" class="form-control" value="<?php echo $firstName?>" >
+                                <input type="text" name="firstName" class="form-control" value="<?php echo $firstName; ?>" >
                               </div>
                             </div>
                             <div class="row">
                               <label class="col-10" for="middleName">Middle Name:</label>
                               <div class="col-90">
-                                <input type="text" name="middleName" class="form-control" value="<?php echo $middleName?>">
+                                <input type="text" name="middleName" class="form-control" value="<?php echo $middleName; ?>">
                               </div>
                             </div>
                             <div class="row">
                               <label class="col-10" for="currentlocation">Current Location:</label>
                               <div class="col-90">
-                                <input type="text" name="currentlocation" class="form-control" value="<?php echo $currentlocation?>" >
+                                <input type="text" name="currentlocation" class="form-control" value="<?php echo $currentlocation; ?>" >
                               </div>
                             </div>
                             <div class="form-group">
                               <label class="col-10" for="gender">Gender:</label>
                               <div class="col-sm-10">
-                                <input type="text" name="gender" class="form-control" name="gender" value="<?php echo $gender?>">
+                                <input type="text" name="gender" class="form-control" name="gender" value="<?php echo $gender; ?>">
                               </div>
                             </div>
                             <div class="row">
                               <label class="col-10" for="phonenumber">Phonenumber</label>:</label>
                               <div class="col-90">
-                                <input type="text" name="phonenumber" class="form-control" value="<?php echo $phonenumber?>">
+                                <input type="text" name="phonenumber" class="form-control" value="<?php echo $phonenumber; ?>">
                               </div>
                             </div>
                             <div class="row">
                               <label class="col-10" for="specialization">Specialization:</label>
                               <div class="col-90">
-                                <input type="text" name="specialization" class="form-control" value="<?php echo $specialization?>">
+                                <input type="text" name="specialization" class="form-control" value="<?php echo $specialization; ?>">
                               </div>
                             </div>
                             <div class="form-group">
                               <label class="col-10" for="level">Level:</label>
                               <div class="col-90">
-                                <input type="text"  name="level" class="form-control" value="<?php echo $level?>">
+                                <input type="text"  name="level" class="form-control" value="<?php echo $level; ?>">
                               </div>
                             </div>
-                            <div class="row">
-                              <label class="col-10" for="results">Results:</label>
-                              <div class="col-sm-10">
-                                <input type="text" name="results"class="form-control" value="<?php echo $results?>">
-                              </div>
-                            </div>
+                            
                           
 
                             <div class="form-group">

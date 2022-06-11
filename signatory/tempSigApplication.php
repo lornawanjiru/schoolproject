@@ -116,7 +116,7 @@ foreach ($rows9 as $key => $value)
 
 
 			<!-- Main -->
-			<div class = "content">					
+			<div class = "content contain">					
                     <div class="login">
                             <?php
                             try{

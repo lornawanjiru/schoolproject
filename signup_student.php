@@ -77,7 +77,7 @@ require 'vendor/autoload.php';
                             $mail = new PHPMailer();
                             $mail->isSMTP(); // Set mailer to use SMTP
                             $mail->Host = 'smtp.gmail.com'; // Specify main and backup SMTP servers
-                            /// $mail->SMTPDebug = 3;                 //For debugging
+                            // $mail->SMTPDebug = 3; //For debugging
                             $mail->SMTPAuth = true; // Enable SMTP authentication
                             $mail->Username = $emailfrom; // SMTP username
                             $mail->Password = $passfrom; // SMTP password
@@ -135,7 +135,7 @@ require 'vendor/autoload.php';
         <div class="login ">
           <form action="<?php echo htmlspecialchars(
               $_SERVER['PHP_SELF']
-          ); ?>" onsubmit="return validateControls()" method="POST" name="login" >
+          ); ?>" onsubmit="return validateControls()"  method="POST" name="login" >
           <div class="form-container">
             <div class="card-info">
                 <div class="landingimg">
@@ -235,23 +235,7 @@ require 'vendor/autoload.php';
                       <div class="col-90">
                         <input type="text" id="level" name="level" placeholder="Please enter your academic level">
                       </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-10">
-                          <label for="results">Transcript Result(A,B/ GPA) *</label>
-                      </div>
-                      <div class="col-90">
-                        <input type="text" id="results" name="results" placeholder="Please enter your Results">
-                      </div>
-                    </div>
-                    <div class="row">
-                              <div class="col-10">
-                                  <label for="photo">Upload your photo</label>
-                              </div>
-                              <div class="col-90">
-                                  <input type="text" id="photo" name="photo" placeholder="Enter your profile photo">
-                              </div>
-                    </div>   
+                </div>
                
             <input type = "submit" id="submit" class = "btn">
 

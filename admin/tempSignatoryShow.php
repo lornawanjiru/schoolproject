@@ -51,9 +51,9 @@
                 
                 <a class="dropdown-btn">Users</a>
                 <div class="dropdown-container">
-                  <li><a href = "tempAdminShow.php">Admin</a></li>
-                  <li><a href = "tempSignatoryShow.php">Signatory</a></li>
-                  <li><a href = "tempStudentShow.php">Students</a></li>
+                  <a href = "tempAdminShow.php">Admin</a>
+                  <a href = "tempSignatoryShow.php">Signatory</a>
+                  <a href = "tempStudentShow.php">Students</a>
                 </div>
                 <a href="javascript:void(0);" class="icon" onclick="myFunction()">
                 <img src="../images/menu.png" alt="" />
@@ -62,11 +62,10 @@
             </div>
           </div>
           </div>
-
 		
-								<div class="content admin">
+								<div class="content admin edit-back">
 									<section>
-                    <h1 style="text-align:center; font-size:25px">Signatory Details</h1>
+                    <h1 >Signatory Details</h1>
                     <?php
                     $conn = new mysqli('localhost', 'scholar', '', 'sms');
                     if ($conn->connect_error) {
@@ -75,7 +74,7 @@
                     $sql = 'SELECT * FROM signatory';
                     $result = $conn->query($sql);
                     if ($result->num_rows > 0) { ?>
-                        <table class="table table-bordered">
+                        <table class="table table-bordered default login">
                           <thead>
                               <tr>
                                   <th style="width:10%">Signatory ID</th>
@@ -172,13 +171,7 @@
         }
       }
     </script>
-      <script src="../js/jquery.min.js"></script>
-      <script src="../js/jquery.dropotron.min.js"></script>
-      <script src="../js/jquery.scrolly.min.js"></script>
-      <script src="../js/jquery.scrollgress.min.js"></script>
-      <script src="../js/skel.min.js"></script>
-      <script src="../js/util.js"></script>
-      <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
-      <script src="../js/main.js"></script>
+      
+      <script src="../js/script.js"></script>
 	</body>
 </html>

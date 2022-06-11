@@ -70,9 +70,9 @@
                 
                 <a class="dropdown-btn">Users</a>
                 <div class="dropdown-container">
-                  <li><a href = "tempAdminShow.php">Admin</a></li>
-                  <li><a href = "tempSignatoryShow.php">Signatory</a></li>
-                  <li><a href = "tempStudentShow.php">Students</a></li>
+                   <a href = "tempAdminShow.php">Admin</a>
+                  <a href = "tempSignatoryShow.php">Signatory</a>
+                  <a href = "tempStudentShow.php">Students</a>
                 </div>
                 <a href="javascript:void(0);" class="icon" onclick="myFunction()">
                 <img src="../images/menu.png" alt="" />
@@ -84,19 +84,19 @@
 
 
 			
-					<div class="content">
+					<div class="content edit-back">
 
 									<?php if($scholarship == "All") {   /*For all scholarships*/?>
 									<section>
-										<header>
-											<h3 style="padding-left: 33%;font-size:30px"><?php echo $scholarship; ?> Scholarships  </h3><br>
-										</header>
+										
+											<h1><?php echo $scholarship; ?> Scholarships  </h1><br>
+										
               				<?php
 				                  $sql = "SELECT scholarshipID, sigID, schname, appDeadline, description, adminapproval, schstatus FROM scholarship ORDER BY `appDeadline` ASC "; //need to be ordered according to uploaded date.
 													$result = $conn->query($sql);
 													if ($result->num_rows > 0) {
 				                                ?>
-				                            <table class = "table table-bordered">
+				                            <table class = "table table-bordered default login">
 				                              <thead>
 				                                <tr>
 				                                  <th class = "col-md-1" style="width: 5%"><strong>SchID</strong></th>
@@ -186,7 +186,7 @@
 													$result = $conn->query($sql);
 													if ($result->num_rows > 0) {
 				                                ?>
-                                        <table class = "table table-bordered">
+                                        <table class = "table table-bordered default login">
     				                              <thead>
     				                                <tr>
     				                                  <th class = "col-md-1" style="width: 5%"><strong>SchID</strong></th>

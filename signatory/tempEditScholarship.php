@@ -144,8 +144,9 @@ while ($rows9 = mysqli_fetch_row($nameResult)) {
                           
                           $educationlevel = $row['educationlevel'];
                           $gender = $row['gender'];
-                          $careerfield = $row['careerfield'];
+                          
                           $scholarshipp = $row['sch'];
+                          $careerfield = $row['careerfield'];
                           $appdeadline = $row['appDeadline'];
                           $granteesNum = $row['granteesNum'];
                           $funding = $row['funding'];
@@ -165,14 +166,12 @@ while ($rows9 = mysqli_fetch_row($nameResult)) {
           } ?>
 
 					
-		<div class="content">
+		<div class="content edit-back">
 		
 
-				<header>
-					<h2 style="padding-left: 33%;"><strong><u>Edit your Scholarship</u></strong></h2>
-				</header>
+            <h1><b >Edit Your Scholarship</b></h1>
 
-				<form method = "post" name = "scholarshiplist" id = "scholarshiplist" action = "../backend/adminAddDelSch.php" enctype="multipart/form-data">
+				<form method = "post" name = "scholarshiplist" id = "scholarshiplist" action = "../backend/adminAddDelSch.php" class="login" enctype="multipart/form-data">
 			<label style="padding-left : 40%"><strong>Scholarship ID : <?php echo $schID; ?></strong></label><br><br><br>
 					<label><strong>Scholarship Name</strong></label><br>
 					<label style="font-size: 15px;">This will be displayed and used for searching your scholarship</label>
@@ -297,40 +296,40 @@ while ($rows9 = mysqli_fetch_row($nameResult)) {
                             echo 'selected';
                         } ?>>Select</option>
 						<option value="agriculture" <?php if ($careerfield === 'agriculture') {
-                                echo 'agriculture';
+                                echo 'selected';
                             } ?>>Agriculture</option>
                           <option value="arts" <?php if ($careerfield === 'arts') {
-                                echo 'arts';
+                                echo 'selected';
                             } ?>>Arts</option>
                                                 <option value="biologicalsciences" <?php if ($careerfield === 'biologicalsciences') {
-                                echo 'biologicalsciences';
+                                echo 'selected';
                             } ?>>Biological Sciences</option>
                                                 <option value="administration" <?php if ($careerfield === 'administration') {
-                                echo 'administration';
+                                echo 'selected';
                             } ?>>Administration</option>
                                                 <option value="dentistry" <?php if ($careerfield === 'dentistry') {
-                                echo 'dentistry';
+                                echo 'selected';
                             } ?>>Dentistry</option>
                                                 <option value="education" <?php if ($careerfield === 'education') {
-                                echo 'education';
+                                echo 'selected';
                             } ?>>Education</option>
                                                 <option value="engineering" <?php if ($careerfield === 'engineering') {
-                                echo 'engineering';
+                                echo 'selected';
                             } ?>>Engineering</option>
                                                 <option value="environmentscience" <?php if ($careerfield === 'environmentscience') {
-                                echo 'environmentscience';
+                                echo 'selected';
                             } ?>>Environement Science</option>
                                                 <option value="law" <?php if ($careerfield === 'law') {
-                                echo 'law';
+                                echo 'selected';
                             } ?>>Law</option>
                                                 <option value="medicalscience" <?php if ($careerfield === 'medicalscience') {
-                                echo 'medicalscience';
+                                echo 'selected';
                             } ?>>Medical Science</option>
                                                 <option value="veterinary" <?php if ($careerfield === 'veterinary') {
-                                echo 'veterinary';
+                                echo 'selected';
                             } ?>>Veterinary</option>
                                                 <option value="socialscience" <?php if ($careerfield === 'socialscience') {
-                                echo 'socialscience';
+                                echo 'selected';
                             } ?>>Social Science</option>
 						</select>
 					<br><br><br>
@@ -400,8 +399,12 @@ while ($rows9 = mysqli_fetch_row($nameResult)) {
 						<input type = "submit" value = "Back">
 					</form>
 				</div>
+                <div class="footer">
+                    <h3>SCHOLARSHIP MANAGEMENT SYSTEM</h3>
+                    <p>copyright &copy;2022</p>
+                </div>
 			</div>
-
+        
 		
 		</div>
 

@@ -1,42 +1,47 @@
 <?php
-  session_start();
-  $_SESSION['selectedAppID'] = 0;
+session_start();
+$_SESSION['selectedAppID'] = 0;
 
-  $_SESSION['appList'] = NULL;
+$_SESSION['appList'] = null;
 
-  //check validity of the user
-  $currentUserID=$_SESSION['currentUserID'];
-  if($currentUserID==NULL){
-    header("Location:../index.php");
-  }
+//check validity of the user
+$currentUserID = $_SESSION['currentUserID'];
+if ($currentUserID == null) {
+    header('Location:../index.php');
+}
 
-  // Connect to database
-  $conn = new mysqli("localhost","scholar", "","sms");
+// Connect to database
+$conn = new mysqli('localhost', 'scholar', '', 'sms');
 
-  // Checks Connection
-    if ($conn->connect_error) {
-      die("Connection failed: " . $conn->connect_error);
+// Checks Connection
+if ($conn->connect_error) {
+    die('Connection failed: ' . $conn->connect_error);
+}
+
+$getName =
+    "select S.firstName, S.middleName, S.lastName from student S where S.studentID = '" .
+    $_SESSION['currentUserID'] .
+    "'";
+
+$nameResult = mysqli_query($conn, $getName);
+
+// Get every row of the table formed from the query
+while ($rows9 = mysqli_fetch_row($nameResult)) {
+    foreach ($rows9 as $key => $value) {
+        if ($key == 0) {
+            $_SESSION['currentUserName'] = $value;
+        }
+        if ($key == 1) {
+            $_SESSION['currentUserName'] =
+                $_SESSION['currentUserName'] . ' ' . $value;
+        }
+        if ($key == 2) {
+            $_SESSION['currentUserName'] =
+                $_SESSION['currentUserName'] . '. ' . $value;
+        }
     }
-
-  $getName = "select S.firstName, S.middleName, S.lastName from student S where S.studentID = '".$_SESSION['currentUserID']."'";
-
-  $nameResult = mysqli_query($conn,$getName);
-
-  // Get every row of the table formed from the query
-    while($rows9=mysqli_fetch_row($nameResult)){
-      foreach ($rows9 as $key => $value){
-	 	    if($key == 0){
-          $_SESSION['currentUserName'] = $value;
-		    }
-    		if($key == 1){
-    			$_SESSION['currentUserName'] = $_SESSION['currentUserName'] . " " . $value;
-    		}
-        if($key == 2){
-          $_SESSION['currentUserName'] = $_SESSION['currentUserName'] . ". " . $value;
-  		  }
-	    }
-    }
-    $conn->close();
+}
+$conn->close();
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -69,13 +74,21 @@
                     <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/profile-sample3.jpg" alt="profile-sample3" class="profile" />
                   </div>
                   <div>
-                    <h2> Hello, <?php echo $_SESSION['currentUserName']. " (ID:" . $_SESSION['currentUserID'] . ")"?>. </h2>
+                    <h2> Hello, <?php echo $_SESSION['currentUserName'] .
+                        ' (ID:' .
+                        $_SESSION['currentUserID'] .
+                        ')'; ?>. </h2>
                   </div>
               </div>
               
               <div class="">
                      <a href = "../backend/logout.php" class = "button special">Logout</a>
-                      <!-- <a href = "#"><?php echo $_SESSION['currentUserName']. " (ID:" . $_SESSION['currentUserID'] . ")"?></a></div> -->
+                      <!-- <a href = "#"><?php echo $_SESSION[
+                          'currentUserName'
+                      ] .
+                          ' (ID:' .
+                          $_SESSION['currentUserID'] .
+                          ')'; ?></a></div> -->
                       <a href = "tempUserProfile.php">Profile</a>
                       <a href = "tempUserApply.php">Apply</a>
                       <a href = "tempUserView.php">Status</a>
@@ -95,12 +108,14 @@
 
           <!-- One -->
           <?php
-            $conn = new mysqli("localhost","scholar","","sms");
-            $schid=$_GET['sch'];
-            $sigID = NULL;
-            $xml=simplexml_load_file("../backend/scholarship_data.xml") or die("Error: Cannot create object");
-            foreach($xml->children() as $sch){
-                if($sch['scholarshipID'] == $schid){
+          $conn = new mysqli('localhost', 'scholar', '', 'sms');
+          $schid = $_GET['sch'];
+          $sigID = null;
+          ($xml = simplexml_load_file('../backend/scholarship_data.xml')) or
+              die('Error: Cannot create object');
+          foreach ($xml->children() as $sch) {
+              if ($sch['scholarshipID'] == $schid) {
+
                   $sigID = $sch->sigID;
                   $schname = $sch->schname;
                   $schlocation = $sch->schlocation;
@@ -118,58 +133,50 @@
                   $apply = $sch->apply;
                   $links = $sch->links;
                   $contact = $sch->contact;
-
-          ?>
+                  ?>
            
 
               <!-- Content -->
-                <div class="content">
-                  <section style="text-align: justify;">
-                    <h1><b>What is <?php echo $schname; ?> ?</b></h1>
+                <div class="content edit-back">
+                <h1><b >Scholarship Details</b></h1>
+                  <div class="login">
+                  <div style="text-align: justify;">
+                    <h2><b>What is <?php echo $schname; ?> ?</b></h2>
                     <p><?php echo $description; ?></p>
-                  </section>
+                  </div>
                   <br><hr><br>
-                  <section>
-                    <h1><b>Who can apply for the scholarship?</b></h1>
+                  <div>
+                    <h2><b>Who can apply for the scholarship?</b></h2>
                     <p><?php echo $eligibility; ?></p>
-                  </section>
+                  </div>
                   <br><hr><br>
-                  <section>
-                    <h1><b>What are the benifits?</b></h1>
+                  <div>
+                    <h2><b>What are the benifits?</b></h2>
                     <p><?php echo $benefits; ?></p>
-                  </section>
+                  </div>
                   <br><hr><br>
-                  <section>
-                    <h1><b>How can you apply?</b></h1>
+                  <div>
+                    <h2><b>How can you apply?</b></h2>
                     <p><?php echo $apply; ?></p>
-                  </section>
+                  </div>
                   <br><hr><br>
-                  <section>
-                    <h1><b>What are the documents required?</b></h1>
-                    <p><?php //echo $row["documents"]; ?></p>
-                  </section>
-                  <br><hr><br>
-                  <section>
-                    <h1><b>What are the selection criteria?</b></h1>
-                    <p><?php //echo $row["selection"]; ?></p>
-                  </section>
-                  <br><hr><br>
-                  <section>
-                    <h1><b>Important Links</b></h1>
+                  <div>
+                    <h2><b>Important Links</b></h2>
                     <p><?php echo $links; ?></p>
-                  </section>
+                  </div>
                   <br><hr><br>
-                  <section>
-                    <h1><b>Contact Details</b></h1>
-                    <p><?php echo $contact;  ?></p>
-                  </section>
+                  <div>
+                    <h2><b>Contact Details</b></h2>
+                    <p><?php echo $contact; ?></p>
+                  </div>
                   <br><hr><br>
+                 
                   <form action="apply.php" method="post">
-                      <?php $_SESSION['schid']=$schid; ?>
-                      <input type="disabled" name="sigID" value = "<?php echo $sigID;?>">
+                      <?php $_SESSION['schid'] = $schid; ?>
+                      <input type="disabled" name="sigID" value = "<?php echo $sigID; ?>">
                       <input type="submit" name="apply" value="Apply >>">
                   </form>
-                  
+                  </div>
                    <!-- Footer -->
                   <div class="footer">
                       <h3>SCHOLARSHIP MANAGEMENT SYSTEM</h3>
@@ -177,7 +184,11 @@
                   </div>
                 </div>
 
-                <?php } }  $conn->close(); ?>
+                <?php
+              }
+          }
+          $conn->close();
+          ?>
        
    
 

@@ -240,19 +240,18 @@
                                 /* start5 */
                                 if ($genderflag == 1) {
                                     /* start4 */
-
                                     if ($ethnicflag == 1) {
                                         /* start3 */
                                         if ($scholarshipflag == 1) {
                                             /* start2 */
                                             if ($careerfieldflag == 1) {
-                                                $to_query = "SELECT * FROM scholarship WHERE degree LIKE '$educationlevel' AND gender LIKE '$gender' AND ethnic LIKE '$ethnic' AND sch LIKE '$scholarship' AND career LIKE '$careerfield' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
+                                                $to_query = "SELECT * FROM scholarship WHERE degree LIKE '$educationlevel' AND gender LIKE '$gender' AND ethnic LIKE '$ethnic' AND sch LIKE '$scholarship' AND careerfield LIKE '$careerfieldfield' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
                                             } else {
                                                 $to_query = "SELECT * FROM scholarship WHERE degree LIKE '$educationlevel' AND gender LIKE '$gender' AND ethnic LIKE '$ethnic' AND sch LIKE '$scholarship' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
                                             } /* end1 */
                                         } else {
                                             if ($careerfieldflag == 1) {
-                                                $to_query = "SELECT * FROM scholarship WHERE degree LIKE '$educationlevel' AND gender LIKE '$gender' AND ethnic LIKE '$ethnic' AND career LIKE '$careerfield' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
+                                                $to_query = "SELECT * FROM scholarship WHERE degree LIKE '$educationlevel' AND gender LIKE '$gender' AND ethnic LIKE '$ethnic' AND careerfield LIKE '$careerfield' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
                                             } else {
                                                 $to_query = "SELECT * FROM scholarship WHERE degree LIKE '$educationlevel' AND gender LIKE '$gender' AND ethnic LIKE '$ethnic' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
                                             }
@@ -260,13 +259,13 @@
                                     } else {
                                         if ($scholarshipflag == 1) {
                                             if ($careerfieldflag == 1) {
-                                                $to_query = "SELECT * FROM scholarship WHERE degree LIKE '$educationlevel' AND gender LIKE '$gender' AND career LIKE '$careerfield' AND sch LIKE '$scholarship' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
+                                                $to_query = "SELECT * FROM scholarship WHERE degree LIKE '$educationlevel' AND gender LIKE '$gender' AND careerfield LIKE '$careerfield' AND sch LIKE '$scholarship' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
                                             } else {
                                                 $to_query = "SELECT * FROM scholarship WHERE degree LIKE '$educationlevel' AND gender LIKE '$gender' AND sch LIKE '$scholarship' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
                                             } /* end1 */
                                         } else {
                                             if ($careerfieldflag == 1) {
-                                                $to_query = "SELECT * FROM scholarship WHERE degree LIKE '$educationlevel' AND gender LIKE '$gender' AND career LIKE '$careerfield' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
+                                                $to_query = "SELECT * FROM scholarship WHERE degree LIKE '$educationlevel' AND gender LIKE '$gender' AND careerfield LIKE '$careerfield' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
                                             } else {
                                                 $to_query = "SELECT * FROM scholarship WHERE degree LIKE '$educationlevel' AND gender LIKE '$gender' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
                                             }
@@ -276,13 +275,13 @@
                                     if ($ethnicflag == 1) {
                                         if ($scholarshipflag == 1) {
                                             if ($careerfieldflag == 1) {
-                                                $to_query = "SELECT * FROM scholarship WHERE degree LIKE '$educationlevel' AND ethnic LIKE '$ethnic' AND sch LIKE '$scholarship' AND career LIKE '$careerfield' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
+                                                $to_query = "SELECT * FROM scholarship WHERE degree LIKE '$educationlevel' AND ethnic LIKE '$ethnic' AND sch LIKE '$scholarship' AND careerfield LIKE '$careerfield' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
                                             } else {
                                                 $to_query = "SELECT * FROM scholarship WHERE degree LIKE '$educationlevel' AND ethnic LIKE '$ethnic' AND sch LIKE '$scholarship'' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
                                             }
                                         } else {
                                             if ($careerfieldflag == 1) {
-                                                $to_query = "SELECT * FROM scholarship WHERE degree LIKE '$educationlevel' AND ethnic LIKE '$ethnic'  AND career LIKE '$careerfield' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
+                                                $to_query = "SELECT * FROM scholarship WHERE degree LIKE '$educationlevel' AND ethnic LIKE '$ethnic'  AND careerfield LIKE '$careerfield' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
                                             } else {
                                                 $to_query = "SELECT * FROM scholarship WHERE degree LIKE '$educationlevel' AND ethnic LIKE '$ethnic' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
                                             }
@@ -290,13 +289,13 @@
                                     } else {
                                         if ($scholarshipflag == 1) {
                                             if ($careerfieldflag == 1) {
-                                                $to_query = "SELECT * FROM scholarship WHERE degree LIKE '$educationlevel' AND sch LIKE '$scholarship' AND career LIKE '$careerfield' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
+                                                $to_query = "SELECT * FROM scholarship WHERE degree LIKE '$educationlevel' AND sch LIKE '$scholarship' AND careerfield LIKE '$careerfield' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
                                             } else {
                                                 $to_query = "SELECT * FROM scholarship WHERE degree LIKE '$educationlevel' AND sch LIKE '$scholarship' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
                                             }
                                         } else {
                                             if ($careerfieldflag == 1) {
-                                                $to_query = "SELECT * FROM scholarship WHERE degree LIKE '$educationlevel'  AND career LIKE '$careerfield' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
+                                                $to_query = "SELECT * FROM scholarship WHERE degree LIKE '$educationlevel'  AND careerfield LIKE '$careerfield' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
                                             } else {
                                                 $to_query = "SELECT * FROM scholarship WHERE degree LIKE '$educationlevel' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
                                             }
@@ -308,13 +307,13 @@
                                     if ($ethnicflag == 1) {
                                         if ($scholarshipflag == 1) {
                                             if ($careerfieldflag == 1) {
-                                                $to_query = "SELECT * FROM scholarship WHERE gender LIKE '$gender' AND ethnic LIKE '$ethnic' AND sch LIKE '$scholarship' AND career LIKE '$careerfield' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
+                                                $to_query = "SELECT * FROM scholarship WHERE gender LIKE '$gender' AND ethnic LIKE '$ethnic' AND sch LIKE '$scholarship' AND careerfield LIKE '$careerfield' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
                                             } else {
                                                 $to_query = "SELECT * FROM scholarship WHERE gender LIKE '$gender' AND ethnic LIKE '$ethnic' AND sch LIKE '$scholarship'' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
                                             }
                                         } else {
                                             if ($careerfieldflag == 1) {
-                                                $to_query = "SELECT * FROM scholarship WHERE gender LIKE '$gender' AND ethnic LIKE '$ethnic'  AND career LIKE '$careerfield' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
+                                                $to_query = "SELECT * FROM scholarship WHERE gender LIKE '$gender' AND ethnic LIKE '$ethnic'  AND careerfield LIKE '$careerfield' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
                                             } else {
                                                 $to_query = "SELECT * FROM scholarship WHERE gender LIKE '$gender' AND ethnic LIKE '$ethnic' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
                                             }
@@ -322,13 +321,13 @@
                                     } else {
                                         if ($scholarshipflag == 1) {
                                             if ($careerfieldflag == 1) {
-                                                $to_query = "SELECT * FROM scholarship WHERE gender LIKE '$gender' AND sch LIKE '$scholarship' AND career LIKE '$careerfield' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
+                                                $to_query = "SELECT * FROM scholarship WHERE gender LIKE '$gender' AND sch LIKE '$scholarship' AND careerfield LIKE '$careerfield' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
                                             } else {
                                                 $to_query = "SELECT * FROM scholarship WHERE gender LIKE '$gender' AND sch LIKE '$scholarship' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
                                             }
                                         } else {
                                             if ($careerfieldflag == 1) {
-                                                $to_query = "SELECT * FROM scholarship WHERE gender LIKE '$gender'  AND career LIKE '$careerfield' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
+                                                $to_query = "SELECT * FROM scholarship WHERE gender LIKE '$gender'  AND careerfield LIKE '$careerfield' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
                                             } else {
                                                 $to_query = "SELECT * FROM scholarship WHERE gender LIKE '$gender' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
                                             }
@@ -338,13 +337,13 @@
                                     if ($ethnicflag == 1) {
                                         if ($scholarshipflag == 1) {
                                             if ($careerfieldflag == 1) {
-                                                $to_query = "SELECT * FROM scholarship WHERE  ethnic LIKE '$ethnic' AND sch LIKE '$scholarship' AND career LIKE '$careerfield' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
+                                                $to_query = "SELECT * FROM scholarship WHERE  ethnic LIKE '$ethnic' AND sch LIKE '$scholarship' AND careerfield LIKE '$careerfield' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
                                             } else {
                                                 $to_query = "SELECT * FROM scholarship WHERE  ethnic LIKE '$ethnic' AND sch LIKE '$scholarship'' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
                                             }
                                         } else {
                                             if ($careerfieldflag == 1) {
-                                                $to_query = "SELECT * FROM scholarship WHERE  ethnic LIKE '$ethnic'  AND career LIKE '$careerfield' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
+                                                $to_query = "SELECT * FROM scholarship WHERE  ethnic LIKE '$ethnic'  AND careerfield LIKE '$careerfield' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
                                             } else {
                                                 $to_query = "SELECT * FROM scholarship WHERE  ethnic LIKE '$ethnic' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
                                             }
@@ -352,13 +351,13 @@
                                     } else {
                                         if ($scholarshipflag == 1) {
                                             if ($careerfieldflag == 1) {
-                                                $to_query = "SELECT * FROM scholarship WHERE  sch LIKE '$scholarship' AND career LIKE '$careerfield' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
+                                                $to_query = "SELECT * FROM scholarship WHERE  sch LIKE '$scholarship' AND careerfield LIKE '$careerfield' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
                                             } else {
                                                 $to_query = "SELECT * FROM scholarship WHERE  sch LIKE '$scholarship' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
                                             }
                                         } else {
                                             if ($careerfieldflag == 1) {
-                                                $to_query = "SELECT * FROM scholarship WHERE  career LIKE '$careerfield' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
+                                                $to_query = "SELECT * FROM scholarship WHERE  careerfield LIKE '$careerfield' AND adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
                                             } else {
                                                 $to_query = "SELECT * FROM scholarship WHERE  adminapproval LIKE 'Approved' AND appDeadline >= '$date1'";
                                             }

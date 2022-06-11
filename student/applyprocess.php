@@ -79,7 +79,7 @@ $conn->close();
       <!-- Header -->
       <div class = "nav">
             <div class="topnav" id="myTopnav">
-              <div class="header"><a >Scholarship Application System</a> </div>
+              <div><a>Scholarship Application System</a> </div>
               <div class="banner desktop-view">
                   <div>
                     <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/profile-sample3.jpg" alt="profile-sample3" class="profile" />
@@ -91,39 +91,32 @@ $conn->close();
                         ')'; ?>. </h2>
                   </div>
               </div>
-              <div class="">
-              <a href = "../backend/logout.php" class = "button special">Logout</a>
               
-              <a href = "tempSigProfile.php">Profile</a>
-              <a class="dropdown-btn"> Scholarship
-              </a>
-              <div class="dropdown-container">
-                <a href = "tempSigScholarship.php">My Scholarships</a>
-                <a href = "tempAddScholarship.php">Add Scholarships</a> 
-              </div>        
-              <a class="dropdown-btn"> Status
-              </a>
-              <div class="dropdown-container">
-                <a href = "tempSigApplication.php?app=Pending">Pending applications</a>
-                <a href = "tempSigApplication.php?app=Approved">Accepted Applicaitons</a>
-                <a href = "tempSigApplication.php?app=Rejected">Rejected Applicaitons</a> 
-              </div> 
-              <a class = "current" href="tempSigHome.php">Home</a>
-              <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+              <div class="">
+                     <a href = "../backend/logout.php" class = "button special">Logout</a>
+                      <!-- <a href = "#"><?php echo $_SESSION[
+                          'currentUserName'
+                      ] .
+                          ' (ID:' .
+                          $_SESSION['currentUserID'] .
+                          ')'; ?></a></div> -->
+                      <a href = "tempUserProfile.php">Profile</a>
+                      <a href = "tempUserApply.php">Apply</a>
+                      <a href = "tempUserView.php">Status</a>
+                      <a class = "current" href="tempUserHome.php">Home</a>
+                    
+                <a href="javascript:void(0);" class="icon" onclick="myFunction()">
                 <img src="../images/menu.png" alt="" />
                 </a>
               </div>  
             </div>
           </div>
-
       <!-- Main -->
-        <div class="content">
+        <div class="content edit-back">
 
-         
+        <h1><b>SUPPORTING DOCUMENTS</b></h1>         
               <form action="../backend/userdocupload.php" method="post" class = "login" enctype="multipart/form-data">
-              <div class="special container">            
-                <h2>SUPPORTING DOCUMENTS</h2>
-              </div>        
+                  
               <h2>Please Submit all the Documents as mentioned below.</h2>
               <h2><b>NOTE : </b>The documents must be of the format- <u><b>PDF</b></u></h2><br>
                   <label><b>1. <u>Certificates of your previous education( transcript of records, diploma) : </u></b></label>
@@ -134,26 +127,26 @@ $conn->close();
                  <br/><br/>
                   <label><b>2. <u> Letters of recommendation : </u></b></label>
                   <label>This must contain letters of recommendation(Collate into one pdf if you have more than one document) and upload it HERE(MAX SIZE : 800kb)<span style="color: red">*</span> </label>
-                  <input type="file"  name="file[]" id="recommendation" onchange=" return fileValidation('recommendation')" required><br>
+                  <input type="file"  name="file[]" id="recommendation" onchange=" return fileValidation('recommendation')" ><br>
                   <br/>
                   <hr/>
                  <br/><br/>
                   <label><b>3. <u> Language certificates (E.g: TOEFL,IELTS) : </u></b></label>
                   <label>This must contain the language certificate. (MAX SIZE : 800kb)<span style="color: red">*</span> </label>
-                  <input type="file"  name="file[]" id="language" onchange="return fileValidation('language')" required><br><br>
+                  <input type="file"  name="file[]" id="language" onchange="return fileValidation('language')"><br><br>
                   <br/>
                   <hr/>
                   <br/><br/>
-                  <label><b>3. <u> Motivation Letter: </u></b></label>
+                  <label><b>4. <u> Motivation Letter: </u></b></label>
                   <label>This must contain the language certificate.(MAX SIZE : 800kb)<span style="color: red">*</span> </label>
-                  <input type="file"  name="file[]" id="motivation" onchange="return fileValidation('motivation')" required><br><br>
+                  <input type="file"  name="file[]" id="motivation" onchange="return fileValidation('motivation')"><br><br>
                   <br/>
                   <hr/>
                   <br/><br/>
                   
-                  <label><b>3. <u> Resume/Curriculum Vitae : </u></b></label>
+                  <label><b>5. <u> Resume/Curriculum Vitae : </u></b></label>
                   <label>This must contain the updated Resume.(MAX SIZE : 800kb)<span style="color: red">*</span> </label>
-                  <input type="file"  name="file[]" id="resume" onchange="return fileValidation('resume')" required><br><br>
+                  <input type="file"  name="file[]" id="resume" onchange="return fileValidation('resume')"><br><br>
                   <input type="submit" name="apply" value="Apply >>">
 
               </form>

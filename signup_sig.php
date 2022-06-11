@@ -82,7 +82,7 @@ require 'vendor/autoload.php';
                             $mail->Password = $passfrom; // SMTP password
                             $mail->SMTPSecure = 'tls'; // Enable TLS encryption, `ssl` also accepted
                             $mail->Port = 587; // TCP port to connect to
-
+                            // $mail->SMTPDebug = SMTP::DEBUG_SERVER;
                             $mail->setFrom($emailfrom, 'SMS');
                             $mail->addReplyTo($emailfrom, 'SMS');
                             $mail->addAddress($email); // Add a recipient
