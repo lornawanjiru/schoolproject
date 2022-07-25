@@ -89,6 +89,12 @@ function validateControls() {
     results.focus()
     return false
   }
+  var gpa = document.getElementById('gpa')
+  if (gpa.value == '') {
+    window.alert('please enter your GPA POINTS')
+    results.focus()
+    return false
+  }
 }
 function myFunction() {
   var x = document.getElementById('myTopnav')

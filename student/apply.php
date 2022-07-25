@@ -9,7 +9,7 @@ $currentUserID = $_SESSION['currentUserID'];
 if ($currentUserID == null) {
     header('Location:../index.php');
 } // Connect to database
-$conn = new mysqli('localhost', 'scholar', '', 'sms'); // Checks Connection
+$conn = new mysqli('localhost', 'scholar', 'Github56#', 'sms'); // Checks Connection
 if ($conn->connect_error) {
     die('Connection failed: ' . $conn->connect_error);
 }
@@ -59,6 +59,7 @@ $conn->close();
       <div class = "nav">
             <div class="topnav" id="myTopnav">
               <div><a>Scholarship Application System</a> </div>
+              <div><a>Student Dashboard</a> </div>
               <div class="banner desktop-view">
                   <div>
                     <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/profile-sample3.jpg" alt="profile-sample3" class="profile" />

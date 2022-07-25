@@ -1,19 +1,26 @@
-<?php session_start();
+<!-- The isset() function checks whether a variable is set, which means that it has to be declared and is not NULL.
+This function returns true if the variable exists and is not NULL, otherwise it returns false.
+Note: If multiple variables are supplied, then this function will return true only if all of the variables are set.
+Tip: A variable can be unset with the unset() function. -->
+<!-- Session variables stores user information to be used across multiple pages (e.g. username etc).
+ By default, session variables last until the user closes the browser. 
+It holds information about one user
+A session is started with the session_start() function.
+Session variables are set with the PHP global variable: $_SESSION.-->
+<?php
+session_start();
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
 //Load Composer's autoloader
+//include or require statements takes all the text/code that exists in the specified field and copies it into the file.
 require 'vendor/autoload.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
-      <meta charset="utf-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
-      <meta name="description" content="">
-      <meta name="author" content="">
+      
       <title>Student Signup</title>
   
     <!-- Custom CSS-->
@@ -25,8 +32,13 @@ require 'vendor/autoload.php';
     <?php
     $email = null;
     $flag = 1;
+    // A function using an excption should be in a "try" block.
+    // If the exception does not trigger, the code will continue as normal.
     try {
+        // $_SERVER is a PHP super global array variable which holds information about headers, paths, and script locations.
+        //POST is used to send data to a server to create/update a resource.
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            //$_POST is an super global array of variables passed to the current script via the HTTP POST method.
             if (!empty($_POST['email']) && !empty($_POST['password'])) {
                 $email = $_POST['email'];
                 $pass = $_POST['password'];
@@ -42,16 +54,22 @@ require 'vendor/autoload.php';
                 $results = $_POST['results'];
                 $images = $_POST['images'];
 
-                $conn = new mysqli('localhost', 'scholar', '', 'sms');
+                $conn = new mysqli('localhost', 'scholar', 'Github56#', 'sms');
 
                 if ($conn->connect_error) {
                     die('Connection failed: ' . $conn->connect_error);
                 }
                 // CHecking if the email has being used. To avoid users with the same emails. That needed during verification
+                // The SQL UNION operator combines the result of two or more SELECT statements.
+                // Each SELECT statement within the UNION must have the same number of columns.
+                // The columns must also have similar data types.
                 $sql =
                     'SELECT upMail FROM student UNION SELECT upMail FROM signatory';
+                //The query() / mysqli_query() function performs a query against a database.
                 $result = $conn->query($sql);
                 if ($result->num_rows > 0) {
+                    //The fetch_assoc() / mysqli_fetch_assoc() function fetches a result row as an associative array.
+                    //Associative arrays are arrays that use named keys that you assign to them.
                     while ($row = $result->fetch_assoc()) {
                         if ($row['upMail'] == $email) {
                             $flag = 0;
@@ -62,6 +80,13 @@ require 'vendor/autoload.php';
                     $_SESSION['errMsg'] = 'User Already Exists!';
                 } else {
                     //Convert password into hash
+                    // PASSWORD DEFAULT - Use the bcrypt algorithm (default as of PHP 5.5.0). Note that this constant is designed to
+                    // change over time as new and stronger algorithms are added to PHP . For that reason, the length of the result from
+                    // using this identifier can change over time. Therefore, it is recommended to store the result in a database that can
+                    // expand beyond 60 characters (255 characters would be a good choice).
+                    // PASSWORD_BCRYPT - Use the CRYPT_BLOWFISH algorithm to create the hash. This will produce a standard crypt ()
+                    // compatible hash using the "$ 2y $" identifier. The result will always be a 60 character string, or FALSE on failure.
+                    //password_hash () uses a strong hash, generates strong salt, and applies proper rounds automatically.
                     $phash = password_hash($pass, PASSWORD_DEFAULT);
 
                     // Write insert query
@@ -124,7 +149,9 @@ require 'vendor/autoload.php';
                 $conn->close();
             }
         }
+        //a catch block retrieves an exception and creates an object containing that exception information.
     } catch (Exception $e) {
+        //getMessage()method returns a description of the error or behavior that caused the exception to be thrown
         echo $e->getMessage();
     }
     ?>
@@ -133,6 +160,12 @@ require 'vendor/autoload.php';
       
       <div class = "text-center ">
         <div class="login ">
+        <!-- The $_SERVER["PHP_SELF"] is a super global variable that returns the filename of the currently executing script.
+        So, the $_SERVER["PHP_SELF"] sends the submitted form data to the page itself, instead of jumping to a different page. 
+        This way, the user will get error messages on the same page as the form. -->
+        <!-- The htmlspecialchars() function converts special characters to HTML entities. This means that it will replace HTML characters like
+         < and > with &lt; and &gt;. 
+        This prevents attackers from exploiting the code by injecting HTML or Javascript code (Cross-site Scripting attacks) in forms. -->
           <form action="<?php echo htmlspecialchars(
               $_SERVER['PHP_SELF']
           ); ?>" onsubmit="return validateControls()"  method="POST" name="login" >

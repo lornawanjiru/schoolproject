@@ -2,7 +2,42 @@
 $studentID = null;
 $status = null;
 ?>
-
+<?php
+session_start();
+$_SESSION['selectedAppID'] = 0;
+$_SESSION['appList'] = null; //check validity of the user
+$currentUserName = $_SESSION['currentUserName'];
+$currentUserID = $_SESSION['currentUserID'];
+if ($currentUserID == null) {
+    header('Location:../index.php');
+}
+// Connect to database
+$conn = new mysqli('localhost', 'scholar', 'Github56#', 'sms');
+// Checks Connection
+if ($conn->connect_error) {
+    die('Connection failed: ' . $conn->connect_error);
+}
+$getName =
+    "select A.firstName, A.middleName, A.lastName from admin A where A.adminID = '" .
+    $_SESSION['currentUserID'] .
+    "'";
+$nameResult = mysqli_query($conn, $getName); // Get every row of the table formed from the query
+while ($rows9 = mysqli_fetch_row($nameResult)) {
+    foreach ($rows9 as $key => $value) {
+        if ($key == 0) {
+            $_SESSION['currentUserName'] = $value;
+        }
+        if ($key == 1) {
+            $_SESSION['currentUserName'] =
+                $_SESSION['currentUserName'] . ' ' . $value;
+        }
+        if ($key == 2) {
+            $_SESSION['currentUserName'] =
+                $_SESSION['currentUserName'] . '. ' . $value;
+        }
+    }
+}
+?>
 <!DOCTYPE HTML>
 <html>
   <head>
@@ -39,7 +74,7 @@ $status = null;
             </div>
             <div class="">
               <a href = "../backend/logout.php" class = "button special">Logout</a>
-              <a class = "current" href = "#">Home</a>
+              <a class = "current" href = "tempAdmin.php">Home</a>
              
                 <a class="dropdown-btn">Applications</a>
                 <div class="dropdown-container">
@@ -57,9 +92,9 @@ $status = null;
                 
                 <a class="dropdown-btn">Users</a>
                 <div class="dropdown-container">
-                  <li><a href = "tempAdminShow.php">Admin</a></li>
-                  <li><a href = "tempSignatoryShow.php">Signatory</a></li>
-                  <li><a href = "tempStudentShow.php">Students</a></li>
+                   
+                  <a href = "tempSignatoryShow.php">Signatory</a></li>
+                  <a href = "tempStudentShow.php">Students</a></li>
                 </div>
                 <a href="javascript:void(0);" class="icon" onclick="myFunction()">
                 <img src="../images/menu.png" alt="" />
@@ -78,7 +113,6 @@ $status = null;
                           if ($conn->connect_error) {
                               die('Connection failed: ' . $conn->connect_error);
                           }
-
                           /* Student */ if (
                               isset($_POST['showUser']) and
                               $_POST['showUser'] == 'showStudent'
@@ -106,49 +140,30 @@ if ($result->num_rows > 0) {
                                         $row['lastName']; ?></td>
                               </tr>
                               <tr>
-                                  <th style="width:50%"><b>Nationality</b></th>
-                                  <td><?php echo $row['nationality']; ?></td>
+                                  <th style="width:50%"><b>Current Location</b></th>
+                                  <td><?php echo $row[
+                                      'currentlocation'
+                                  ]; ?></td>
                               </tr>
                               <tr>
                                   <th style="width:50%"><b>Gender</b></th>
                                   <td><?php echo $row['gender']; ?></td>
                               </tr>
                               <tr>
-                                  <th style="width:50%"><b>BirthDate</b></th>
-                                  <td><?php echo $row['birthDate']; ?></td>
+                                  <th style="width:50%"><b>Phone Number</b></th>
+                                  <td><?php echo $row['phonenumber']; ?></td>
                               </tr>
                               <tr>
-                                  <th style="width:50%"><b>BirthPlace</b></th>
-                                  <td><?php echo $row['birthPlace']; ?></td>
+                                  <th style="width:50%"><b>specialization</b></th>
+                                  <td><?php echo $row['specialization']; ?></td>
                               </tr>
+                              
+                              
                               <tr>
-                                  <th style="width:50%"><b>Present address </b></th>
-                                  <td><?php echo $row['presStreetAddr'] .
-                                      '<br/>' .
-                                      $row['presProvCity'] .
-                                      '<br/>' .
-                                      $row['presRegion']; ?></td>
+                                  <th style="width:50%"><b>Highest achieved educational Level </b></th>
+                                  <td><?php echo $row['level']; ?></td>
                               </tr>
-                              <tr>
-                                  <th style="width:50%"><b>Permanent address </b></th>
-                                  <td><?php echo $row['permStreetAddr'] .
-                                      '<br/>' .
-                                      $row['permProvCity'] .
-                                      '<br/>' .
-                                      $row['permRegion']; ?></td>
-                              </tr>
-                              <tr>
-                                  <th style="width:50%"><b>Contact </b></th>
-                                  <td><?php echo $row['contactNo']; ?></td>
-                              </tr>
-                              <tr>
-                                  <th style="width:50%"><b>College</b></th>
-                                  <td><?php echo $row['college']; ?></td>
-                              </tr>
-                              <tr>
-                                  <th style="width:50%"><b>Departement</b></th>
-                                  <td><?php echo $row['dept']; ?></td>
-                              </tr>
+                             
                               <tr>
                                   <th style="width:50%"><b>Status</b></th>
                                   <td><?php
@@ -165,7 +180,7 @@ if ($result->num_rows > 0) {
                               </tr>
                         </table>
                         <section id="application" style="display: none;">
-                          	<table class="table table-bordered">
+                          	<table class="table table-bordered default login">
                             	<thead>
                                 	<tr>
                                   		<th style="width:10%">Application ID</th>
@@ -183,7 +198,6 @@ if ($result->num_rows > 0) {
                                      $conn,
                                      $queryScholarship
                                  );
-
                                  while (
                                      $rows = mysqli_fetch_row($qSchoResult)
                                  ) {
@@ -258,9 +272,7 @@ if ($result->num_rows > 0) {
                               </tr>
                               <tr>
                                   <th style="width:50%"><b>Organization/University</b></th>
-                                  <td><?php echo $row[
-                                      'organization/university'
-                                  ]; ?></td>
+                                  <td><?php echo $row['organization']; ?></td>
                               </tr>
                               <tr>
                                   <th style="width:50%"><b>Position</b></th>
@@ -268,7 +280,7 @@ if ($result->num_rows > 0) {
                               </tr>
                               <tr>
                                   <th style="width:50%"><b>Contact </b></th>
-                                  <td><?php echo $row['contact']; ?></td>
+                                  <td><?php echo $row['phonenumber']; ?></td>
                               </tr>
                               <tr>
                                   <th style="width:50%"><b>Status</b></th>
@@ -290,7 +302,7 @@ if ($result->num_rows > 0) {
                                  $queryScholarship = "SELECT * FROM scholarship WHERE sigID = $sigID";
                                  $result = $conn->query($queryScholarship);
                                  if ($result->num_rows > 0) { ?>
-                                                <table class = "table table-bordered">
+                                                <table class = "table table-bordered default login">
             				                              <thead>
             				                                <tr>
             				                                  <th class = "col-md-1" style="width: 5%"><strong>SchID</strong></th>
@@ -418,19 +430,19 @@ if ($result->num_rows > 0) {
                           </form>
                         </section>
                         <?php }
-}
-/* ADMIN  */
+} /* ADMIN  */
 } elseif (isset($_POST['showUser']) and $_POST['showUser'] == 'showAdmin') {
                               echo 'Admin';
                           }
                       } catch (Exception $e) {
                       } ?>
 									</section>
-								</div>
-                <div class="footer">
+                  <div class="footer">
                 <h3>SCHOLARSHIP MANAGEMENT SYSTEM</h3>
                 <p>copyright &copy;2022</p>
          </div>
+								</div>
+                
       </div>
 
 		
@@ -494,13 +506,7 @@ if ($result->num_rows > 0) {
   		}
 
   	</script>
-      <script src="../js/jquery.min.js"></script>
-      <script src="../js/jquery.dropotron.min.js"></script>
-      <script src="../js/jquery.scrollgress.min.js"></script>
-      <script src="../js/jquery.scrolly.min.js"></script>
-      <script src="../js/util.js"></script>
-      <script src="../js/skel.min.js"></script>
-      <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
-      <script src="../js/main.js"></script>
+      
+      <script src="../js/script.js"></script>
 	</body>
 </html>

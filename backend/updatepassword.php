@@ -8,7 +8,7 @@
   $email = $_SESSION['email'];
   if ($pass === $repass) {
       $phash = password_hash($pass, PASSWORD_DEFAULT);
-      $conn = new mysqli('localhost', 'scholar', '', 'sms');
+      $conn = new mysqli('localhost', 'scholar', 'Github56#', 'sms');
 
       if ($conn->connect_error) {
           die('Connection failed: ' . $conn->connect_error);

@@ -11,7 +11,7 @@ if ($currentUserID == null) {
 }
 
 // Connect to database
-$conn = new mysqli('localhost', 'scholar', '', 'sms');
+$conn = new mysqli('localhost', 'scholar', 'Github56#', 'sms');
 
 // Checks Connection
 if ($conn->connect_error) {
@@ -61,6 +61,7 @@ $conn->close();
       <script type="text/javascript">
           function fileValidation(name){
               var fileInput = document.getElementById(name);
+              //Display the path or the name of the selected file:
               var filePath = fileInput.value;
               var allowedExtensions = /(\.pdf)$/i;  //  /(\.jpg|\.jpeg|\.png|\.gif)$/i
               if(!allowedExtensions.exec(filePath)){
@@ -80,6 +81,7 @@ $conn->close();
       <div class = "nav">
             <div class="topnav" id="myTopnav">
               <div><a>Scholarship Application System</a> </div>
+              <div><a>Student Dashboard</a> </div>
               <div class="banner desktop-view">
                   <div>
                     <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/profile-sample3.jpg" alt="profile-sample3" class="profile" />
@@ -115,7 +117,7 @@ $conn->close();
         <div class="content edit-back">
 
         <h1><b>SUPPORTING DOCUMENTS</b></h1>         
-              <form action="../backend/userdocupload.php" method="post" class = "login" enctype="multipart/form-data">
+              <form action="../backend/userdocupload.php" method="post"  class = "login" enctype="multipart/form-data">
                   
               <h2>Please Submit all the Documents as mentioned below.</h2>
               <h2><b>NOTE : </b>The documents must be of the format- <u><b>PDF</b></u></h2><br>
@@ -123,6 +125,15 @@ $conn->close();
                   <label>This must contain certified copies of your transcript. Collate into one pdf and upload it HERE(MAX SIZE : 800kb)<span style="color: red">*</span> </label>
                   <input type="file"  name="file[]" id="transcript" onchange=" return fileValidation('transcript')" ><br>                  
                  <br/>
+                 <div class="row">
+					<div class="col-10">
+					  <label><strong>GPA POINTS: <a href="https://gpacalculator.net/college-gpa-calculator/">GPA CALCULATOR</a></strong></label><br>
+					  <label style="font-size: 15px;">This is to fasten your application but incase we realised its inaccurate your application is revoked.</label>
+					</div>
+					<div class="col-90">
+					  <input type = "text" id = "gpa" onsubmit="return validateControls()" name = "gpa" placeholder="Eg:4.00" >
+					</div>
+                </div>
                   <hr/>
                  <br/><br/>
                   <label><b>2. <u> Letters of recommendation : </u></b></label>
@@ -135,28 +146,67 @@ $conn->close();
                   <label>This must contain the language certificate. (MAX SIZE : 800kb)<span style="color: red">*</span> </label>
                   <input type="file"  name="file[]" id="language" onchange="return fileValidation('language')"><br><br>
                   <br/>
+                  <div class="row">
+					<div class="col-10">
+					  <label><strong>Language Results: <a href="https://www.ets.org/toefl/test-takers/ibt/scores/understanding/">SCORES UNDERSTANDING</a></strong></label><br>
+					  <label style="font-size: 15px;">This is to fasten your application but incase we realised its inaccurate your application is revoked.</label>
+					</div>
+					<div class="col-90">
+					  <input type = "text" id = "languageresults" name = "languageresults" placeholder="Eg:86" >
+					</div>
+                </div>
                   <hr/>
                   <br/><br/>
-                  <label><b>4. <u> Motivation Letter: </u></b></label>
-                  <label>This must contain the language certificate.(MAX SIZE : 800kb)<span style="color: red">*</span> </label>
+                  <label><b>4. <u> Financial support reasons Form : </u></b></label>
+                  <label>This must contain a well detailed explanation on why you need financial support.(MAX SIZE : 800kb)<span style="color: red">*</span> </label>
                   <input type="file"  name="file[]" id="motivation" onchange="return fileValidation('motivation')"><br><br>
                   <br/>
+                  <div class="row">
+					<div class="col-10">
+					  <label><strong>Financial support</strong></strong></label><br>
+					  <label style="font-size: 15px;">This is to fasten your application but incase we realised its inaccurate your application is revoked.</label>
+					</div>
+					<div class="col-90">
+                        <select name="financialsupport" style="display: inline;">
+                          <option value="select" selected>Select</option>
+                          <option value="No">No</option>
+                          <option value="Yes">Yes</option>
+                        </select>
+					</div>
                   <hr/>
                   <br/><br/>
                   
                   <label><b>5. <u> Resume/Curriculum Vitae : </u></b></label>
                   <label>This must contain the updated Resume.(MAX SIZE : 800kb)<span style="color: red">*</span> </label>
-                  <input type="file"  name="file[]" id="resume" onchange="return fileValidation('resume')"><br><br>
-                  <input type="submit" name="apply" value="Apply >>">
-
+                  <input type="file"  name="file[]" id="resume" onchange="return fileValidation('resume')"><br><br>    
+                <br/> <hr/>
+                 <br/> 
+                    <div class="row">
+					<div class="col-10">
+					  <label><strong>Ethnic:</strong></label><br>
+					  <label style="font-size: 15px;">This is to fasten your application but incase we realised its inaccurate your application is revoked.</label>
+					</div>
+					<div class="col-90">
+                        <select name="ethnic" style="display: inline;">
+                          <option value="select" selected>Select</option>
+                          <option value="americanindian">American Indian</option>
+                          <option value="asian">Asian</option>
+                          <option value="black">Black/African American</option>
+                          <option value="latino">Latino/ Hispanics</option>
+                          <option value="white">White</option>
+                          <option value="hawaiian">Native Hawaiian/Pacific Islander</option>
+                        </select>
+					</div>
+                    <br/><br/>
+                    <input type="submit" name="apply" value="Apply >>">
               </form>
-            <div class="footer">
+           
+        </div>
+        <!-- Footer -->
+        <div class="footer">
             <h3>SCHOLARSHIP MANAGEMENT SYSTEM</h3>
             <p>copyright &copy;2022</p>
          </div>
-        </div>
-        <!-- Footer -->
-        
     </div>
 
      

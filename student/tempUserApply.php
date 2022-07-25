@@ -8,7 +8,7 @@
      header('Location:../index.php');
  }
  /* Connect to database */
- $conn = new mysqli('localhost', 'scholar', '', 'sms');
+ $conn = new mysqli('localhost', 'scholar', 'Github56#', 'sms');
  /* Checks Connection */
  if ($conn->connect_error) {
      die('Connection failed: ' . $conn->connect_error);
@@ -64,6 +64,7 @@
       <div class = "nav">
             <div class="topnav" id="myTopnav">
               <div><a>Scholarship Application System</a> </div>
+              <div><a>Student Dashboard</a> </div>
               <div class="banner desktop-view">
                   <div>
                     <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/profile-sample3.jpg" alt="profile-sample3" class="profile" />
@@ -89,7 +90,7 @@
                       <a href = "tempUserView.php">Status</a>
                       <a class = "current" href="tempUserHome.php">Home</a>
                     
-                <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+                <a href="" class="icon" onclick="myFunction()">
                 <img src="../images/menu.png" alt="" />
                 </a>
               </div>  
@@ -188,6 +189,12 @@
       <div class="scholarship-content">
         <div> 
           <?php
+          //   d - The day of the month (from 01 to 31)
+          //   D - A textual representation of a day (three letters)
+          //   Y - A four digit representation of a year
+          //   y - A two digit representation of a year
+          //   m - A numeric representation of a month (from 01 to 12)
+          //   M - A short textual representation of a month (three letters)
           $date1 = date('Y-m-d');
           $educationlevel = $gender = $ethnic = $scholarship = $careerfield =
               '';

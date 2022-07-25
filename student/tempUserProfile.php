@@ -1,4 +1,14 @@
 <?php
+/* Start a session so that other files can access these variables */
+// <!-- The isset() function checks whether a variable is set, which means that it has to be declared and is not NULL.
+// This function returns true if the variable exists and is not NULL, otherwise it returns false.
+// Note: If multiple variables are supplied, then this function will return true only if all of the variables are set.
+// Tip: A variable can be unset with the unset() function. -->
+// <!-- Session variables stores user information to be used across multiple pages (e.g. username etc).
+//  By default, session variables last until the user closes the browser.
+// It holds information about one user
+// A session is started with the session_start() function.
+// Session variables are set with the PHP global variable: $_SESSION.-->
 session_start();
 $_SESSION['selectedAppID'] = 0;
 $_SESSION['currentUserName'] = null;
@@ -11,7 +21,7 @@ if ($currentUserID == null) {
 }
 
 // Connect to database
-$conn = new mysqli('localhost', 'scholar', '', 'sms');
+$conn = new mysqli('localhost', 'scholar', 'Github56#', 'sms');
 
 // Checks Connection
 if ($conn->connect_error) {
@@ -23,7 +33,9 @@ $getName =
     "select S.firstName, S.middleName, S.lastName from student S where S.studentID = '" .
     $_SESSION['currentUserID'] .
     "'";
+//The query() / mysqli_query() function performs a query against a database.
 $nameResult = mysqli_query($conn, $getName);
+//The fetch_row() / mysqli_fetch_row() function fetches one row from a result-set and returns it as an enumerated array.
 while ($rows9 = mysqli_fetch_row($nameResult)) {
     foreach ($rows9 as $key => $value) {
         if ($key == 0) {
@@ -86,6 +98,7 @@ while ($row = $result->fetch_assoc()) {
       <div class = "nav">
             <div class="topnav" id="myTopnav">
               <div><a>Scholarship Application System</a> </div>
+              <div><a>Student Dashboard</a> </div>
               <div class="banner desktop-view">
                   <div>
                     <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/profile-sample3.jpg" alt="profile-sample3" class="profile" />
@@ -111,7 +124,7 @@ while ($row = $result->fetch_assoc()) {
                       <a href = "tempUserView.php">Status</a>
                       <a class = "current" href="tempUserHome.php">Home</a>
                     
-                <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+                <a href="" class="icon" onclick="myFunction()">
                 <img src="../images/menu.png" alt="" />
                 </a>
               </div>  
@@ -334,7 +347,7 @@ while ($row = $result->fetch_assoc()) {
    
 
     <!-- Scripts -->
-    <script type="text/javascript">
+    <!-- <script type="text/javascript">
   		function viewcontent(){
   			var selectone=document.getElementById("class").value;
   			var schview=document.getElementById("application");
@@ -346,7 +359,7 @@ while ($row = $result->fetch_assoc()) {
   				schview.style.display = 'none';
   			}
   		}
-  	</script>  
+  	</script>   -->
       
       <script src="../js/script.js"></script>
 

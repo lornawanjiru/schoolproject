@@ -1,14 +1,38 @@
 <?php
 /*Start a session*/
   session_start();
-
-  $conn = new mysqli("localhost","scholar", "","sms");
+  $_SESSION['selectedAppID'] = 0;
+  $_SESSION['appList'] = null; //check validity of the user
+  $currentUserName = $_SESSION['currentUserName'];
+  $currentUserID = $_SESSION['currentUserID'];
+  if ($currentUserID == null) {
+	  header('Location:../index.php');
+  } // Connect to database
+  $conn = new mysqli("localhost","scholar", "Github56#","sms");
 
   // Checks Connection
     if ($conn->connect_error) {
       die("Connection failed: " . $conn->connect_error);
     }
-
+$getName =
+    "select A.firstName, A.middleName, A.lastName from admin A where A.adminID = '" .
+    $_SESSION['currentUserID'] .
+    "'";
+$nameResult = mysqli_query($conn, $getName); // Get every row of the table formed from the query
+while ($rows9 = mysqli_fetch_row($nameResult)) {
+    foreach ($rows9 as $key => $value) {
+        if ($key == 0) {
+            $_SESSION['currentUserName'] = $value;
+        }
+        if ($key == 1) {
+            $_SESSION['currentUserName'] =
+                $_SESSION['currentUserName'] . ' ' . $value;
+        }
+        if ($key == 2) {
+            $_SESSION['currentUserName'] =
+                $_SESSION['currentUserName'] . '. ' . $value;
+        }
+    }}
     if(isset($_GET['scholarship'])){
     	$scholarship = $_GET['scholarship'];
     }else{
@@ -52,7 +76,7 @@
             </div>
             <div class="">
               <a href = "../backend/logout.php" class = "button special">Logout</a>
-              <a class = "current" href = "#">Home</a>
+              <a class = "current" href = "tempAdmin.php">Home</a>
              
                 <a class="dropdown-btn">Applications</a>
                 <div class="dropdown-container">
@@ -70,7 +94,7 @@
                 
                 <a class="dropdown-btn">Users</a>
                 <div class="dropdown-container">
-                   <a href = "tempAdminShow.php">Admin</a>
+                  
                   <a href = "tempSignatoryShow.php">Signatory</a>
                   <a href = "tempStudentShow.php">Students</a>
                 </div>
@@ -122,7 +146,7 @@
 				                                    	<td><?php
 				                                    		$sigID=$row['sigID'];
 				                                    		echo $row['sigID']; ?></td>
-				                                      	<td><a href="#" data-toggle="modal" data-target="#scholarshipDescription"><?php
+				                                      	<td><a href="#"><?php
 				                                      		$schname=$row['schname'];
 				                                      		echo $row['schname']; ?></a></td>
 				                                      	<td><?php echo $row['appDeadline']; ?></td>

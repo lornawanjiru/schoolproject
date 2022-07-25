@@ -12,7 +12,7 @@ if ($currentUserID == null) {
 }
 
 // Connect to database
-$conn = new mysqli('localhost', 'scholar', '', 'sms');
+$conn = new mysqli('localhost', 'scholar', 'Github56#', 'sms');
 
 // Checks Connection
 if ($conn->connect_error) {
@@ -23,19 +23,22 @@ $getName =
     "select S.firstName, S.middleName, S.lastName from student S where S.studentID = '" .
     $_SESSION['currentUserID'] .
     "'";
-
+//The query() / mysqli_query() function performs a query against a database.
 $nameResult = mysqli_query($conn, $getName);
 
 // Get every row of the table formed from the query
 while ($rows9 = mysqli_fetch_row($nameResult)) {
     foreach ($rows9 as $key => $value) {
+        // This is for the firstname column
         if ($key == 0) {
             $_SESSION['currentUserName'] = $value;
         }
+        // This is for the middlename column
         if ($key == 1) {
             $_SESSION['currentUserName'] =
                 $_SESSION['currentUserName'] . ' ' . $value;
         }
+        // This is for the lastname column
         if ($key == 2) {
             $_SESSION['currentUserName'] =
                 $_SESSION['currentUserName'] . '. ' . $value;
@@ -65,6 +68,7 @@ while ($rows9 = mysqli_fetch_row($nameResult)) {
         <div class = "nav">
             <div class="topnav" id="myTopnav">
               <div><a>Scholarship Application System</a> </div>
+              <div><a>Student Dashboard</a> </div>
               <div class="banner desktop-view">
                   <div>
                     <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/profile-sample3.jpg" alt="profile-sample3" class="profile" />
@@ -90,7 +94,7 @@ while ($rows9 = mysqli_fetch_row($nameResult)) {
                       <a href = "tempUserView.php">Status</a>
                       <a class = "current" href="tempUserHome.php">Home</a>
                     
-                <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+                <a href="" class="icon" onclick="myFunction()">
                 <img src="../images/menu.png" alt="" />
                 </a>
               </div>  
@@ -183,7 +187,7 @@ while ($rows9 = mysqli_fetch_row($nameResult)) {
           <!-- Footer -->
          <div class="footer">
             <h3>SCHOLARSHIP MANAGEMENT SYSTEM</h3>
-            <p>copyright &copy;2021</p>
+            <p>copyright &copy;2022</p>
          </div>
 
        </div>

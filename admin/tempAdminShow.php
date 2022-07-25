@@ -1,3 +1,48 @@
+<?php
+session_start();
+$_SESSION['selectedAppID'] = 0;
+
+$_SESSION['appList'] = null;
+
+//check validity of the user
+$currentUserName = $_SESSION['currentUserName'];
+$currentUserID = $_SESSION['currentUserID'];
+if ($currentUserID == null) {
+    header('Location:../index.php');
+}
+
+// Connect to database
+$conn = new mysqli('localhost', 'scholar', 'Github56#', 'sms');
+
+// Checks Connection
+if ($conn->connect_error) {
+    die('Connection failed: ' . $conn->connect_error);
+}
+
+$getName =
+    "select A.firstName, A.middleName, A.lastName from admin A where A.adminID = '" .
+    $_SESSION['currentUserID'] .
+    "'";
+
+$nameResult = mysqli_query($conn, $getName);
+
+// Get every row of the table formed from the query
+while ($rows9 = mysqli_fetch_row($nameResult)) {
+    foreach ($rows9 as $key => $value) {
+        if ($key == 0) {
+            $_SESSION['currentUserName'] = $value;
+        }
+        if ($key == 1) {
+            $_SESSION['currentUserName'] =
+                $_SESSION['currentUserName'] . ' ' . $value;
+        }
+        if ($key == 2) {
+            $_SESSION['currentUserName'] =
+                $_SESSION['currentUserName'] . '. ' . $value;
+        }
+    }
+}
+?>
 <!DOCTYPE HTML>
 <html>
   <head>
@@ -34,7 +79,7 @@
             </div>
             <div class="">
               <a href = "../backend/logout.php" class = "button special">Logout</a>
-              <a class = "current" href = "#">Home</a>
+              <a class = "current" href = "tempAdmin.php">Home</a>
              
                 <a class="dropdown-btn">Applications</a>
                 <div class="dropdown-container">
@@ -52,11 +97,11 @@
                 
                 <a class="dropdown-btn">Users</a>
                 <div class="dropdown-container">
-                  <li><a href = "tempAdminShow.php">Admin</a></li>
-                  <li><a href = "tempSignatoryShow.php">Signatory</a></li>
-                  <li><a href = "tempStudentShow.php">Students</a></li>
+                  
+                  <a href = "tempSignatoryShow.php">Signatory</a></li>
+                  <a href = "tempStudentShow.php">Students</a></li>
                 </div>
-                <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+                <a href="" class="icon" onclick="myFunction()">
                 <img src="../images/menu.png" alt="" />
                 </a>
               </div>  

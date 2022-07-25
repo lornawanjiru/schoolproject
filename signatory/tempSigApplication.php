@@ -1,5 +1,14 @@
 <?php
-
+/* Start a session so that other files can access these variables */
+// <!-- The isset() function checks whether a variable is set, which means that it has to be declared and is not NULL.
+// This function returns true if the variable exists and is not NULL, otherwise it returns false.
+// Note: If multiple variables are supplied, then this function will return true only if all of the variables are set.
+// Tip: A variable can be unset with the unset() function. -->
+// <!-- Session variables stores user information to be used across multiple pages (e.g. username etc).
+//  By default, session variables last until the user closes the browser. 
+// It holds information about one user
+// A session is started with the session_start() function.
+// Session variables are set with the PHP global variable: $_SESSION.-->
   session_start();
 
 	 //check validity of the user
@@ -9,7 +18,7 @@
   }
 
   // Connect to database
-  $conn = new mysqli("localhost","scholar", "","sms");
+  $conn = new mysqli("localhost","scholar", "Github56#","sms");
 
   // Checks Connection
     if ($conn->connect_error) {
@@ -48,14 +57,6 @@ foreach ($rows9 as $key => $value)
 <html>
   <head>
       <title>Home</title>
-
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta name="description" content="">
-      <meta name="author" content="">
-
       <link href="../css/main.css" rel="stylesheet">
       <link href="../css/general.css" rel="stylesheet">
 
@@ -149,9 +150,11 @@ foreach ($rows9 as $key => $value)
                               <div class="col-sm-10">
                             
                                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" name="login" >
+                               <!--onchange Execute a JavaScript when a user changes the selected option of a <select> element: -->
                                 <select name="class" id="class" onchange="viewcontent()" style="padding-top:2%;padding-bottom:2%;padding-left:2%;display:block;">
                                     <option value="select" selected><strong>Select Your Scholarship</strong></option>
                             	<?php
+                              //The fetch_row() / mysqli_fetch_row() function fetches one row from a result-set and returns it as an enumerated array.
                             		while($rows9=mysqli_fetch_row($result)){
                             			foreach ($rows9 as $key => $value){
 	                            			if($key == 0){
@@ -206,7 +209,7 @@ foreach ($rows9 as $key => $value)
                                         </thead>
                                         <tbody>
                                       <?php
-
+                                      //The fetch_row() / mysqli_fetch_row() function fetches one row from a result-set and returns it as an enumerated array.
                                   	while($rows=mysqli_fetch_row($qSchoResult))
                                   	{
                                       $status = NULL;
@@ -336,6 +339,7 @@ foreach ($rows9 as $key => $value)
                                        </thead>
                                        <tbody>
                                       <?php
+                                      //The fetch_row() / mysqli_fetch_row() function fetches one row from a result-set and returns it as an enumerated array.
                                   	while($rows=mysqli_fetch_row($qSchoResult))
                                   	{
                                       $status = NULL;

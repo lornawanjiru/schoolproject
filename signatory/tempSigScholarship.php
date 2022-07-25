@@ -8,7 +8,7 @@
  }
 
  // Connect to database
- $conn = new mysqli('localhost', 'scholar', '', 'sms');
+ $conn = new mysqli('localhost', 'scholar', 'Github56#', 'sms');
 
  // Checks Connection
  if ($conn->connect_error) {
@@ -45,12 +45,7 @@
   <head>
       <title>Home</title>
 
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta name="description" content="">
-      <meta name="author" content="">
+      
 
       <!-- Custom CSS -->
       <link href="../css/main.css" rel="stylesheet">
@@ -137,9 +132,10 @@
         ]; ?></strong></td>
 								<td style="padding :1%">
 								<?php
+        //The time() function returns the current time in the number of seconds since the Unix Epoch (January 1 1970 00:00:00 GMT).
         $now = time();
         $date = $row['appDeadline'];
-
+        //The strtotime() function parses an English textual datetime into a Unix timestamp (the number of seconds since January 1 1970 00:00:00 GMT).
         if (strtotime($date) > $now) {
             echo 'Ongoing', '(', $date, ')';
         } else {

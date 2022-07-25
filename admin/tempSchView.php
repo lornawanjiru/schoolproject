@@ -1,14 +1,39 @@
 <?php
 
 session_start();
-
+$_SESSION['selectedAppID'] = 0;
+  $_SESSION['appList'] = null; //check validity of the user
+  $currentUserName = $_SESSION['currentUserName'];
+  $currentUserID = $_SESSION['currentUserID'];
+  if ($currentUserID == null) {
+	  header('Location:../index.php');
+  } 
 // Connect to database
-$conn = new mysqli('localhost', 'scholar', '', 'sms');
+$conn = new mysqli('localhost', 'scholar', 'Github56#', 'sms');
 
 // Checks Connection
 if ($conn->connect_error) {
     die('Connection failed: ' . $conn->connect_error);
 }
+$getName =
+    "select A.firstName, A.middleName, A.lastName from admin A where A.adminID = '" .
+    $_SESSION['currentUserID'] .
+    "'";
+$nameResult = mysqli_query($conn, $getName); // Get every row of the table formed from the query
+while ($rows9 = mysqli_fetch_row($nameResult)) {
+    foreach ($rows9 as $key => $value) {
+        if ($key == 0) {
+            $_SESSION['currentUserName'] = $value;
+        }
+        if ($key == 1) {
+            $_SESSION['currentUserName'] =
+                $_SESSION['currentUserName'] . ' ' . $value;
+        }
+        if ($key == 2) {
+            $_SESSION['currentUserName'] =
+                $_SESSION['currentUserName'] . '. ' . $value;
+        }
+    }}
 ?>
 <!DOCTYPE HTML>
 
@@ -46,7 +71,7 @@ if ($conn->connect_error) {
             </div>
             <div class="">
               <a href = "../backend/logout.php" class = "button special">Logout</a>
-              <a class = "current" href = "#">Home</a>
+              <a class = "current" href = "tempAdmin.php">Home</a>
              
                 <a class="dropdown-btn">Applications</a>
                 <div class="dropdown-container">
@@ -64,9 +89,9 @@ if ($conn->connect_error) {
                 
                 <a class="dropdown-btn">Users</a>
                 <div class="dropdown-container">
-                  <li><a href = "tempAdminShow.php">Admin</a></li>
-                  <li><a href = "tempSignatoryShow.php">Signatory</a></li>
-                  <li><a href = "tempStudentShow.php">Students</a></li>
+                   
+                  <a href = "tempSignatoryShow.php">Signatory</a></li>
+                  <a href = "tempStudentShow.php">Students</a></li>
                 </div>
                 <a href="javascript:void(0);" class="icon" onclick="myFunction()">
                 <img src="../images/menu.png" alt="" />
@@ -79,6 +104,7 @@ if ($conn->connect_error) {
 
 			<!-- Main -->
       <div class="content">
+        <div class="login">
               <span style="text-align:center">
                 <br><h1 style="font-size : 28px"><strong><?php echo $_POST[
                     'schname'
@@ -105,9 +131,11 @@ if ($conn->connect_error) {
                             $status = $row['schstatus'];
                         }
                     }
+                     //The simplexml_load_file() function converts an XML document to an object.
                     ($xml = simplexml_load_file(
                         '../backend/scholarship_data.xml'
                     )) or die('Error: Cannot create object');
+                     //The children() function finds the children of a specified node.
                     foreach ($xml->children() as $sch) {
                         if ($sch['scholarshipID'] == $schid) {
 
@@ -135,56 +163,40 @@ if ($conn->connect_error) {
                             <h1><b>What is <?php echo $schname; ?> ?</b></h1>
                             <p><?php echo $description; ?></p>
                           </section>
-                          <br><hr><br><hr style=" height: 1px;color: red;background-color: grey;border: none;">
-                          <section>
-                            <h1><b>Who is offering the scholarship?</b></h1>
-                            <p><?php
-                            //university or organization name
-                            ?></p>
-                          </section>
-                          <br><hr><br><hr style=" height: 1px;color: red;background-color: grey;border: none;">
-                          <section>
-                            <h1><b>Documents required?</b></h1>
-                            <p><?php
-                            //university or organization name
-                            ?></p>
-                          </section>
-                          <br><hr><br><hr style=" height: 1px;color: red;background-color: grey;border: none;">
+                          
+                          
+                          <br><hr><br>
                           <section>
                             <h1><b>Who can apply for the scholarship?</b></h1>
                             <p><?php echo $eligibility; ?></p>
                           </section>
-                          <br><hr><br><hr style=" height: 1px;color: red;background-color: grey;border: none;">
+                          <br><hr><br>
                           <section>
                             <h1><b>What are the benifits?</b></h1>
                             <p><?php echo $benefits; ?></p>
                           </section>
-                          <br><hr><br><hr style=" height: 1px;color: red;background-color: grey;border: none;">
+                          <br><hr><br>
                           <section>
                             <h1><b>How can you apply?</b></h1>
                             <p><?php echo $apply; ?></p>
                           </section>
-                          <br><hr><br><hr style=" height: 1px;color: red;background-color: grey;border: none;">
+                          <br><hr><br>
                           <section>
-                            <h1><b>Applicants must be Located at? </b></h1>
+                            <h1><b>Scholarship is  Located at? </b></h1>
                             <p><?php echo $schlocation; ?></p>
                           </section>
-                          <br><hr><br><hr style=" height: 1px;color: red;background-color: grey;border: none;">
-                          <section>
-                            <h1><b>Applicants HomeTown must be ?</b></h1>
-                            <p><?php echo $schlocationfrom; ?></p>
-                          </section>
-                          <br><hr><br><hr style=" height: 1px;color: red;background-color: grey;border: none;">
+                         
+                          <br><hr><br>
                           <section>
                             <h1><b>Important Links</b></h1>
                             <p><?php echo $links; ?></p>
                           </section>
-                          <br><hr><br><hr style=" height: 1px;color: red;background-color: grey;border: none;">
+                          <br><hr><br>
                           <section>
                             <h1><b>Contact Details</b></h1>
                             <p><?php echo $contact; ?></p>
                           </section>
-                          <br><hr><br><hr style=" height: 1px;color: red;background-color: grey;border: none;">
+                          <br><hr><br>
                           <section>
                             <h1><b>Admin Approval</b></h1>
                             <p><?php echo $adminapproval;
@@ -193,7 +205,7 @@ if ($conn->connect_error) {
                     $conn->close();
                     ?></p>
                           </section>
-                          <br><hr><br><hr style=" height: 1px;color: red;background-color: grey;border: none;">
+                          <br><hr><br>
                        
 
               <?php
@@ -275,10 +287,8 @@ if ($conn->connect_error) {
       <form action="tempScholarship.php" method="post">
          <br><input type="submit" style="margin-left:32%"  value="<< Go Back">
       </form>
-      <div class="footer">
-            <h3>SCHOLARSHIP MANAGEMENT SYSTEM</h3>
-            <p>copyright &copy;2022</p>
-         </div>
+      </div>
+      
   </div>
     <?php
                 }
@@ -286,16 +296,22 @@ if ($conn->connect_error) {
                 echo $e->getMessage();
             } ?>
 		
-
+            <div class="footer">
+              <h3>SCHOLARSHIP MANAGEMENT SYSTEM</h3>
+              <p>copyright &copy;2022</p>
+           </div>
 		</div>
 
 		<!-- Scripts -->
     <script type="text/javascript">
 
     function viewcontent(){
+      //get the value of the element with the specified id=""
       var selectone=document.getElementById("class").value;
+      //Get the element with the specified id:
       var schview=document.getElementById("application");
       if(selectone!="select"){
+        //Change the HTML content of an element with id="schid":
         document.getElementById("schid").innerHTML = selectone;
         schview.style.display = 'block';
       }
@@ -308,6 +324,8 @@ if ($conn->connect_error) {
       if(confirm(str)){
         document.blockform.submit();
       } else{
+        //The preventDefault() method of the Event interface tells the user agent that if the event does not get explicitly handled,
+        // its default action should not be taken as it normally would be.
         event.preventDefault();
       }
     }

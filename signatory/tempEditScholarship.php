@@ -1,5 +1,14 @@
 <?php
-
+/* Start a session so that other files can access these variables */
+// <!-- The isset() function checks whether a variable is set, which means that it has to be declared and is not NULL.
+// This function returns true if the variable exists and is not NULL, otherwise it returns false.
+// Note: If multiple variables are supplied, then this function will return true only if all of the variables are set.
+// Tip: A variable can be unset with the unset() function. -->
+// <!-- Session variables stores user information to be used across multiple pages (e.g. username etc).
+//  By default, session variables last until the user closes the browser. 
+// It holds information about one user
+// A session is started with the session_start() function.
+// Session variables are set with the PHP global variable: $_SESSION.-->
 session_start();
 
 //check validity of the user
@@ -22,7 +31,7 @@ $getName =
     "'";
 
 $nameResult = mysqli_query($conn, $getName);
-
+//The fetch_row() / mysqli_fetch_row() function fetches one row from a result-set and returns it as an enumerated array.
 while ($rows9 = mysqli_fetch_row($nameResult)) {
     foreach ($rows9 as $key => $value) {
         if ($key == 0) {
@@ -47,12 +56,7 @@ while ($rows9 = mysqli_fetch_row($nameResult)) {
   <head>
       <title>Home</title>
 
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta name="description" content="">
-      <meta name="author" content="">
+      
 	  <link href="../css/main.css" rel="stylesheet">
       <link href="../css/general.css" rel="stylesheet">
 
@@ -124,7 +128,7 @@ while ($rows9 = mysqli_fetch_row($nameResult)) {
 
           try {
               // Connect to database
-              $conn = new mysqli('localhost', 'scholar', '', 'sms');
+              $conn = new mysqli('localhost', 'scholar', 'Github56#', 'sms');
 
               // Checks Connection
               if ($conn->connect_error) {
@@ -134,10 +138,17 @@ while ($rows9 = mysqli_fetch_row($nameResult)) {
               $granteesNum = $funding = $description = $eligibility = $benefits = $apply = $links = $contact = $adminapproval = null;
               if (isset($_POST['view'])) {
                   $schID = $_POST['scholarshipID'];
-
+                            //A JOIN clause is used to combine rows from two or more tables, based on a related column between them.
+                            // (INNER) JOIN: Returns records that have matching values in both tables
+                            // LEFT (OUTER) JOIN: Returns all records from the left table, and the matched records from the right table
+                            // RIGHT (OUTER) JOIN: Returns all records from the right table, and the matched records from the left table
+                            // FULL (OUTER) JOIN: Returns all records when there is a match in either left or right table
+                            //AS is used to assign a new name temporarily to a table column or even table.
+                            //WHERE is used to compare the given value with the field value available in table.
                   $sql = "SELECT * FROM scholarship WHERE scholarshipID = $schID";
                   $result = $conn->query($sql);
                   if ($result->num_rows > 0) {
+                    //associative array are arrays that use named keys that assign to them.
                       while ($row = $result->fetch_assoc()) {
                           $schname = $row['schname'];
                           $schlocation = $row['schlocation'];
@@ -157,7 +168,7 @@ while ($rows9 = mysqli_fetch_row($nameResult)) {
                           $links = $row['links'];
                           $contact = $row['contact'];
                           $adminapproval = $row['adminapproval'];
-
+                          //explode() function breaks a string into an array.
                           $ethnic = explode(',', $row['ethnic']);
                       }
                   }
@@ -229,7 +240,7 @@ while ($rows9 = mysqli_fetch_row($nameResult)) {
 
 					<label><strong>ethnic </strong></label><br>
 					<label style="font-size: 15px;">This is a scholarship for a particular ethnic group ...</label><br>
-					
+					<!-- The in_array() function searches an array for a specific value. -->
 					<input type="checkbox" name="ethnic[]" value="americanindian" <?php echo in_array(
          'americanindian',
          $ethnic

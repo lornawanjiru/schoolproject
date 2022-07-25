@@ -11,7 +11,7 @@ if ($currentUserID == null) {
 }
 
 // Connect to database
-$conn = new mysqli('localhost', 'scholar', '', 'sms');
+$conn = new mysqli('localhost', 'scholar', 'Github56#', 'sms');
 // Checks Connection
 if ($conn->connect_error) {
     die('Connection failed: ' . $conn->connect_error);
@@ -91,7 +91,7 @@ while ($rows9 = mysqli_fetch_row($nameResult)) {
                 <a href = "tempSigApplication.php?app=Rejected">Rejected Applicaitons</a> 
               </div> 
               <a class = "current" href="tempSigHome.php">Home</a>
-              <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+              <a href="" class="icon" onclick="myFunction()">
                 <img src="../images/menu.png" alt="" />
                 </a>
               </div>  

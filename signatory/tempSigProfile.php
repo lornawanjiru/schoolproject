@@ -11,7 +11,7 @@ if ($currentUserID == null) {
 }
 
 // Connect to database
-$conn = new mysqli('localhost', 'scholar', '', 'sms');
+$conn = new mysqli('localhost', 'scholar', 'Github56#', 'sms');
 // Checks Connection
 if ($conn->connect_error) {
     die('Connection failed: ' . $conn->connect_error);
@@ -60,12 +60,6 @@ while ($row = $result->fetch_assoc()) {
   <head>
       <title>Home</title>
 
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta name="description" content="">
-      <meta name="author" content="">
 
       <link href="../css/main.css" rel="stylesheet">
       <link href="../css/general.css" rel="stylesheet">

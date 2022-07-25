@@ -1,40 +1,40 @@
 <?php
 
-  session_start();
+session_start();
 
-	 //check validity of the user
-  $currentUserID=$_SESSION['currentUserID'];
-  if($currentUserID==NULL){
-    header("Location:../index.php");
-  }
+//check validity of the user
+$currentUserID = $_SESSION['currentUserID'];
+if ($currentUserID == null) {
+    header('Location:../index.php');
+}
 
-  // Connect to database
-    $conn = new mysqli("localhost","scholar","","sms");
+// Connect to database
+$conn = new mysqli('localhost', 'scholar', 'Github56#', 'sms');
 
-  // Checks Connection
-    if ($conn->connect_error) {
-      die("Connection failed: " . $conn->connect_error);
+// Checks Connection
+if ($conn->connect_error) {
+    die('Connection failed: ' . $conn->connect_error);
+}
+
+$getName =
+    "select S.firstName, S.middleName, S.lastName from signatory S where S.sigID = '" .
+    $_SESSION['currentUserID'] .
+    "'";
+$nameResult = mysqli_query($conn, $getName);
+while ($rows9 = mysqli_fetch_row($nameResult)) {
+    foreach ($rows9 as $key => $value) {
+        if ($key == 0) {
+            $_SESSION['currentUserName'] = $value;
+        }
+        if ($key == 1) {
+            $_SESSION['currentUserName'] =
+                $_SESSION['currentUserName'] . ' ' . $value;
+        }
+        if ($key == 2) {
+            $_SESSION['currentUserName'] =
+                $_SESSION['currentUserName'] . '. ' . $value;
+        }
     }
-
-$getName = "select S.firstName, S.middleName, S.lastName from signatory S where S.sigID = '".$_SESSION['currentUserID']."'";
-$nameResult = mysqli_query($conn,$getName);
-while($rows9=mysqli_fetch_row($nameResult))
-{
-foreach ($rows9 as $key => $value)
-	{
-	 	if($key == 0)
-		{
-			$_SESSION['currentUserName'] = $value;
-		}
-		if($key == 1)
-		{
-			$_SESSION['currentUserName'] = $_SESSION['currentUserName'] . " " . $value;
-		}
-    if($key == 2)
-    {
-		  $_SESSION['currentUserName'] = $_SESSION['currentUserName'] . ". " . $value;
-		}
-	}
 }
 ?>
 <!DOCTYPE HTML>
@@ -42,13 +42,6 @@ foreach ($rows9 as $key => $value)
 <html>
   <head>
       <title>Home</title>
-
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta name="description" content="">
-      <meta name="author" content="">
       <link href="../css/main.css" rel="stylesheet">
       <link href="../css/general.css" rel="stylesheet">
 
@@ -79,7 +72,10 @@ foreach ($rows9 as $key => $value)
                     <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/profile-sample3.jpg" alt="profile-sample3" class="profile" />
                   </div>
                   <div>
-                    <h2> Hello, <?php echo $_SESSION['currentUserName']. " (ID:" . $_SESSION['currentUserID'] . ")"?>. </h2>
+                    <h2> Hello, <?php echo $_SESSION['currentUserName'] .
+                        ' (ID:' .
+                        $_SESSION['currentUserID'] .
+                        ')'; ?>. </h2>
                   </div>
               </div>
               <div class="">
@@ -100,7 +96,7 @@ foreach ($rows9 as $key => $value)
                 <a href = "tempSigApplication.php?app=Rejected">Rejected Applicaitons</a> 
               </div> 
               <a class = "current" href="tempSigHome.php">Home</a>
-              <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+              <a href="" class="icon" onclick="myFunction()">
                 <img src="../images/menu.png" alt="" />
                 </a>
               </div>  
@@ -111,19 +107,16 @@ foreach ($rows9 as $key => $value)
 				<div class="content">
 
 					
-    	<?php
-    	try{
-    		/*If the view button was clicked*/
-  		if (isset($_POST['view']) AND $_POST['view'] == 'View'){
-        ?>
+    	<?php try {
+         /*If the view button was clicked*/
+         if (isset($_POST['view']) and $_POST['view'] == 'View') { ?>
           <h1 style="text-align:center; font-size:25px">Application Details</h1>
         <?php
-          $appID = $_POST['appID'];
-          $sql = "SELECT * FROM application WHERE applicationID='$appID'";
-          $result = $conn->query($sql);
-          if ($result->num_rows > 0) {
-            while($row = $result->fetch_assoc()) {
-        ?>
+        $appID = $_POST['appID'];
+        $sql = "SELECT * FROM application WHERE applicationID='$appID'";
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) { ?>
         <table class="table">
             <tr>
                 <th style="width:50%"><b>Application ID</b></th>
@@ -171,63 +164,69 @@ foreach ($rows9 as $key => $value)
                 </thead>
                 <tbody>
             <?php
-      			$schID=$_POST['schID'];
-      			$studentID=$_POST['studentID'];
-      			$folder=$studentID."_".$schID;
-      			$dir = "../applications/$folder/";
-            
-      			// Open a directory, and read its contents
-      			if (is_dir($dir)){
-      				$i=0;
-      			  if ($dh = opendir($dir)){
-      			    while (($file = readdir($dh)) !== false){
-      			    	if($i>1){
-      	    ?>
+            $schID = $_POST['schID'];
+            $studentID = $_POST['studentID'];
+            $folder = $studentID . '_' . $schID;
+            $dir = "../applications/$folder/";
+
+            // Open a directory, and read its contents
+            //is_dir Check whether the specified filename is a directory:
+            if (is_dir($dir)) {
+
+                $i = 0;
+                if ($dh = opendir($dir)) {
+                    while (($file = readdir($dh)) !== false) {
+                        if ($i > 1) { ?>
       						<tr><td><?php echo $file; ?></td><td>
-      								<form action="<?php echo $dir."".$file;?>" method="post" target="_blank">
+      								<form action="<?php echo $dir .
+                  '' .
+                  $file; ?>" method="post" target="_blank">
                           <button name="view" value="view">View</button>
       			          </form>
       			      </td>
-            <?php
-      			      }
-      			     	$i +=1;
-      			    }
-      			    closedir($dh);
-      			  }
-      	    ?>
-      	    <?php } else { ?>
+            <?php }
+                        $i += 1;
+                    }
+                    closedir($dh);
+                }
+                ?>
+      	    <?php
+            } else {
+                 ?>
           			<script>
           				alert("Error! File View Failed!");
           				location.replace("tempSigApplication.php");
           			</script>
       		  <?php
-      			}
+            }
             ?>
           </tbody></table>
           </section><br>
           <section style="text-align:center">
             <form name="blockform" method="post" action="../backend/sigBlockUnblockApp.php" onsubmit="confirmblock(this,'This will Block corresponding Application.\n Are your Sure?')" >
               <input type="hidden" name="appID" value="<?php echo $appID; ?>">
-              <input type="submit"  name="blk_unblk_app" id="blockapp" value="blockapp" <?php if($row['appstatus'] === "inactive"){
-                echo " style = 'color:#fff;display:none'";
+              <input type="submit"  name="blk_unblk_app" id="blockapp" value="blockapp" <?php if (
+                  $row['appstatus'] === 'inactive'
+              ) {
+                  echo " style = 'color:#fff;display:none'";
               } ?>>
             </form><br>
 
             <form name="unblockform" action="../backend/sigBlockUnblockApp.php" onsubmit="confirmunblock(this,'This will Unblock corresponding Application.\n Are your Sure?')"  method="post">
               <input type="hidden" name="appID" value="<?php echo $appID; ?>">
-              <input type="submit" name="blk_unblk_app" id="unblockapp" value="unblockapp" <?php if($row['appstatus'] !== 'inactive'){
-                echo " style = 'color:#fff;display:none;'";
+              <input type="submit" name="blk_unblk_app" id="unblockapp" value="unblockapp" <?php if (
+                  $row['appstatus'] !== 'inactive'
+              ) {
+                  echo " style = 'color:#fff;display:none;'";
               } ?>>
             </form>
             </section>
-            <?php
-            }
-          }
-    		}
-    	} catch(PDOException $e){
-    		echo $e->getMessage();
-    	}
-      ?>
+            <?php }
+        }
+        }
+     } catch (PDOException $e) {
+         echo $e->getMessage();
+     } ?>
 				<div class="footer">
             <h3>SCHOLARSHIP MANAGEMENT SYSTEM</h3>
             <p>copyright &copy;2022</p>

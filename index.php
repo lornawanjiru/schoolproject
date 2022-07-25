@@ -2,6 +2,9 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+  <!-- The <meta> tag defines metadata about an HTML document. Metadata is data (information) about data.
+   <meta> tags always go inside the <head> element, and are typically used to specify character set, page description,
+     keywords, author of the document, and viewport settings. -->
       <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
@@ -24,7 +27,7 @@
                 <a href="signup_sig.php">Signatory</a>
                 <a href="signup_student.php">Students</a>
                 <a href="#">Home</a>
-                <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+                <a href="" class="icon" onclick="myFunction()">
                 <img src="images/menu.png" alt="" />
                 </a>
             </div>

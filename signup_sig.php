@@ -42,7 +42,7 @@ require 'vendor/autoload.php';
                 $position = $_POST['position'];
                 $phonenumber = $_POST['phonenumber'];
 
-                $conn = new mysqli('localhost', 'scholar', '', 'sms');
+                $conn = new mysqli('localhost', 'scholar', 'Github56#', 'sms');
 
                 if ($conn->connect_error) {
                     die('Connection failed: ' . $conn->connect_error);

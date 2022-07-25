@@ -1,5 +1,14 @@
 <?php
 /* Start a session so that other files can access these variables */
+// <!-- The isset() function checks whether a variable is set, which means that it has to be declared and is not NULL.
+// This function returns true if the variable exists and is not NULL, otherwise it returns false.
+// Note: If multiple variables are supplied, then this function will return true only if all of the variables are set.
+// Tip: A variable can be unset with the unset() function. -->
+// <!-- Session variables stores user information to be used across multiple pages (e.g. username etc).
+//  By default, session variables last until the user closes the browser. 
+// It holds information about one user
+// A session is started with the session_start() function.
+// Session variables are set with the PHP global variable: $_SESSION.-->
 session_start();
 $_SESSION['selectedAppID'] = 0;
 $_SESSION['currentUserName'] = null;
@@ -9,7 +18,7 @@ if ($currentUserID == null) {
     header('Location:../index.php');
 }
 /* Connect to database */
-$conn = new mysqli('localhost', 'scholar', '', 'sms');
+$conn = new mysqli('localhost', 'scholar', 'Github56#', 'sms');
 /* Checks Connection */
 if ($conn->connect_error) {
     die('Connection failed: ' . $conn->connect_error);
@@ -65,6 +74,7 @@ while ($rows9 = mysqli_fetch_row($nameResult)) {
 	  <div class = "nav">
             <div class="topnav" id="myTopnav">
               <div><a>Scholarship Application System</a> </div>
+              <div><a>Student Dashboard</a> </div>
               <div class="banner desktop-view">
                   <div>
                     <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/profile-sample3.jpg" alt="profile-sample3" class="profile" />
@@ -90,7 +100,7 @@ while ($rows9 = mysqli_fetch_row($nameResult)) {
                       <a href = "tempUserView.php">Status</a>
                       <a class = "current" href="tempUserHome.php">Home</a>
                     
-                <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+                <a href="" class="icon" onclick="myFunction()">
                 <img src="../images/menu.png" alt="" />
                 </a>
               </div>  
@@ -108,6 +118,13 @@ while ($rows9 = mysqli_fetch_row($nameResult)) {
 					<div class="scholarship-content">
                             <div class="form-group">
                             <?php
+                            //A JOIN clause is used to combine rows from two or more tables, based on a related column between them.
+                            // (INNER) JOIN: Returns records that have matching values in both tables
+                            // LEFT (OUTER) JOIN: Returns all records from the left table, and the matched records from the right table
+                            // RIGHT (OUTER) JOIN: Returns all records from the right table, and the matched records from the left table
+                            // FULL (OUTER) JOIN: Returns all records when there is a match in either left or right table
+                            //AS is used to assign a new name temporarily to a table column or even table.
+                            //WHERE is used to compare the given value with the field value available in table.
                             $sql = "SELECT * FROM application AS A JOIN scholarship AS S on A.scholarshipID=S.scholarshipID where studentID=$currentUserID";
                             $result = $conn->query($sql);
                             if ($result->num_rows > 0) { ?>
@@ -153,13 +170,13 @@ while ($rows9 = mysqli_fetch_row($nameResult)) {
 
                                 <div id="application">
                                   <h1><strong>Your Scholarship</strong></h1>
-                                  	<table class="table table-bordered">
+                                  	<table class="table table-bordered default ">
                                     	<thead>
                                         	<tr>
-                                          		<th style="width:10%">Application ID</th>
+                                          		<th style="width:20%">Application ID</th>
                                           		<th style="width:40%">Scholarship</th>
-                                          		<th style="width:10%">Signatory Approval</th>
-                                          		<th style="width:10%">App Status</th>
+                                          		<th style="width:20%">Signatory Approval</th>
+                                          		<th style="width:20%">App Status</th>
                                         	</tr>
                                     	</thead>
                                     	<tbody>
@@ -171,6 +188,7 @@ while ($rows9 = mysqli_fetch_row($nameResult)) {
                                         );
 
                                         while (
+                                            //The fetch_row() / mysqli_fetch_row() function fetches one row from a result-set and returns it as an enumerated array.
                                             $rows = mysqli_fetch_row(
                                                 $qSchoResult
                                             )
@@ -221,6 +239,7 @@ while ($rows9 = mysqli_fetch_row($nameResult)) {
                                        );
 
                                        while (
+                                        //The fetch_row() / mysqli_fetch_row() function fetches one row from a result-set and returns it as an enumerated array.
                                            $rows = mysqli_fetch_row(
                                                $qSchoResult
                                            )
